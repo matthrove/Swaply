@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#8B1A2B">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>US23 · Indicador de lectura — Swaply</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body class="app-body" data-screen-id="us23">
+  <div class="app-shell">
+    <aside id="appSidebar" class="app-sidebar" aria-label="Historias de usuario"></aside>
+    <div class="app-main">
+      <header class="app-topbar" id="appTopbar">
+        <!-- Configuration settings gear button on the far left -->
+        <button type="button" class="btn-settings" id="btnSettings" aria-label="Ajustes" style="background:none; border:none; font-size:20px; cursor:pointer; padding:0 8px; color:var(--primary);">⚙️</button>
+        <span class="app-topbar-title" id="screenTitle">US23 · Indicador de lectura</span>
+        <button type="button" class="hu-toggle" id="huToggle" aria-label="Ver historias de usuario">50 HU</button>
+      </header>
+      <div class="app-viewport">
+        <div class="app-frame" id="appFrame" role="main" aria-live="polite">
+          <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
+        <div class="scr">
+          <div class="head"><span class="back">‹</span><h2>Andrea P.</h2></div>
+          <div style="display:flex;flex-direction:column;flex:1;padding-top:6px">
+            <div class="chat-msg me">¿Te parece mañana 7pm?<div class="meta" style="color:#bdbdb9">12:21 ✓</div></div>
+            <div class="small" style="text-align:right;margin-bottom:6px">enviado</div>
+            <div class="chat-msg me">Confírmame por favor 🙏<div class="meta" style="color:#7ec6ff">12:22 ✓✓</div></div>
+            <div class="small" style="text-align:right;margin-bottom:6px;color:#3aa56b">leído · 12:23</div>
+            <div class="chat-msg them">Sí, mañana a las 7 va bien<div class="meta">12:24
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/screens-data.js"></script>
+  <script src="js/app-meta.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

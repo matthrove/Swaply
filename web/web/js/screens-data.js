@@ -1,0 +1,366 @@
+window.screensData = [
+  {
+    "id": "us01",
+    "us": "US01",
+    "title": "Registro con correo institucional",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Crear cuenta</h2></div>\n          <div class=\"small\">Únete con tu correo universitario</div>\n          <div class=\"mt-lg col\">\n            <div class=\"form-field\"><label>Nombres y apellidos</label><div class=\"input\">Rogger Escalante</div></div>\n            <div class=\"form-field\"><label>Correo institucional</label><div class=\"input\">rogger@upc.edu.pe</div></div>\n            <div class=\"form-field\"><label>Contraseña</label><div class=\"input\">••••••••"
+  },
+  {
+    "id": "us01b",
+    "us": "US01b",
+    "title": "Error: correo no institucional",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Crear cuenta</h2></div>\n          <div class=\"mt-lg col\">\n            <div class=\"form-field\"><label>Correo</label><div class=\"input\" style=\"border-color:#d64545;color:#d64545\">gmail@gmail.com</div></div>\n            <div class=\"toast bad\"><span class=\"ic\">⚠</span><div>Solo se aceptan correos institucionales universitarios (.edu / .edu.pe)</div></div>\n            <div class=\"small\">Universidades soportadas: UPC · PUCP · UNMSM · UNI · USIL …</div>\n          </div>\n          <div style=\"margin-top:auto;padding-bottom:12px\"><div class=\"btn dis\">Crear cuenta"
+  },
+  {
+    "id": "us02",
+    "us": "US02",
+    "title": "Inicio de sesión",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div style=\"text-align:center;margin-top:24px;font-family:'Caveat',cursive;font-size:38px;font-weight:700;letter-spacing:1px;color:var(--primary);\">Swaply</div>\n          <div class=\"small center\" style=\"margin-bottom:24px\">Intercambia conocimiento</div>\n          <div class=\"col\">\n            <div class=\"form-field\"><label>Correo</label><div class=\"input\">rogger@upc.edu.pe</div></div>\n            <div class=\"form-field\"><label>Contraseña</label><div class=\"input\">••••••••</div></div>\n            <div class=\"small\" style=\"text-align:right;text-decoration:underline;color:var(--primary);font-weight:600\">¿Olvidaste tu contraseña?</div>\n          </div>\n          <div style=\"margin-top:auto;padding-bottom:12px\">\n            <div class=\"btn\">Iniciar sesión</div>\n            <div class=\"btn ghost mt\">Crear cuenta"
+  },
+  {
+    "id": "us03",
+    "us": "US03",
+    "title": "Recuperar contraseña",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Recuperar acceso</h2></div>\n          <div class=\"small\">Te enviaremos un enlace para crear una nueva contraseña. El enlace expira en 24 horas.</div>\n          <div class=\"mt-lg\">\n            <div class=\"form-field\"><label>Correo registrado</label><div class=\"input\">rogger@upc.edu.pe"
+  },
+  {
+    "id": "us04",
+    "us": "US04",
+    "title": "Cierre de sesión",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Ajustes</h2></div>\n          <div class=\"col\">\n            <div class=\"row-line\"><div class=\"l\">👤 Cuenta</div><div class=\"r\">›</div></div>\n            <div class=\"row-line\"><div class=\"l\">🔔 Notificaciones</div><div class=\"r\">›</div></div>\n            <div class=\"row-line\"><div class=\"l\">🔒 Privacidad</div><div class=\"r\">›</div></div>\n            <div class=\"row-line\"><div class=\"l\">❓ Ayuda</div><div class=\"r\">›"
+  },
+  {
+    "id": "us05",
+    "us": "US05",
+    "title": "Crear perfil de aprendiz",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Tu perfil · aprendiz</h2></div>\n          <div class=\"dots\"><i class=\"on\"></i><i></i><i></i></div>\n          <div class=\"form-field mt-lg\"><label>Universidad</label><div class=\"input\">UPC ▾</div></div>\n          <div class=\"form-field\"><label>Carrera</label><div class=\"input\">Ing. de Software ▾</div></div>\n          <div class=\"form-field\"><label>Ciclo</label><div class=\"input\">4to ciclo ▾</div></div>\n          <div class=\"section-label\">Quiero aprender</div>\n          <div class=\"chips\">\n            <span class=\"chip on\">Cálculo Diferencial ✕</span>\n            <span class=\"chip on\">Figma ✕</span>\n            <span class=\"chip\">+ Agregar</span>\n          </div>\n          <div style=\"margin-top:auto;padding-bottom:12px\"><div class=\"btn\">Guardar y continuar"
+  },
+  {
+    "id": "us06",
+    "us": "US06",
+    "title": "Crear perfil de tutor",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Tu perfil · tutor</h2></div>\n          <div class=\"section-label\">Habilidades para enseñar</div>\n          <div style=\"border:1.5px solid #c9c7c2;border-radius:10px;padding:8px;font-size:10px\">\n            <div style=\"font-weight:600;font-size:11px\">Cálculo Diferencial</div>\n            <div class=\"small\" style=\"margin-top:2px\">\"Domino límites, derivadas y aplicaciones. He sido jefe de práctica.\"</div>\n            <div class=\"flex\" style=\"margin-top:6px;gap:4px\"><span class=\"chip s\">Intermedio</span><span class=\"chip s\">3+ años</span></div>\n          </div>\n          <div class=\"toast bad mt\"><span class=\"ic\">⚠</span><div>Esta habilidad ya está en tu perfil</div></div>\n          <div class=\"input mt\">+ Agregar otra habilidad</div>\n          <div class=\"section-label\">Disponibilidad</div>\n          <div class=\"chips\"><span class=\"chip on\">Mañanas</span><span class=\"chip\">Tardes</span><span class=\"chip on\">Noches</span></div>\n          <div style=\"margin-top:auto;padding-bottom:12px\"><div class=\"btn\">Guardar perfil"
+  },
+  {
+    "id": "us07",
+    "us": "US07",
+    "title": "Editar perfil",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Editar perfil</h2></div>\n          <div class=\"flex\" style=\"justify-content:center;flex-direction:column;text-align:center\"><div class=\"av xl\">RE</div><div class=\"small\" style=\"margin-top:6px;text-decoration:underline;color:var(--primary)\">Cambiar foto</div></div>\n          <div class=\"form-field mt\"><label>Nombre</label><div class=\"input\">Rogger Escalante</div></div>\n          <div class=\"form-field\"><label>Bio</label><div class=\"input\" style=\"height:50px;align-items:flex-start;padding-top:8px;color:var(--ink)\">Estudiante de Ing. Software, me gusta enseñar cálculo…</div></div>\n          <div class=\"form-field\"><label>Universidad · Carrera</label><div class=\"input\">UPC · Ing. Software</div></div>\n          <div class=\"toast mt\"><span class=\"ic\">ℹ</span><div>No se detectaron cambios todavía</div></div>\n          <div style=\"margin-top:auto;padding-bottom:12px\"><div class=\"btn\">Guardar cambios"
+  },
+  {
+    "id": "us08",
+    "us": "US08",
+    "title": "Subir foto de perfil",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Foto de perfil</h2></div>\n          <div style=\"border:2px dashed #c9c7c2;border-radius:14px;padding:24px 14px;text-align:center;margin-top:8px;\">\n            <div style=\"font-size:42px\">🖼️</div>\n            <div style=\"font-size:11px;font-weight:600;margin-top:6px\">Arrastra o toca para subir</div>\n            <div class=\"small\">JPG o PNG · máx. 5 MB</div>\n          </div>\n          <div class=\"toast bad mt\"><span class=\"ic\">⚠</span><div>La imagen no debe superar los <b>5 MB</b></div></div>\n          <div class=\"section-label\">Vista previa</div>\n          <div class=\"flex\"><div class=\"av xl\">RE</div><div><div style=\"font-weight:600;font-size:12px\">Rogger E.</div><div class=\"small\">UPC · Ing. Software"
+  },
+  {
+    "id": "us09",
+    "us": "US09",
+    "title": "Rol dual tutor / aprendiz",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Mis roles</h2></div>\n          <div class=\"small\">Activa los roles que vas a usar. Puedes tener ambos a la vez.</div>\n          <div class=\"mt-lg col\" style=\"gap:10px\">\n            <div style=\"border:1.5px solid var(--primary);border-radius:12px;padding:10px;\">\n              <div class=\"flex\"><div style=\"font-weight:700;font-size:12px;flex:1\">🎓 Aprendiz</div><div class=\"pill dark\">Activo</div></div>\n              <div class=\"small\" style=\"margin-top:4px\">Pide ayuda y agenda tutorías</div>\n            </div>\n            <div style=\"border:1.5px solid var(--primary);border-radius:12px;padding:10px;\">\n              <div class=\"flex\"><div style=\"font-weight:700;font-size:12px;flex:1\">📚 Tutor</div><div class=\"pill\">Inactivo</div></div>\n              <div class=\"small\" style=\"margin-top:4px\">Enseña tus habilidades y gana créditos</div>\n              <div class=\"btn ghost sm\" style=\"margin-top:8px\">Activar rol tutor"
+  },
+  {
+    "id": "us10",
+    "us": "US10",
+    "title": "Perfil público de tutor",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Perfil</h2><div class=\"right\">★</div></div>\n          <div class=\"flex\"><div class=\"av xl\">AP</div><div><div style=\"font-weight:700;font-size:13px\">Andrea Paredes</div><div class=\"small\">PUCP · Ing. Industrial · 7° ciclo</div><div class=\"stars\" style=\"margin-top:2px\">★★★★★ <b>4.9 (32)</b>"
+  },
+  {
+    "id": "us11",
+    "us": "US11",
+    "title": "Buscar tutores por habilidad",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Buscar tutores</h2></div>\n          <div class=\"input\"><span class=\"ic\">🔍</span><span>Cálculo Diferencial</span></div>\n          <div class=\"chips\"><span class=\"chip on\">Todos</span><span class=\"chip\">UPC</span><span class=\"chip\">PUCP</span><span class=\"chip\">UNMSM</span></div>\n          <div class=\"small\"><b>3 tutores</b> encontrados</div>\n          <div class=\"col mt\">\n            <div class=\"card\"><div class=\"av\">AP</div><div class=\"body\"><div class=\"name\">Andrea Paredes</div><div class=\"meta\">PUCP · Ingeniería</div><div class=\"stars\">★★★★★ <b>4.9 (32)</b></div><span class=\"tag\">Cálculo Diferencial</span></div><div class=\"fav\">★</div></div>\n            <div class=\"card\"><div class=\"av\">LM</div><div class=\"body\"><div class=\"name\">Luis Mendoza</div><div class=\"meta\">UNMSM · Ciencias</div><div class=\"stars\">★★★★☆ <b>4.5 (18)</b></div><span class=\"tag\">Cálculo Diferencial</span></div></div>\n            <div class=\"card\"><div class=\"av\">KR</div><div class=\"body\"><div class=\"name\">Karen Ríos</div><div class=\"meta\">UPC · Sistemas</div><div class=\"stars\">★★★★☆ <b>4.2 (9)</b></div><span class=\"tag\">Cálculo Diferencial</span>"
+  },
+  {
+    "id": "us11b",
+    "us": "US11b",
+    "title": "Sin resultados",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Buscar tutores</h2></div>\n          <div class=\"input\"><span class=\"ic\">🔍</span><span>xyzabc123</span></div>\n          <div class=\"empty\"><div class=\"ic\">🔍</div><div class=\"t\">No encontramos tutores</div><div class=\"s\">Prueba con otro término o revisa la ortografía"
+  },
+  {
+    "id": "us12",
+    "us": "US12",
+    "title": "Filtro por universidad",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Filtros</h2><div class=\"right\" style=\"text-decoration:underline\">Limpiar</div></div>\n          <div class=\"section-label\">Universidad</div>\n          <div class=\"ckline\"><span class=\"ck on\">✓</span>PUCP</div>\n          <div class=\"ckline\"><span class=\"ck\"></span>UNMSM</div>\n          <div class=\"ckline\"><span class=\"ck\"></span>UPC <span class=\"small\" style=\"margin-left:auto\">(tu universidad)</span></div>\n          <div class=\"ckline\"><span class=\"ck\"></span>USIL</div>\n          <div class=\"toast warn\"><span class=\"ic\">⚠</span><div>No puedes conectarte con tutores de tu misma universidad</div></div>\n          <div class=\"section-label\">Habilidad</div>\n          <div class=\"input\"><span class=\"ic\">🔍</span>Buscar habilidad…</div>\n          <div style=\"margin-top:auto;padding-bottom:12px\"><div class=\"btn\">Aplicar filtros (1)"
+  },
+  {
+    "id": "us13",
+    "us": "US13",
+    "title": "Filtro por disponibilidad",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Disponibilidad</h2></div>\n          <div class=\"section-label\">Turno preferido</div>\n          <div class=\"col\" style=\"gap:10px\">\n            <div style=\"border:2px solid var(--primary);border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px\"><div style=\"font-size:22px\">🌅</div><div style=\"flex:1\"><div style=\"font-weight:600;font-size:12px\">Mañanas</div><div class=\"small\">6:00 – 12:00</div></div><span class=\"ck r on\"><span class=\"d\"></span></span></div>\n            <div style=\"border:1.5px solid #c9c7c2;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px\"><div style=\"font-size:22px\">☀️</div><div style=\"flex:1\"><div style=\"font-weight:600;font-size:12px\">Tardes</div><div class=\"small\">12:00 – 18:00</div></div><span class=\"ck r\"></span></div>\n            <div style=\"border:1.5px solid #c9c7c2;border-radius:12px;padding:10px;display:flex;align-items:center;gap:10px\"><div style=\"font-size:22px\">🌙</div><div style=\"flex:1\"><div style=\"font-weight:600;font-size:12px\">Noches</div><div class=\"small\">18:00 – 23:00</div></div><span class=\"ck r\"></span></div>\n          </div>\n          <div style=\"margin-top:auto;padding-bottom:12px\"><div class=\"btn\">Ver 5 tutores disponibles</div><div class=\"btn ghost mt\">Limpiar filtro"
+  },
+  {
+    "id": "us14",
+    "us": "US14",
+    "title": "Tutores favoritos",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Mis favoritos</h2><div class=\"right\"><b>2</b> tutores</div></div>\n          <div class=\"col mt\">\n            <div class=\"card\"><div class=\"av\">AP</div><div class=\"body\"><div class=\"name\">Andrea Paredes</div><div class=\"meta\">PUCP · Cálculo Diferencial</div><div class=\"stars\">★★★★★ <b>4.9</b></div></div><div class=\"fav\">★</div></div>\n            <div class=\"card\"><div class=\"av\">CM</div><div class=\"body\"><div class=\"name\">Carlos Montes</div><div class=\"meta\">UNMSM · Física General</div><div class=\"stars\">★★★★☆ <b>4.6</b></div></div><div class=\"fav\">★"
+  },
+  {
+    "id": "us15",
+    "us": "US15",
+    "title": "Recomendaciones en dashboard",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div style=\"padding:8px 0\"><div class=\"small\">Buen día,</div><div style=\"font-weight:700;font-size:18px;color:var(--primary)\">Rogger 👋</div></div>\n          <div class=\"input\"><span class=\"ic\">🔍</span>Buscar tutores…</div>\n          <div class=\"section-label\">Tutores recomendados para ti</div>\n          <div style=\"display:flex;gap:8px;overflow:hidden\">\n            <div style=\"min-width:110px;border:1.5px solid #c9c7c2;border-radius:10px;padding:8px;text-align:center\"><div class=\"av lg\" style=\"margin:0 auto\">AP</div><div style=\"font-size:11px;font-weight:600;margin-top:4px\">Andrea P.</div><div class=\"small\">Cálculo · PUCP</div><div class=\"stars\" style=\"font-size:9px\">★★★★★</div></div>\n            <div style=\"min-width:110px;border:1.5px solid #c9c7c2;border-radius:10px;padding:8px;text-align:center\"><div class=\"av lg\" style=\"margin:0 auto\">LM</div><div style=\"font-size:11px;font-weight:600;margin-top:4px\">Luis M.</div><div class=\"small\">Física · UNMSM</div><div class=\"stars\" style=\"font-size:9px\">★★★★☆"
+  },
+  {
+    "id": "us16",
+    "us": "US16",
+    "title": "Enviar solicitud",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Nueva solicitud</h2></div>\n          <div class=\"flex\"><div class=\"av lg\">AP</div><div><div style=\"font-weight:600;font-size:12px\">Para: Andrea Paredes</div><div class=\"small\">PUCP · Cálculo Diferencial"
+  },
+  {
+    "id": "us17",
+    "us": "US17",
+    "title": "Aceptar solicitud",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Solicitud recibida</h2></div>\n          <div class=\"flex\"><div class=\"av lg\">RE</div><div><div style=\"font-weight:600;font-size:12px\">Rogger Escalante</div><div class=\"small\">UPC · 4° ciclo</div><div class=\"stars\" style=\"font-size:10px\">★★★★☆ 4.4"
+  },
+  {
+    "id": "us18",
+    "us": "US18",
+    "title": "Rechazar solicitud",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Rechazar solicitud</h2></div>\n          <div class=\"small\">El aprendiz será notificado para que pueda buscar otro tutor.</div>\n          <div class=\"section-label\">Motivo (opcional)</div>\n          <div class=\"col\">\n            <div class=\"ckline\"><span class=\"ck r on\"><span class=\"d\"></span></span>No tengo disponibilidad esta semana</div>\n            <div class=\"ckline\"><span class=\"ck r\"></span>El tema no es mi especialidad</div>\n            <div class=\"ckline\"><span class=\"ck r\"></span>Otro motivo</div>\n          </div>\n          <div class=\"form-field mt\"><label>Mensaje al aprendiz</label><div class=\"input\" style=\"height:50px;align-items:flex-start;padding-top:8px\">Hola, esta semana estoy en parciales…</div></div>\n          <div style=\"margin-top:auto;padding-bottom:12px\"><div class=\"flex\"><div class=\"btn ghost\" style=\"flex:1\">Cancelar</div><div class=\"btn\" style=\"flex:1\">Confirmar rechazo"
+  },
+  {
+    "id": "us19",
+    "us": "US19",
+    "title": "Historial de solicitudes",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Mis solicitudes</h2></div>\n          <div class=\"tabs\"><div class=\"t on\">Pendientes (2)</div><div class=\"t\">Aceptadas</div><div class=\"t\">Hist.</div></div>\n          <div class=\"col\">\n            <div class=\"card\"><div class=\"av\">AP</div><div class=\"body\"><div class=\"name\">Andrea Paredes</div><div class=\"meta\">Cálculo · enviada hace 2h</div><span class=\"pill warn\">Pendiente</span></div></div>\n            <div class=\"card\"><div class=\"av\">CM</div><div class=\"body\"><div class=\"name\">Carlos Montes</div><div class=\"meta\">Física · enviada ayer</div><span class=\"pill warn\">Pendiente</span></div></div>\n            <div class=\"card\"><div class=\"av\">LM</div><div class=\"body\"><div class=\"name\">Luis Mendoza</div><div class=\"meta\">Cálculo · hace 3 días</div><span class=\"pill good\">Aceptada</span></div></div>\n            <div class=\"card\"><div class=\"av\">KR</div><div class=\"body\"><div class=\"name\">Karen Ríos</div><div class=\"meta\">Sistemas · hace 1 sem.</div><span class=\"pill bad\">Rechazada</span>"
+  },
+  {
+    "id": "us20",
+    "us": "US20",
+    "title": "Cancelar solicitud",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Solicitud</h2></div>\n          <div class=\"flex\"><div class=\"av lg\">AP</div><div><div style=\"font-weight:600;font-size:12px\">Andrea Paredes</div><div class=\"small\">Cálculo Diferencial"
+  },
+  {
+    "id": "us21",
+    "us": "US21",
+    "title": "Chat en tiempo real",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><div class=\"flex\" style=\"gap:8px\"><div class=\"av\">AP</div><div><div style=\"font-weight:600;font-size:12px\">Andrea P.</div><div class=\"small\" style=\"color:#3aa56b\">● en línea"
+  },
+  {
+    "id": "us22",
+    "us": "US22",
+    "title": "Envío de archivos",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Andrea P.</h2></div>\n          <div style=\"display:flex;flex-direction:column;flex:1;padding-top:6px\">\n            <div class=\"chat-msg them\" style=\"background:#fff;border:1.5px solid #c9c7c2;padding:8px\"><div class=\"flex\"><div style=\"font-size:22px\">📄</div><div><div style=\"font-weight:600;font-size:11px\">Ejercicios_cálculo.pdf</div><div class=\"small\">2.4 MB · toca para descargar"
+  },
+  {
+    "id": "us23",
+    "us": "US23",
+    "title": "Indicador de lectura",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Andrea P.</h2></div>\n          <div style=\"display:flex;flex-direction:column;flex:1;padding-top:6px\">\n            <div class=\"chat-msg me\">¿Te parece mañana 7pm?<div class=\"meta\" style=\"color:#bdbdb9\">12:21 ✓</div></div>\n            <div class=\"small\" style=\"text-align:right;margin-bottom:6px\">enviado</div>\n            <div class=\"chat-msg me\">Confírmame por favor 🙏<div class=\"meta\" style=\"color:#7ec6ff\">12:22 ✓✓</div></div>\n            <div class=\"small\" style=\"text-align:right;margin-bottom:6px;color:#3aa56b\">leído · 12:23</div>\n            <div class=\"chat-msg them\">Sí, mañana a las 7 va bien<div class=\"meta\">12:24"
+  },
+  {
+    "id": "us24",
+    "us": "US24",
+    "title": "Historial de conversaciones",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><h2>Chats</h2><div class=\"right\">✏️</div></div>\n          <div class=\"input\"><span class=\"ic\">🔍</span>Buscar mensajes…</div>\n          <div class=\"col mt\">\n            <div class=\"card\" style=\"align-items:center\"><div class=\"av lg\">AP</div><div class=\"body\"><div class=\"flex\"><div class=\"name\" style=\"flex:1\">Andrea Paredes</div><div class=\"small\">12:30</div></div><div class=\"small\" style=\"margin-top:2px\">Confírmame por favor 🙏</div></div><span class=\"pill dark\" style=\"font-size:9px;padding:1px 6px\">2</span></div>\n            <div class=\"card\" style=\"align-items:center\"><div class=\"av lg\">LM</div><div class=\"body\"><div class=\"flex\"><div class=\"name\" style=\"flex:1\">Luis Mendoza</div><div class=\"small\">ayer</div></div><div class=\"small\" style=\"margin-top:2px\">Te paso la fórmula que aplicamos…"
+  },
+  {
+    "id": "us25",
+    "us": "US25",
+    "title": "Bloquear usuario",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Opciones del chat</h2></div>\n          <div class=\"flex\"><div class=\"av lg\">JG</div><div><div style=\"font-weight:600;font-size:12px\">Jorge G.</div><div class=\"small\">USIL · Sistemas"
+  },
+  {
+    "id": "us26",
+    "us": "US26",
+    "title": "Programar sesión",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Programar sesión</h2></div>\n          <div class=\"flex\"><div class=\"av\">AP</div><div class=\"small\">con <b style=\"color:var(--ink)\">Andrea Paredes</b> · Cálculo Dif.</div></div>\n          <div class=\"section-label\">Fecha</div>\n          <div style=\"border:1.5px solid #c9c7c2;border-radius:10px;padding:8px;font-size:10px\">\n            <div class=\"flex\" style=\"justify-content:space-between;font-weight:600;font-size:11px\"><span>‹ Noviembre 2026</span><span>›</span></div>\n            <div style=\"display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:6px;text-align:center\">\n              <span class=\"small\">L</span><span class=\"small\">M</span><span class=\"small\">M</span><span class=\"small\">J</span><span class=\"small\">V</span><span class=\"small\">S</span><span class=\"small\">D</span>\n              <span style=\"color:#bbb\">28</span><span style=\"color:#bbb\">29</span><span style=\"color:#bbb\">30</span><span style=\"color:#bbb\">31</span><span>1</span><span>2</span><span>3</span>\n              <span>4</span><span>5</span><span>6</span><span style=\"background:var(--cta);color:var(--ink);border-radius:50%;font-weight:700\">7</span><span>8</span><span>9</span><span>10</span>\n              <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span>\n            </div>\n          </div>\n          <div class=\"section-label\">Hora</div>\n          <div class=\"chips\"><span class=\"chip\">17:00</span><span class=\"chip on\">19:00</span><span class=\"chip\">20:00</span><span class=\"chip\" style=\"opacity:.4;text-decoration:line-through\">21:00</span></div>\n          <div class=\"toast warn\"><span class=\"ic\">⚠</span><div>Ya tienes una sesión en ese horario</div></div>\n          <div style=\"margin-top:auto;padding-bottom:12px\"><div class=\"btn\">Confirmar · Jue 7 nov · 19:00"
+  },
+  {
+    "id": "us27",
+    "us": "US27",
+    "title": "Recordatorio de sesión",
+    "frameAttrs": " style=\"background:var(--ink);border-color:var(--ink)\"",
+    "html": "<div class=\"bar\" style=\"color:#fff\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\" style=\"color:#fff\">\n          <div class=\"center\" style=\"font-family:'Caveat',cursive;font-size:48px;font-weight:700;margin-top:18px\">7:00</div>\n          <div class=\"center small\" style=\"color:#bdbdb9\">Jueves, 7 de Noviembre</div>\n          <div style=\"background:#fff;color:var(--ink);border-radius:14px;padding:10px;margin-top:24px\">\n            <div class=\"flex\"><div style=\"font-size:18px\">⏰</div><div style=\"flex:1\"><div style=\"font-weight:700;font-size:12px\">Swaply · Recordatorio</div><div class=\"small\" style=\"color:#777\">ahora"
+  },
+  {
+    "id": "us28",
+    "us": "US28",
+    "title": "Marcar sesión como completada",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Sesión</h2></div>\n          <div class=\"flex\"><div class=\"av lg\">RE</div><div><div style=\"font-weight:600;font-size:12px\">Con Rogger Escalante</div><div class=\"small\">Cálculo · 7 Nov 19:00 · 60 min"
+  },
+  {
+    "id": "us29",
+    "us": "US29",
+    "title": "Cancelar sesión",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Cancelar sesión</h2></div>\n          <div class=\"small\">Estás por cancelar la sesión con <b style=\"color:var(--ink)\">Andrea P.</b> del <b style=\"color:var(--ink)\">jue 7 nov · 19:00</b>.</div>\n          <div class=\"toast bad mt\"><span class=\"ic\">⚠</span><div><b>Cancelación tardía:</b> faltan 45 min. Puede afectar tu reputación.</div></div>\n          <div class=\"form-field mt\"><label>Motivo (obligatorio)</label>\n            <div class=\"input\" style=\"height:60px;align-items:flex-start;padding-top:8px;font-size:11px;color:var(--ink)\">Se me cruzó una clase obligatoria…</div>\n          </div>\n          <div class=\"section-label\">Política</div>\n          <ul style=\"font-size:10px;color:#555;padding-left:14px;margin:4px 0;line-height:1.5\"><li>+2h: sin penalidad</li><li>2h – 1h: advertencia</li><li>‹ 1h: afecta reputación</li></ul>\n          <div style=\"margin-top:auto;padding-bottom:12px\"><div class=\"flex\"><div class=\"btn ghost\" style=\"flex:1\">Volver</div><div class=\"btn\" style=\"flex:1;background:#d64545\">Cancelar igual"
+  },
+  {
+    "id": "us30",
+    "us": "US30",
+    "title": "Historial de sesiones",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Mis sesiones</h2></div>\n          <div class=\"tabs\"><div class=\"t\">Próximas (1)</div><div class=\"t on\">Completadas (8)</div></div>\n          <div class=\"col\">\n            <div class=\"card\"><div class=\"av\">AP</div><div class=\"body\"><div class=\"name\">Andrea Paredes</div><div class=\"meta\">Cálculo · 28 oct · 1h</div><div class=\"stars\" style=\"font-size:10px\">★★★★★ <b>diste 5</b>"
+  },
+  {
+    "id": "us31",
+    "us": "US31",
+    "title": "Calificar al tutor",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>¿Cómo estuvo?</h2></div>\n          <div class=\"center\"><div class=\"av xl\" style=\"margin:0 auto\">AP</div><div style=\"font-weight:600;font-size:12px;margin-top:6px\">Andrea Paredes</div><div class=\"small\">Cálculo Diferencial · 7 nov</div></div>\n          <div class=\"stars-row\"><span class=\"on\">★</span><span class=\"on\">★</span><span class=\"on\">★</span><span class=\"on\">★</span><span class=\"on\">★</span></div>\n          <div class=\"center small\" style=\"font-weight:600;color:var(--ink)\">¡Excelente!</div>\n          <div class=\"form-field mt-lg\"><label>Reseña (opcional)</label><div class=\"input\" style=\"height:70px;align-items:flex-start;padding-top:8px;color:var(--ink);font-size:11px\">Súper clara, me ayudó a entender derivadas implícitas con ejemplos.</div></div>\n          <div class=\"section-label\">Etiquetas rápidas</div>\n          <div class=\"chips\"><span class=\"chip on\">Paciente</span><span class=\"chip on\">Clara</span><span class=\"chip\">Puntual</span><span class=\"chip\">+ más</span></div>\n          <div style=\"margin-top:auto;padding-bottom:12px\"><div class=\"btn\">Enviar calificación"
+  },
+  {
+    "id": "us32",
+    "us": "US32",
+    "title": "Calificación al aprendiz",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Califica al aprendiz</h2></div>\n          <div class=\"center\"><div class=\"av xl\" style=\"margin:0 auto\">RE</div><div style=\"font-weight:600;font-size:12px;margin-top:6px\">Rogger Escalante</div></div>\n          <div class=\"stars-row\"><span class=\"on\">★</span><span class=\"on\">★</span><span class=\"on\">★</span><span class=\"on\">★</span><span>★</span></div>\n          <div class=\"center small\">¿Llegó preparado y comprometido?</div>\n          <div class=\"chips\" style=\"justify-content:center\"><span class=\"chip on\">Puntual</span><span class=\"chip on\">Atento</span><span class=\"chip\">Preparado</span></div>\n          <div class=\"toast warn mt\"><span class=\"ic\">⏳</span><div>Tienes <b>7 días</b> después de la sesión para calificar</div></div>\n          <div class=\"small mt\" style=\"color:#777\">Sesión: 7 nov · expira: 14 nov</div>\n          <div style=\"margin-top:auto;padding-bottom:12px\"><div class=\"btn\">Enviar calificación"
+  },
+  {
+    "id": "us33",
+    "us": "US33",
+    "title": "Mis calificaciones recibidas",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Mis reseñas</h2></div>\n          <div class=\"center\" style=\"border:1.5px solid var(--primary);border-radius:14px;padding:12px;margin-top:4px\"><div style=\"font-family:'Caveat',cursive;font-size:36px;font-weight:700;line-height:1;color:var(--primary)\">4.8</div><div class=\"stars\" style=\"font-size:14px\">★★★★★</div><div class=\"small\">basado en <b>24 reseñas</b></div></div>\n          <div class=\"section-label\">Reseñas</div>\n          <div class=\"col\">\n            <div class=\"card\"><div class=\"av\">LM</div><div class=\"body\"><div class=\"flex\"><div class=\"name\" style=\"flex:1\">Luis M. <span class=\"stars\">★★★★★</span></div><div class=\"small\">7 nov</div></div><div class=\"meta\">\"Súper clara y paciente, recomendado.\""
+  },
+  {
+    "id": "us34",
+    "us": "US34",
+    "title": "Insignia tutor destacado",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Logros</h2></div>\n          <div style=\"border:2px solid var(--primary);border-radius:18px;padding:14px;text-align:center;background:var(--brand-bg);position:relative\">\n            <div style=\"font-size:48px\">🏅</div>\n            <div style=\"font-family:'Caveat',cursive;font-size:24px;font-weight:700;line-height:1;color:var(--primary)\">¡Tutor Destacado!</div>\n            <div class=\"small\" style=\"margin-top:4px\">4.5★ con +10 sesiones completadas</div>\n          </div>\n          <div class=\"section-label\">Progreso</div>\n          <div class=\"kv\"><span class=\"k\">Promedio</span><span class=\"v\">4.8 ★</span></div>\n          <div class=\"kv\"><span class=\"k\">Sesiones completadas</span><span class=\"v\">12 / 10</span></div>\n          <div class=\"kv\"><span class=\"k\">Estado de insignia</span><span class=\"v\" style=\"color:#3aa56b\">Activa</span></div>\n          <div class=\"toast warn mt\"><span class=\"ic\">ℹ</span><div>Si tu promedio cae bajo <b>4.0</b>, la insignia se retira automáticamente."
+  },
+  {
+    "id": "us35",
+    "us": "US35",
+    "title": "Reportar reseña inapropiada",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Reportar reseña</h2></div>\n          <div class=\"card\"><div class=\"av\">JG</div><div class=\"body\"><div class=\"name\">Jorge G. <span class=\"stars\">★☆☆☆☆</span></div><div class=\"meta\">\"Esto es una estafa, no enseñó nada.\"</div><div class=\"small\" style=\"margin-top:4px\">3 nov"
+  },
+  {
+    "id": "us36",
+    "us": "US36",
+    "title": "Créditos por enseñar",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Mi billetera</h2></div>\n          <div style=\"border:2px solid var(--primary);border-radius:18px;padding:14px;text-align:center;background:var(--brand-bg);position:relative\">\n            <div class=\"small\" style=\"text-transform:uppercase;letter-spacing:.1em\">Saldo actual</div>\n            <div style=\"font-family:'Caveat',cursive;font-size:54px;font-weight:700;line-height:1;color:var(--primary)\">15</div>\n            <div class=\"small\">créditos · Swaply</div>\n            <div class=\"note-sticky\">+3 hoy!</div>\n          </div>\n          <div class=\"section-label\">Cómo ganar</div>\n          <div class=\"row-line\"><div class=\"l\">📚 Completar una sesión</div><div class=\"r\"><b>+3</b></div></div>\n          <div class=\"row-line\"><div class=\"l\">⭐ Recibir 5★ del aprendiz</div><div class=\"r\"><b>+1</b></div></div>\n          <div class=\"row-line\"><div class=\"l\">🎖 Insignia destacada</div><div class=\"r\"><b>+5</b></div></div>\n          <div style=\"margin-top:auto;padding-bottom:12px\"><div class=\"btn ghost\">Ver historial completo"
+  },
+  {
+    "id": "us37",
+    "us": "US37",
+    "title": "Usar créditos en tutoría",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Confirmar solicitud</h2></div>\n          <div class=\"flex\"><div class=\"av lg\">AP</div><div><div style=\"font-weight:600;font-size:12px\">Andrea Paredes</div><div class=\"small\">Cálculo Diferencial"
+  },
+  {
+    "id": "us38",
+    "us": "US38",
+    "title": "Historial de créditos",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Movimientos</h2></div>\n          <div class=\"tabs\"><div class=\"t on\">Todos</div><div class=\"t\">Ganados</div><div class=\"t\">Gastados</div></div>\n          <div class=\"col\">\n            <div class=\"row-line\"><div class=\"l\"><div class=\"av dot\">↑</div><div><div style=\"font-weight:600;font-size:11px\">Sesión con Luis M.</div><div class=\"small\">7 nov · enseñé"
+  },
+  {
+    "id": "us39",
+    "us": "US39",
+    "title": "Notificaciones en tiempo real",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><h2>Notificaciones</h2><div class=\"right\">Marcar leído</div></div>\n          <div class=\"small\">Hoy</div>\n          <div class=\"col mt\">\n            <div class=\"card\" style=\"background:var(--brand-bg)\"><div class=\"av dot\">📩</div><div class=\"body\"><div class=\"name\">Nueva solicitud</div><div class=\"meta\">Rogger E. quiere ayuda en Cálculo Diferencial</div><div class=\"small\">hace 5 min"
+  },
+  {
+    "id": "us40",
+    "us": "US40",
+    "title": "Preferencias de notificación",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Notificaciones</h2></div>\n          <div class=\"section-label\">Tipos</div>\n          <div class=\"row-line\"><div class=\"l\">📩 Nuevas solicitudes</div><div class=\"r\"><span style=\"display:inline-block;width:30px;height:18px;background:var(--primary);border-radius:9px;position:relative\"><span style=\"display:block;width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;right:2px;top:2px\"></span></span></div></div>\n          <div class=\"row-line\"><div class=\"l\">💬 Mensajes nuevos</div><div class=\"r\"><span style=\"display:inline-block;width:30px;height:18px;background:#d9d7d2;border-radius:9px;position:relative\"><span style=\"display:block;width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;left:2px;top:2px\"></span></span></div></div>\n          <div class=\"row-line\"><div class=\"l\">⏰ Recordatorios de sesión</div><div class=\"r\"><span style=\"display:inline-block;width:30px;height:18px;background:var(--primary);border-radius:9px;position:relative\"><span style=\"display:block;width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;right:2px;top:2px\"></span></span></div></div>\n          <div class=\"row-line\"><div class=\"l\">⭐ Nuevas reseñas</div><div class=\"r\"><span style=\"display:inline-block;width:30px;height:18px;background:var(--primary);border-radius:9px;position:relative\"><span style=\"display:block;width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;right:2px;top:2px\"></span></span></div></div>\n          <div class=\"row-line\"><div class=\"l\">📰 Novedades de Swaply</div><div class=\"r\"><span style=\"display:inline-block;width:30px;height:18px;background:#d9d7d2;border-radius:9px;position:relative\"><span style=\"display:block;width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;left:2px;top:2px\"></span></span></div></div>\n          <div class=\"section-label\">Canal</div>\n          <div class=\"ckline\"><span class=\"ck on\">✓</span>App</div>\n          <div class=\"ckline\"><span class=\"ck on\">✓</span>Correo institucional</div>\n          <div class=\"ckline\"><span class=\"ck\"></span>SMS"
+  },
+  {
+    "id": "us41",
+    "us": "US41",
+    "title": "Panel de administración",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><h2>Admin · Resumen</h2></div>\n          <div class=\"small\">Datos actualizados hace 2h</div>\n          <div class=\"flex mt\" style=\"gap:6px\">\n            <div class=\"stat\"><div class=\"n\">2 184</div><div class=\"l\">Usuarios</div></div>\n            <div class=\"stat\"><div class=\"n\">412</div><div class=\"l\">Sesiones mes"
+  },
+  {
+    "id": "us42",
+    "us": "US42",
+    "title": "Verificación de identidad",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Validar identidad</h2><div class=\"right\">3 / 12</div></div>\n          <div class=\"flex\"><div class=\"av lg\">DM</div><div><div style=\"font-weight:600;font-size:12px\">Diana Méndez</div><div class=\"small\">rogger@upc.edu.pe"
+  },
+  {
+    "id": "us43",
+    "us": "US43",
+    "title": "Gestión de reportes",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Reportes</h2></div>\n          <div class=\"tabs\"><div class=\"t on\">Pendientes (5)</div><div class=\"t\">Resueltos</div></div>\n          <div class=\"col\">\n            <div class=\"card\"><div class=\"av dot\">⚠</div><div class=\"body\"><div class=\"name\">Reseña ofensiva</div><div class=\"meta\">Jorge G. → Andrea P.</div><div class=\"small\">hace 1h · reportado por 2 usuarios"
+  },
+  {
+    "id": "us44",
+    "us": "US44",
+    "title": "Gestión de universidades",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Universidades</h2><div class=\"right\">+ Nueva</div></div>\n          <div class=\"input\"><span class=\"ic\">🔍</span>Buscar universidad…</div>\n          <div class=\"col mt\">\n            <div class=\"row-line\"><div class=\"l\"><b>UPC</b> <span class=\"small\">@upc.edu.pe</span></div><div class=\"r\"><span class=\"pill good\">Activa</span></div></div>\n            <div class=\"row-line\"><div class=\"l\"><b>PUCP</b> <span class=\"small\">@pucp.edu.pe</span></div><div class=\"r\"><span class=\"pill good\">Activa</span></div></div>\n            <div class=\"row-line\"><div class=\"l\"><b>UNMSM</b> <span class=\"small\">@unmsm.edu.pe</span></div><div class=\"r\"><span class=\"pill good\">Activa</span></div></div>\n            <div class=\"row-line\"><div class=\"l\"><b>UNI</b> <span class=\"small\">@uni.edu.pe</span></div><div class=\"r\"><span class=\"pill warn\">Pendiente</span></div></div>\n            <div class=\"row-line\"><div class=\"l\"><b>USIL</b> <span class=\"small\">@usil.edu.pe</span></div><div class=\"r\"><span class=\"pill bad\">Bloqueada</span>"
+  },
+  {
+    "id": "us45",
+    "us": "US45",
+    "title": "Bienvenida",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div style=\"flex:1;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:0 6px\">\n            <div style=\"font-size:60px\">🤝</div>\n            <div style=\"font-family:'Caveat',cursive;font-size:42px;font-weight:700;line-height:1;margin-top:6px\">Swaply</div>\n            <div style=\"font-size:13px;font-weight:600;margin-top:6px\">Intercambia conocimiento entre universidades</div>\n            <div class=\"small\" style=\"margin:6px 14px 0;line-height:1.5\">Conecta con estudiantes de otras casas de estudio. Aprende lo que necesitas, enseña lo que dominas.</div>\n            <div class=\"dots\" style=\"margin-top:18px\"><i class=\"on\"></i><i></i><i></i><i></i></div>\n          </div>\n          <div style=\"padding-bottom:12px\"><div class=\"btn\">Empezar</div><div class=\"btn ghost mt\">Ya tengo cuenta"
+  },
+  {
+    "id": "us46",
+    "us": "US46",
+    "title": "Tour guiado",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\" style=\"position:relative\">\n          <div style=\"opacity:.35;pointer-events:none\">\n            <div style=\"padding:8px 0\"><div class=\"small\">Buen día,</div><div style=\"font-weight:700;font-size:18px;color:var(--primary)\">Rogger 👋</div></div>\n            <div class=\"input\"><span class=\"ic\">🔍</span>Buscar tutores…</div>\n            <div class=\"section-label\">Tutores recomendados</div>\n            <div class=\"card mt\"><div class=\"av lg\">AP</div><div class=\"body\"><div class=\"name\">Andrea P.</div><div class=\"meta\">PUCP · Cálculo"
+  },
+  {
+    "id": "us47",
+    "us": "US47",
+    "title": "Ayuda y FAQ",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Ayuda</h2></div>\n          <div class=\"input\"><span class=\"ic\">🔍</span>¿Cómo gano créditos?</div>\n          <div class=\"section-label\">Categorías</div>\n          <div class=\"chips\"><span class=\"chip on\">Cuenta</span><span class=\"chip\">Créditos</span><span class=\"chip\">Sesiones</span><span class=\"chip\">Seguridad</span></div>\n          <div class=\"col mt\">\n            <div class=\"row-line\"><div class=\"l\">¿Cómo verifico mi correo?</div><div class=\"r\">+</div></div>\n            <div style=\"border:1.5px solid var(--primary);border-radius:10px;padding:8px;background:var(--brand-bg)\"><div style=\"font-weight:600;font-size:11px\">¿Cómo gano créditos?</div><div class=\"small\" style=\"margin-top:4px\">Ganas 3 créditos por cada sesión completada, +1 por reseñas 5★ y +5 al lograr la insignia \"Tutor destacado\".</div></div>\n            <div class=\"row-line\"><div class=\"l\">¿Puedo enseñar y aprender a la vez?</div><div class=\"r\">+</div></div>\n            <div class=\"row-line\"><div class=\"l\">¿Qué pasa si cancelo tarde?</div><div class=\"r\">+</div></div>\n            <div class=\"row-line\"><div class=\"l\">¿Cómo reporto a un usuario?</div><div class=\"r\">+"
+  },
+  {
+    "id": "us48",
+    "us": "US48",
+    "title": "Privacidad del perfil",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Privacidad</h2></div>\n          <div class=\"section-label\">¿Qué se ve en tu perfil?</div>\n          <div class=\"row-line\"><div class=\"l\">Mostrar universidad</div><div class=\"r\"><span style=\"display:inline-block;width:30px;height:18px;background:var(--primary);border-radius:9px;position:relative\"><span style=\"display:block;width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;right:2px;top:2px\"></span></span></div></div>\n          <div class=\"row-line\"><div class=\"l\">Mostrar nombre real</div><div class=\"r\"><span style=\"display:inline-block;width:30px;height:18px;background:var(--primary);border-radius:9px;position:relative\"><span style=\"display:block;width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;right:2px;top:2px\"></span></span></div></div>\n          <div class=\"row-line\"><div class=\"l\">Mostrar carrera</div><div class=\"r\"><span style=\"display:inline-block;width:30px;height:18px;background:#d9d7d2;border-radius:9px;position:relative\"><span style=\"display:block;width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;left:2px;top:2px\"></span></span></div></div>\n          <div class=\"section-label\">Visibilidad general</div>\n          <div style=\"border:2px solid var(--primary);border-radius:12px;padding:10px;background:var(--brand-bg)\"><div class=\"flex\"><div style=\"font-size:20px\">🙈</div><div style=\"flex:1\"><div style=\"font-weight:600;font-size:12px\">Perfil privado</div><div class=\"small\">No apareces en búsquedas. Solo tú puedes iniciar contacto.</div></div><span class=\"ck r\"></span></div></div>\n          <div class=\"toast mt\"><span class=\"ic\">ℹ</span><div>Los cambios se aplican de inmediato."
+  },
+  {
+    "id": "us49",
+    "us": "US49",
+    "title": "Eliminar cuenta",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Eliminar cuenta</h2></div>\n          <div class=\"toast bad\"><span class=\"ic\">⚠</span><div><b>Acción irreversible.</b> Tus datos se eliminarán en <b>30 días</b>.</div></div>\n          <div class=\"section-label\">Qué se borra</div>\n          <ul style=\"font-size:10px;color:#555;padding-left:14px;margin:4px 0;line-height:1.6\"><li>Tu perfil, foto y habilidades</li><li>Historial de sesiones y reseñas</li><li>Saldo de créditos restante</li><li>Conversaciones</li></ul>\n          <div class=\"form-field mt\"><label>Confirma tu contraseña</label><div class=\"input\">••••••••</div></div>\n          <div class=\"ckline\"><span class=\"ck on\">✓</span><span class=\"small\">Entiendo que esta acción es definitiva</span></div>\n          <div style=\"margin-top:auto;padding-bottom:12px\"><div class=\"flex\"><div class=\"btn ghost\" style=\"flex:1\">Cancelar</div><div class=\"btn\" style=\"flex:1;background:#d64545\">Eliminar"
+  },
+  {
+    "id": "us50",
+    "us": "US50",
+    "title": "Cambio de contraseña",
+    "frameAttrs": "",
+    "html": "<div class=\"bar\"><span>12:30</span><span class=\"icons\">▲▼ ⋯⋯⋯</span></div>\n        <div class=\"scr\">\n          <div class=\"head\"><span class=\"back\">‹</span><h2>Cambiar contraseña</h2></div>\n          <div class=\"form-field mt\"><label>Contraseña actual</label><div class=\"input\">••••••••</div></div>\n          <div class=\"form-field\"><label>Nueva contraseña</label><div class=\"input\">••••••••••</div></div>\n          <div class=\"form-field\"><label>Confirmar nueva</label><div class=\"input\">••••••••••</div></div>\n          <div class=\"section-label\">Requisitos</div>\n          <div class=\"col\" style=\"gap:4px\">\n            <div class=\"ckline\" style=\"padding:4px 0;border:none\"><span class=\"ck on\">✓</span><span class=\"small\">Mínimo 8 caracteres</span></div>\n            <div class=\"ckline\" style=\"padding:4px 0;border:none\"><span class=\"ck on\">✓</span><span class=\"small\">Una mayúscula</span></div>\n            <div class=\"ckline\" style=\"padding:4px 0;border:none\"><span class=\"ck on\">✓</span><span class=\"small\">Un número</span></div>\n            <div class=\"ckline\" style=\"padding:4px 0;border:none\"><span class=\"ck\"></span><span class=\"small\">Un símbolo (opcional)</span></div>\n          </div>\n          <div class=\"toast bad mt\" style=\"display:none\"><span class=\"ic\">⚠</span><div>La contraseña actual no es correcta</div></div>\n          <div style=\"margin-top:auto;padding-bottom:12px\"><div class=\"btn\">Actualizar contraseña"
+  }
+];

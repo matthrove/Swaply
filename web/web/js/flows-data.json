@@ -1,0 +1,737 @@
+[
+  {
+    "us": "US01",
+    "title": "Registro con correo institucional",
+    "actions": [
+      "\"Crear cuenta\"",
+      "enviar",
+      "no institucional",
+      "ya existe",
+      "verificar"
+    ],
+    "screens": [
+      "Form registro",
+      "Error dominio",
+      "Ya registrado",
+      "Verificación"
+    ]
+  },
+  {
+    "us": "US02",
+    "title": "Inicio de sesión",
+    "actions": [
+      "\"Iniciar sesión\"",
+      "enviar",
+      "incorrectas",
+      "no verificada"
+    ],
+    "screens": [
+      "Login",
+      "Error credenciales",
+      "No verificada"
+    ]
+  },
+  {
+    "us": "US03",
+    "title": "Recuperación de contraseña",
+    "actions": [
+      "\"olvidé contraseña\"",
+      "enviar",
+      "no existe",
+      "+24h"
+    ],
+    "screens": [
+      "Form recover",
+      "Sin cuenta",
+      "Email enviado",
+      "Enlace expirado"
+    ]
+  },
+  {
+    "us": "US04",
+    "title": "Cierre de sesión",
+    "actions": [
+      "menú · \"Cerrar sesión\"",
+      "confirmar",
+      "timeout"
+    ],
+    "screens": [
+      "Confirmación",
+      "Sesión expirada"
+    ]
+  },
+  {
+    "us": "US05",
+    "title": "Creación de perfil de aprendiz",
+    "actions": [
+      "primer login",
+      "guardar",
+      "vacíos",
+      "sin foto/bio"
+    ],
+    "screens": [
+      "Form aprendiz",
+      "Campos vacíos",
+      "Perfil incompleto"
+    ]
+  },
+  {
+    "us": "US06",
+    "title": "Creación de perfil de tutor",
+    "actions": [
+      "\"agregar habilidad\"",
+      "guardar",
+      "sin habilidad",
+      "duplicada"
+    ],
+    "screens": [
+      "Form tutor",
+      "Sin habilidad",
+      "Duplicada"
+    ]
+  },
+  {
+    "us": "US07",
+    "title": "Edición de perfil",
+    "actions": [
+      "\"editar\"",
+      "guardar",
+      "sin cambios",
+      "refleja"
+    ],
+    "screens": [
+      "Form editar",
+      "Sin cambios",
+      "Actualizado"
+    ]
+  },
+  {
+    "us": "US08",
+    "title": "Subida de foto de perfil",
+    "actions": [
+      "\"cambiar foto\"",
+      "subir",
+      "&gt;5MB",
+      "formato"
+    ],
+    "screens": [
+      "Selector",
+      "Muy grande",
+      "Formato inválido",
+      "Foto visible"
+    ]
+  },
+  {
+    "us": "US09",
+    "title": "Rol dual tutor/aprendiz",
+    "actions": [
+      "\"roles\"",
+      "activar",
+      "activar tutor",
+      "guardar",
+      "desactivar"
+    ],
+    "screens": [
+      "Mis roles",
+      "Habilidades",
+      "Desactivado"
+    ]
+  },
+  {
+    "us": "US10",
+    "title": "Visualización del perfil público",
+    "actions": [
+      "tap tutor",
+      "incompleto",
+      "\"solicitar\""
+    ],
+    "screens": [
+      "Perfil incompleto",
+      "Perfil tutor"
+    ]
+  },
+  {
+    "us": "US11",
+    "title": "Búsqueda de tutores por habilidad",
+    "actions": [
+      "tap buscar",
+      "buscar",
+      "sin resultados",
+      "vacío",
+      "tap"
+    ],
+    "screens": [
+      "Buscador",
+      "Vacío",
+      "Más recientes",
+      "Lista ordenada"
+    ]
+  },
+  {
+    "us": "US12",
+    "title": "Filtro por universidad",
+    "actions": [
+      "\"filtros\"",
+      "aplicar",
+      "misma uni",
+      "+ habilidad"
+    ],
+    "screens": [
+      "Selector uni",
+      "Bloqueo interuni",
+      "Combinado"
+    ]
+  },
+  {
+    "us": "US13",
+    "title": "Filtro por disponibilidad horaria",
+    "actions": [
+      "\"horario\"",
+      "aplicar",
+      "vacío"
+    ],
+    "screens": [
+      "Turnos",
+      "Sin disponibilidad",
+      "Lista por turno"
+    ]
+  },
+  {
+    "us": "US14",
+    "title": "Guardar tutores en favoritos",
+    "actions": [
+      "tap ★",
+      "no favorito",
+      "ver",
+      "ya favorito"
+    ],
+    "screens": [
+      "Agregado",
+      "Mis favoritos",
+      "Removido"
+    ]
+  },
+  {
+    "us": "US15",
+    "title": "Recomendaciones personalizadas",
+    "actions": [
+      "cargar",
+      "usuario nuevo",
+      "tap"
+    ],
+    "screens": [
+      "Tutores populares",
+      "Personalizadas"
+    ]
+  },
+  {
+    "us": "US16",
+    "title": "Enviar solicitud de intercambio",
+    "actions": [
+      "\"enviar solicitud\"",
+      "enviar",
+      "sin mensaje",
+      "duplicada",
+      "tutor notif."
+    ],
+    "screens": [
+      "Form solicitud",
+      "Sin mensaje",
+      "Duplicada",
+      "Enviada"
+    ]
+  },
+  {
+    "us": "US17",
+    "title": "Aceptar solicitud de intercambio",
+    "actions": [
+      "abrir",
+      "aceptar",
+      "sin texto",
+      "conversar"
+    ],
+    "screens": [
+      "Detalle",
+      "Chat vacío",
+      "Chat habilitado"
+    ]
+  },
+  {
+    "us": "US18",
+    "title": "Rechazar solicitud",
+    "actions": [
+      "\"rechazar\"",
+      "confirmar",
+      "con motivo",
+      "sin motivo",
+      "historial"
+    ],
+    "screens": [
+      "Motivo",
+      "Aprendiz · motivo",
+      "Aprendiz · genérico"
+    ]
+  },
+  {
+    "us": "US19",
+    "title": "Historial de solicitudes",
+    "actions": [
+      "\"mis solicitudes\"",
+      "ninguna",
+      "tap"
+    ],
+    "screens": [
+      "Empty",
+      "Por estado"
+    ]
+  },
+  {
+    "us": "US20",
+    "title": "Cancelar solicitud pendiente",
+    "actions": [
+      "tap solicitud",
+      "respondida",
+      "pendiente",
+      "confirmar"
+    ],
+    "screens": [
+      "Ya respondida",
+      "Modal cancelar"
+    ]
+  },
+  {
+    "us": "US21",
+    "title": "Chat en tiempo real",
+    "actions": [
+      "escribir + enviar",
+      "enviar",
+      "sin conexión",
+      "otra sección"
+    ],
+    "screens": [
+      "Composer",
+      "Encolado",
+      "Entregado &lt;2s",
+      "Notif. push"
+    ]
+  },
+  {
+    "us": "US22",
+    "title": "Envío de archivos en el chat",
+    "actions": [
+      "📎 adjuntar",
+      "subir",
+      "&gt;10MB",
+      "PDF OK",
+      "imagen"
+    ],
+    "screens": [
+      "Selector",
+      "Muy grande",
+      "PDF enviado",
+      "Miniatura"
+    ]
+  },
+  {
+    "us": "US23",
+    "title": "Indicador de lectura",
+    "actions": [
+      "enviar",
+      "receptor abre",
+      "no"
+    ],
+    "screens": [
+      "✓ enviado",
+      "Sin leer",
+      "✓✓ leído"
+    ]
+  },
+  {
+    "us": "US24",
+    "title": "Historial de conversaciones",
+    "actions": [
+      "\"chats\"",
+      "acción",
+      "buscar"
+    ],
+    "screens": [
+      "Lista chats",
+      "Resultados"
+    ]
+  },
+  {
+    "us": "US25",
+    "title": "Bloqueo de usuarios",
+    "actions": [
+      "\"🚫 bloquear\"",
+      "confirmar",
+      "no",
+      "desbloquear",
+      "confirmar"
+    ],
+    "screens": [
+      "Confirm",
+      "Bloqueado",
+      "Lista bloqueados"
+    ]
+  },
+  {
+    "us": "US26",
+    "title": "Programar sesión",
+    "actions": [
+      "\"programar\"",
+      "confirmar",
+      "fecha pasada",
+      "conflicto"
+    ],
+    "screens": [
+      "Calendario",
+      "Pasada",
+      "Conflicto",
+      "Confirmada"
+    ]
+  },
+  {
+    "us": "US27",
+    "title": "Recordatorio de sesión",
+    "actions": [
+      "−24h",
+      "−1h",
+      "tap"
+    ],
+    "screens": [
+      "Notif. 24h",
+      "Notif. 1h"
+    ]
+  },
+  {
+    "us": "US28",
+    "title": "Marcar sesión como completada",
+    "actions": [
+      "tap sesión",
+      "marcar",
+      "aún no",
+      "→ EP07"
+    ],
+    "screens": [
+      "Detalle sesión",
+      "Aún no",
+      "Completada"
+    ]
+  },
+  {
+    "us": "US29",
+    "title": "Cancelar sesión programada",
+    "actions": [
+      "\"cancelar\"",
+      "confirmar",
+      "+2h",
+      "2–1h",
+      "−1h"
+    ],
+    "screens": [
+      "Form motivo",
+      "Sin penalidad",
+      "Advertencia",
+      "Afecta reputación"
+    ]
+  },
+  {
+    "us": "US30",
+    "title": "Historial de sesiones completadas",
+    "actions": [
+      "\"mis sesiones\"",
+      "ninguna"
+    ],
+    "screens": [
+      "Empty",
+      "Lista detallada"
+    ]
+  },
+  {
+    "us": "US31",
+    "title": "Calificar sesión de tutoría",
+    "actions": [
+      "\"calificar\"",
+      "enviar",
+      "ya calificó",
+      "solo ★"
+    ],
+    "screens": [
+      "Formulario",
+      "Duplicada",
+      "Solo puntuación",
+      "Promedio actualizado"
+    ]
+  },
+  {
+    "us": "US32",
+    "title": "Calificación mutua al aprendiz",
+    "actions": [
+      "tutor califica",
+      "+7d",
+      "enviar"
+    ],
+    "screens": [
+      "Expirado",
+      "Calificar aprendiz",
+      "Refleja en perfil"
+    ]
+  },
+  {
+    "us": "US33",
+    "title": "Ver calificaciones recibidas",
+    "actions": [
+      "\"reseñas\"",
+      "ninguna"
+    ],
+    "screens": [
+      "Empty",
+      "Lista reseñas"
+    ]
+  },
+  {
+    "us": "US34",
+    "title": "Insignia de tutor destacado",
+    "actions": [
+      "sistema actualiza",
+      "cae &lt;4.0",
+      "visible"
+    ],
+    "screens": [
+      "Insignia retirada",
+      "Insignia otorgada"
+    ]
+  },
+  {
+    "us": "US35",
+    "title": "Reportar reseña inapropiada",
+    "actions": [
+      "\"⚠ reportar\"",
+      "enviar",
+      "duplicado",
+      "→ admin"
+    ],
+    "screens": [
+      "Form motivo",
+      "Ya reportada",
+      "Reporte enviado"
+    ]
+  },
+  {
+    "us": "US36",
+    "title": "Obtener créditos por enseñar",
+    "actions": [
+      "acredita auto",
+      "tap",
+      "historial"
+    ],
+    "screens": [
+      "Notif. crédito",
+      "Billetera"
+    ]
+  },
+  {
+    "us": "US37",
+    "title": "Usar créditos para solicitar tutoría",
+    "actions": [
+      "\"enviar\"",
+      "insuficiente",
+      "→ EP04"
+    ],
+    "screens": [
+      "Sin créditos",
+      "Pago confirmado"
+    ]
+  },
+  {
+    "us": "US38",
+    "title": "Historial de movimientos",
+    "actions": [
+      "\"historial\"",
+      "filtrar",
+      "solo ganancias"
+    ],
+    "screens": [
+      "Movimientos",
+      "Filtrado +"
+    ]
+  },
+  {
+    "us": "US39",
+    "title": "Notificaciones en tiempo real",
+    "actions": [
+      "solicitud · msg · sesión",
+      "tap",
+      "solicitud",
+      "mensaje",
+      "sesión"
+    ],
+    "screens": [
+      "Notif"
+    ]
+  },
+  {
+    "us": "US40",
+    "title": "Configurar preferencias de notificación",
+    "actions": [
+      "\"notificaciones\"",
+      "cambiar",
+      "desactiva msg"
+    ],
+    "screens": [
+      "Toggles",
+      "Sin msg"
+    ]
+  },
+  {
+    "us": "US41",
+    "title": "Panel de administración",
+    "actions": [
+      "credenciales",
+      "refrescar",
+      "+24h"
+    ],
+    "screens": [
+      "Dashboard admin",
+      "Datos viejos",
+      "Gráficos"
+    ]
+  },
+  {
+    "us": "US42",
+    "title": "Validación de identidad institucional",
+    "actions": [
+      "tap solicitud",
+      "acción",
+      "rechazar"
+    ],
+    "screens": [
+      "Detalle",
+      "Correo motivo",
+      "Sello ✓"
+    ]
+  },
+  {
+    "us": "US43",
+    "title": "Gestión de reportes de usuarios",
+    "actions": [
+      "tap reporte",
+      "elegir acción",
+      "desestimar",
+      "eliminar",
+      "suspender"
+    ],
+    "screens": [
+      "Detalle reporte",
+      "Sin acción",
+      "Contenido eliminado",
+      "Usuario suspendido"
+    ]
+  },
+  {
+    "us": "US44",
+    "title": "Gestión de universidades",
+    "actions": [
+      "\"universidades\"",
+      "acción",
+      "agregar",
+      "guardar",
+      "eliminar"
+    ],
+    "screens": [
+      "Lista uni",
+      "Nuevo dominio",
+      "Bloquear dominio"
+    ]
+  },
+  {
+    "us": "US45",
+    "title": "Pantalla de bienvenida",
+    "actions": [
+      "app abre",
+      "acción",
+      "tiene cuenta",
+      "\"registrarse\""
+    ],
+    "screens": [
+      "Welcome",
+      "Carousel info"
+    ]
+  },
+  {
+    "us": "US46",
+    "title": "Tour guiado al primer ingreso",
+    "actions": [
+      "cargar dashboard",
+      "acción",
+      "\"saltar\""
+    ],
+    "screens": [
+      "Tour paso 1",
+      "Reaccesible"
+    ]
+  },
+  {
+    "us": "US47",
+    "title": "Ayuda y preguntas frecuentes",
+    "actions": [
+      "\"ayuda\"",
+      "acción",
+      "buscar"
+    ],
+    "screens": [
+      "FAQ",
+      "Resultados",
+      "Respuesta abierta"
+    ]
+  },
+  {
+    "us": "US48",
+    "title": "Configuración de privacidad del perfil",
+    "actions": [
+      "\"privacidad\"",
+      "activar",
+      "oculta uni",
+      "perfil privado"
+    ],
+    "screens": [
+      "Toggles",
+      "Campos ocultos",
+      "No aparece"
+    ]
+  },
+  {
+    "us": "US49",
+    "title": "Eliminar cuenta",
+    "actions": [
+      "\"eliminar cuenta\"",
+      "acción",
+      "cancelar",
+      "confirmar",
+      "+30d"
+    ],
+    "screens": [
+      "Form eliminar",
+      "Cuenta activa",
+      "Eliminación 30d"
+    ]
+  },
+  {
+    "us": "US50",
+    "title": "Cambio de contraseña",
+    "actions": [
+      "\"contraseña\"",
+      "enviar",
+      "actual mal",
+      "no cumple",
+      "listo"
+    ],
+    "screens": [
+      "Formulario",
+      "Actual incorrecta",
+      "No cumple",
+      "Actualizada"
+    ]
+  }
+]
