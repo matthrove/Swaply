@@ -24,7 +24,7 @@ const MAIN_NAV = {
 };
 
 const EXCLUDE_BOTTOM_NAV = new Set(['us45', 'us01', 'us01b', 'us02', 'us03']);
-const EXCLUDE_BACK = new Set(['us45']);
+const EXCLUDE_BACK = new Set(['us45', 'us15']);
 
 const FALLBACK_BACK = {
   us02: 'us45',
@@ -679,9 +679,9 @@ function setupCustomFlows(frame, screenId) {
       updateCareers();
     }
     
-    const chipM = frame.querySelector('#chip-disp-m');
-    const chipT = frame.querySelector('#chip-disp-t');
-    const chipN = frame.querySelector('#chip-disp-n');
+    const chipM = frame.querySelector('#chip-disp-m, #setup-tutor-disp-m');
+    const chipT = frame.querySelector('#chip-disp-t, #setup-tutor-disp-t');
+    const chipN = frame.querySelector('#chip-disp-n, #setup-tutor-disp-n');
     const hoursContainer = frame.querySelector('#tutor-hours-chips');
     
     const hoursMap = {
