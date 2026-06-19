@@ -4,29 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#8B1A2B">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>US41 · Panel de administración — Swaply</title>
+  <title>US41 · Editar perfil — Swaply</title>
   <link rel="stylesheet" href="css/app.css">
 </head>
 <body class="app-body" data-screen-id="us41">
   <div class="app-shell">
-    <aside id="appSidebar" class="app-sidebar" aria-label="Historias de usuario"></aside>
+    <aside id="appSidebar" class="app-sidebar"></aside>
     <div class="app-main">
       <header class="app-topbar" id="appTopbar">
-        <!-- Configuration settings gear button on the far left -->
-        <button type="button" class="btn-settings" id="btnSettings" aria-label="Ajustes" style="background:none; border:none; font-size:20px; cursor:pointer; padding:0 8px; color:var(--primary);">⚙️</button>
-        <span class="app-topbar-title" id="screenTitle">US41 · Panel de administración</span>
-        <button type="button" class="hu-toggle" id="huToggle" aria-label="Ver historias de usuario">50 HU</button>
+        <button type="button" id="btnSettings" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0 8px;color:var(--primary);">⚙️</button>
+        <span class="app-topbar-title" id="screenTitle">US41 · Editar perfil</span>
+        <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
       </header>
       <div class="app-viewport">
-        <div class="app-frame" id="appFrame" role="main" aria-live="polite">
-          <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
-        <div class="scr">
-          <div class="head"><h2>Admin · Resumen</h2></div>
-          <div class="small">Datos actualizados hace 2h</div>
-          <div class="flex mt" style="gap:6px">
-            <div class="stat"><div class="n">2 184</div><div class="l">Usuarios</div></div>
-            <div class="stat"><div class="n">412</div><div class="l">Sesiones mes
+        <div class="app-frame" id="appFrame" role="main">
+          
+    <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
+    <div class="scr">
+      <div class="head"><span class="back">‹</span><h2>Editar perfil</h2></div>
+      <div class="col" style="gap:8px;">
+        <div class="form-field"><label>Nombre</label><div class="input">Juan Pérez</div></div>
+        <div class="form-field"><label>Bio</label><div class="input">Estudiante de Ing. de Software</div></div>
+      </div>
+      <div class="btn mt">Guardar cambios</div>
+    </div>
+  
         </div>
       </div>
     </div>

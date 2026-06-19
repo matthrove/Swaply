@@ -4,23 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#8B1A2B">
-  <meta name="apple-mobile-web-app-capable" content="yes">
   <title>US36c · Nueva sesión — Swaply</title>
   <link rel="stylesheet" href="css/app.css">
 </head>
 <body class="app-body" data-screen-id="us36-custom">
   <div class="app-shell">
-    <aside id="appSidebar" class="app-sidebar" aria-label="Historias de usuario"></aside>
+    <aside id="appSidebar" class="app-sidebar"></aside>
     <div class="app-main">
       <header class="app-topbar" id="appTopbar">
-        <!-- Configuration settings gear button on the far left -->
-        <button type="button" class="btn-settings" id="btnSettings" aria-label="Ajustes" style="background:none; border:none; font-size:20px; cursor:pointer; padding:0 8px; color:var(--primary);">⚙️</button>
+        <button type="button" id="btnSettings" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0 8px;color:var(--primary);">⚙️</button>
         <span class="app-topbar-title" id="screenTitle">US36c · Nueva sesión</span>
-        <button type="button" class="hu-toggle" id="huToggle" aria-label="Ver historias de usuario">50 HU</button>
+        <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
       </header>
       <div class="app-viewport">
-        <div class="app-frame" id="appFrame" role="main" aria-live="polite">
+        <div class="app-frame" id="appFrame" role="main">
           
+    <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
+    <div class="scr" style="display:flex; flex-direction:column; height:100%;">
+      <div class="head"><span class="back">‹</span><h2>Nueva sesión</h2></div>
+      <div class="small" style="margin-bottom:16px;">¿Con quién quieres sesionar?</div>
+      <div class="col" style="gap:12px; flex:1;">
+        <div class="btn" id="btn-tutor-nuevo" style="text-align:center;">🔍 Buscar nuevo tutor</div>
+      </div>
+    </div>
+  
         </div>
       </div>
     </div>

@@ -4,28 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#8B1A2B">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>US39 · Notificaciones en tiempo real — Swaply</title>
+  <title>US39 · Mi billetera — Swaply</title>
   <link rel="stylesheet" href="css/app.css">
 </head>
 <body class="app-body" data-screen-id="us39">
   <div class="app-shell">
-    <aside id="appSidebar" class="app-sidebar" aria-label="Historias de usuario"></aside>
+    <aside id="appSidebar" class="app-sidebar"></aside>
     <div class="app-main">
       <header class="app-topbar" id="appTopbar">
-        <!-- Configuration settings gear button on the far left -->
-        <button type="button" class="btn-settings" id="btnSettings" aria-label="Ajustes" style="background:none; border:none; font-size:20px; cursor:pointer; padding:0 8px; color:var(--primary);">⚙️</button>
-        <span class="app-topbar-title" id="screenTitle">US39 · Notificaciones en tiempo real</span>
-        <button type="button" class="hu-toggle" id="huToggle" aria-label="Ver historias de usuario">50 HU</button>
+        <button type="button" id="btnSettings" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0 8px;color:var(--primary);">⚙️</button>
+        <span class="app-topbar-title" id="screenTitle">US39 · Mi billetera</span>
+        <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
       </header>
       <div class="app-viewport">
-        <div class="app-frame" id="appFrame" role="main" aria-live="polite">
-          <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
-        <div class="scr">
-          <div class="head"><h2>Notificaciones</h2><div class="right">Marcar leído</div></div>
-          <div class="small">Hoy</div>
-          <div class="col mt">
-            <div class="card" style="background:var(--brand-bg)"><div class="av dot">📩</div><div class="body"><div class="name">Nueva solicitud</div><div class="meta">Rogger E. quiere ayuda en Cálculo Diferencial</div><div class="small">hace 5 min
+        <div class="app-frame" id="appFrame" role="main">
+          
+    <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
+    <div class="scr">
+      <div class="head"><span class="back">‹</span><h2>Mi billetera</h2></div>
+      <div class="card" style="text-align:center; padding:20px;">
+        <div class="small">Saldo disponible</div>
+        <div style="font-family:'Caveat',cursive; font-size:42px; font-weight:700; color:var(--primary);">S/ 120</div>
+      </div>
+      <div class="section-label" style="margin-top:16px;">Historial</div>
+      <div class="col" style="gap:8px; margin-top:8px;">
+        <div class="kv"><span class="k">Sesión con Andrea</span><span class="v" style="color:#3aa56b;">+30</span></div>
+        <div class="kv"><span class="k">Sesión con Luis</span><span class="v" style="color:#d64545;">-20</span></div>
+      </div>
+    </div>
+  
         </div>
       </div>
     </div>
