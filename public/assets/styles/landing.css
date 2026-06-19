@@ -418,6 +418,15 @@ body.landing {
   color: #fff;
   font-size: 48px;
   font-weight: 700;
+  overflow: hidden;
+}
+
+.team-member .photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
 }
 
 .team-member span {
