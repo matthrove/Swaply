@@ -497,7 +497,7 @@ function bindInteractions(container, screenId) {
     });
   });
 
-  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion']);
+  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy']);
   container.querySelectorAll('.btn, .btn.ghost, .btn.sm').forEach(btn => {
     if (btn.id && SKIP_IDS.has(btn.id)) return;
     const text = btn.textContent.trim();
@@ -835,9 +835,73 @@ function setupCustomFlows(frame, screenId) {
     if (optBilletera) optBilletera.addEventListener('click', () => navigateTo('us39'));
 
     // ⚙️ Ajustes button in topbar
-    document.querySelector('#btnSettings')?.addEventListener('click', () => navigateTo('us04'));
+    document.querySelector('#btnSettings')?.addEventListener('click', () => navigateTo('configuracion'));
   }
-  
+
+  else if (screenId === 'us07') {
+    const nameIn = frame.querySelector('#edit-name');
+    const bioIn = frame.querySelector('#edit-bio');
+    const univIn = frame.querySelector('#edit-univ');
+    const careerIn = frame.querySelector('#edit-career');
+    const toast = frame.querySelector('#edit-toast');
+    const toastMsg = frame.querySelector('#edit-toast-msg');
+
+    if (user) {
+      if (nameIn) nameIn.value = user.name || '';
+      if (bioIn) bioIn.value = (user.studentProfile?.bio || user.tutorProfile?.bio) || '';
+      if (univIn) univIn.value = (user.studentProfile?.univ || user.tutorProfile?.univ) || '';
+      if (careerIn) careerIn.value = (user.studentProfile?.career || user.tutorProfile?.career) || '';
+    }
+
+    const saveBtn = frame.querySelector('#btn-save-profile');
+    if (saveBtn) {
+      saveBtn.addEventListener('click', () => {
+        const updatedUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+        updatedUser.name = nameIn?.value.trim() || updatedUser.name;
+        const profileKey = updatedUser.role === 'tutor' ? 'tutorProfile' : 'studentProfile';
+        if (!updatedUser[profileKey]) updatedUser[profileKey] = {};
+        updatedUser[profileKey].bio = bioIn?.value.trim() || '';
+        updatedUser[profileKey].univ = univIn?.value.trim() || '';
+        updatedUser[profileKey].career = careerIn?.value.trim() || '';
+        localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+        let users = JSON.parse(localStorage.getItem('users') || '[]');
+        users = users.map(u => u.email === updatedUser.email ? updatedUser : u);
+        localStorage.setItem('users', JSON.stringify(users));
+        if (toast) toast.style.display = 'flex';
+        if (toastMsg) toastMsg.textContent = '¡Cambios guardados!';
+        setTimeout(() => { if (toast) toast.style.display = 'none'; }, 2500);
+      });
+    }
+  }
+
+  else if (screenId === 'configuracion') {
+    const btnLogout = frame.querySelector('#btn-logout-submit');
+    if (btnLogout) {
+      btnLogout.onclick = () => {
+        localStorage.removeItem('currentUser');
+        navigateTo('us45');
+      };
+    }
+    const darkBtn = frame.querySelector('#btn-dark');
+    const privBtn = frame.querySelector('#btn-privacy');
+    if (darkBtn) {
+      darkBtn.addEventListener('click', () => {
+        const on = darkBtn.textContent.trim() === 'Activado';
+        darkBtn.textContent = on ? 'Desactivado' : 'Activado';
+        darkBtn.style.background = on ? 'transparent' : 'var(--primary)';
+        darkBtn.style.color = on ? 'var(--primary)' : '#fff';
+      });
+    }
+    if (privBtn) {
+      privBtn.addEventListener('click', () => {
+        const on = privBtn.textContent.trim() === 'Activo';
+        privBtn.textContent = on ? 'Inactivo' : 'Activo';
+        privBtn.style.background = on ? 'transparent' : 'var(--primary)';
+        privBtn.style.color = on ? 'var(--primary)' : '#fff';
+      });
+    }
+  }
+
   else if (screenId === 'us09') {
     if (!user) return;
     const cardStudent = frame.querySelector('#card-role-student');

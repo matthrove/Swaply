@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#8B1A2B">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Karen Ríos — Swaply</title>
+  <link rel="stylesheet" href="assets/styles/app.css">
+</head>
+<body class="app-body" data-screen-id="tutor-karen">
+  <div class="app-shell">
+    <aside id="appSidebar" class="app-sidebar" aria-label="Historias de usuario"></aside>
+    <div class="app-main">
+      <header class="app-topbar" id="appTopbar">
+        <button type="button" class="btn-settings" id="btnSettings" aria-label="Ajustes" style="background:none; border:none; font-size:20px; cursor:pointer; padding:0 8px; color:var(--primary);">⚙️</button>
+        <span class="app-topbar-title" id="screenTitle">Perfil de tutor</span>
+        <button type="button" class="hu-toggle" id="huToggle" aria-label="Ver historias de usuario">50 HU</button>
+      </header>
+      <div class="app-viewport">
+        <div class="app-frame" id="appFrame" role="main" aria-live="polite">
+          <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
+          <div class="scr" style="display:flex; flex-direction:column; height:100%;">
+            <div class="head"><span class="back">‹</span><h2>Perfil de tutor</h2></div>
+
+            <div style="flex:1; overflow-y:auto; padding-bottom:12px;">
+              <!-- Avatar + Name -->
+              <div style="display:flex; flex-direction:column; align-items:center; gap:8px; margin-bottom:16px;">
+                <div class="av xl" style="background:linear-gradient(135deg,#d4f4e4,#2a8a55); color:#fff; font-size:26px; font-weight:700;">KR</div>
+                <div style="font-weight:700; font-size:17px; color:var(--ink);">Karen Ríos</div>
+                <div style="font-size:12px; color:var(--muted);">UPC · Ingeniería de Sistemas</div>
+                <div style="display:flex; gap:4px; align-items:center;">
+                  <span style="color:#f5a623; font-size:13px;">★★★★☆</span>
+                  <span style="font-weight:700; font-size:12px;">4.2</span>
+                  <span style="font-size:11px; color:var(--muted);">(9 reseñas)</span>
+                </div>
+                <span class="tag" style="background:#e8fbf0; color:#2a8a55; font-weight:600; font-size:11px;">🌱 Tutor nuevo</span>
+              </div>
+
+              <!-- Bio -->
+              <div class="form-field">
+                <label>Sobre mí</label>
+                <div style="font-size:13px; color:var(--ink); line-height:1.5;">
+                  Estudiante de 4to año de Ing. de Sistemas en la UPC. Me especializo en programación, bases de datos y algoritmos. Tengo experiencia como monitora en mi universidad y me gusta enseñar con ejemplos prácticos y proyectos reales.
+                </div>
+              </div>
+
+              <!-- Materias -->
+              <div class="form-field">
+                <label>Materias que enseña</label>
+                <div class="chips" style="flex-wrap:wrap; gap:6px; margin-top:4px;">
+                  <span class="chip on">Cálculo Diferencial</span>
+                  <span class="chip on">Programación en Python</span>
+                  <span class="chip on">Bases de Datos</span>
+                  <span class="chip on">Algoritmos</span>
+                </div>
+              </div>
+
+              <!-- Disponibilidad -->
+              <div class="form-field">
+                <label>Disponibilidad</label>
+                <div class="chips" style="flex-wrap:wrap; gap:6px; margin-top:4px;">
+                  <span class="chip on">Lunes</span>
+                  <span class="chip on">Martes</span>
+                  <span class="chip on">Viernes</span>
+                  <span class="chip on">Domingo</span>
+                </div>
+                <div style="font-size:11px; color:var(--muted); margin-top:6px;">🕐 Horarios: Noche (6 PM – 10 PM)</div>
+              </div>
+
+              <!-- Créditos -->
+              <div class="form-field">
+                <label>Costo por sesión</label>
+                <div style="font-size:14px; font-weight:700; color:var(--primary);">2 créditos / hora</div>
+              </div>
+
+              <!-- Reseñas -->
+              <div class="form-field">
+                <label>Reseñas recientes</label>
+                <div style="background:#f9f9f9; border-radius:10px; padding:10px; margin-top:4px;">
+                  <div style="font-size:12px; font-weight:700;">Diego L. · ★★★★★</div>
+                  <div style="font-size:11px; color:var(--ink); margin-top:2px;">"Karen explica programación de forma muy clara, ideal para principiantes."</div>
+                </div>
+                <div style="background:#f9f9f9; border-radius:10px; padding:10px; margin-top:6px;">
+                  <div style="font-size:12px; font-weight:700;">Ana P. · ★★★★☆</div>
+                  <div style="font-size:11px; color:var(--ink); margin-top:2px;">"Buena tutora, muy paciente y siempre dispuesta a resolver dudas."</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="padding-top:8px; padding-bottom:12px;">
+              <button type="button" class="btn" onclick="window.location.href='us19.html'" style="width:100%;">Solicitar sesión</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/screens-data.js"></script>
+  <script src="assets/js/app-meta.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

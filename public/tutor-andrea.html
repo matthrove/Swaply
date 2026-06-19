@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#8B1A2B">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Andrea Paredes — Swaply</title>
+  <link rel="stylesheet" href="assets/styles/app.css">
+</head>
+<body class="app-body" data-screen-id="tutor-andrea">
+  <div class="app-shell">
+    <aside id="appSidebar" class="app-sidebar" aria-label="Historias de usuario"></aside>
+    <div class="app-main">
+      <header class="app-topbar" id="appTopbar">
+        <button type="button" class="btn-settings" id="btnSettings" aria-label="Ajustes" style="background:none; border:none; font-size:20px; cursor:pointer; padding:0 8px; color:var(--primary);">⚙️</button>
+        <span class="app-topbar-title" id="screenTitle">Perfil de tutor</span>
+        <button type="button" class="hu-toggle" id="huToggle" aria-label="Ver historias de usuario">50 HU</button>
+      </header>
+      <div class="app-viewport">
+        <div class="app-frame" id="appFrame" role="main" aria-live="polite">
+          <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
+          <div class="scr" style="display:flex; flex-direction:column; height:100%;">
+            <div class="head"><span class="back">‹</span><h2>Perfil de tutor</h2></div>
+
+            <div style="flex:1; overflow-y:auto; padding-bottom:12px;">
+              <!-- Avatar + Name -->
+              <div style="display:flex; flex-direction:column; align-items:center; gap:8px; margin-bottom:16px;">
+                <div class="av xl" style="background:linear-gradient(135deg,#f4d4d8,#8B1A2B); color:#fff; font-size:26px; font-weight:700;">AP</div>
+                <div style="font-weight:700; font-size:17px; color:var(--ink);">Andrea Paredes</div>
+                <div style="font-size:12px; color:var(--muted);">PUCP · Ingeniería de Sistemas</div>
+                <div style="display:flex; gap:4px; align-items:center;">
+                  <span style="color:#f5a623; font-size:13px;">★★★★★</span>
+                  <span style="font-weight:700; font-size:12px;">4.9</span>
+                  <span style="font-size:11px; color:var(--muted);">(32 reseñas)</span>
+                </div>
+                <span class="tag" style="background:var(--brand-bg); color:var(--primary); font-weight:600; font-size:11px;">📚 Tutor verificado</span>
+              </div>
+
+              <!-- Bio -->
+              <div class="form-field">
+                <label>Sobre mí</label>
+                <div style="font-size:13px; color:var(--ink); line-height:1.5;">
+                  Estudiante de 5to año de Ingeniería de Sistemas en la PUCP. Me especializo en Cálculo, Álgebra y Estadística. He dado más de 80 tutorías y me encanta encontrar formas creativas de explicar conceptos complejos.
+                </div>
+              </div>
+
+              <!-- Materias -->
+              <div class="form-field">
+                <label>Materias que enseña</label>
+                <div class="chips" style="flex-wrap:wrap; gap:6px; margin-top:4px;">
+                  <span class="chip on">Cálculo Diferencial</span>
+                  <span class="chip on">Cálculo Integral</span>
+                  <span class="chip on">Álgebra Lineal</span>
+                  <span class="chip on">Estadística</span>
+                </div>
+              </div>
+
+              <!-- Disponibilidad -->
+              <div class="form-field">
+                <label>Disponibilidad</label>
+                <div class="chips" style="flex-wrap:wrap; gap:6px; margin-top:4px;">
+                  <span class="chip on">Lunes</span>
+                  <span class="chip on">Miércoles</span>
+                  <span class="chip on">Viernes</span>
+                  <span class="chip" style="opacity:0.5;">Fines de semana</span>
+                </div>
+                <div style="font-size:11px; color:var(--muted); margin-top:6px;">🕐 Horarios: Tarde (12 PM – 6 PM)</div>
+              </div>
+
+              <!-- Créditos -->
+              <div class="form-field">
+                <label>Costo por sesión</label>
+                <div style="font-size:14px; font-weight:700; color:var(--primary);">3 créditos / hora</div>
+              </div>
+
+              <!-- Reseñas -->
+              <div class="form-field">
+                <label>Reseñas recientes</label>
+                <div style="background:#f9f9f9; border-radius:10px; padding:10px; margin-top:4px;">
+                  <div style="font-size:12px; font-weight:700;">Carlos M. · ★★★★★</div>
+                  <div style="font-size:11px; color:var(--ink); margin-top:2px;">"Excelente tutora, explica muy bien y tiene mucha paciencia."</div>
+                </div>
+                <div style="background:#f9f9f9; border-radius:10px; padding:10px; margin-top:6px;">
+                  <div style="font-size:12px; font-weight:700;">Valeria R. · ★★★★★</div>
+                  <div style="font-size:11px; color:var(--ink); margin-top:2px;">"Gracias a Andrea pude aprobar mi examen parcial de Cálculo."</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="padding-top:8px; padding-bottom:12px;">
+              <button type="button" class="btn" onclick="window.location.href='us19.html'" style="width:100%;">Solicitar sesión</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/screens-data.js"></script>
+  <script src="assets/js/app-meta.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
