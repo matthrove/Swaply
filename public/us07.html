@@ -23,11 +23,12 @@
         <div class="scr">
           <div class="head"><span class="back">‹</span><h2>Editar perfil</h2></div>
           <div class="flex" style="justify-content:center;flex-direction:column;text-align:center"><div class="av xl">RE</div><div class="small" style="margin-top:6px;text-decoration:underline;color:var(--primary)">Cambiar foto</div></div>
-          <div class="form-field mt"><label>Nombre</label><div class="input">Rogger Escalante</div></div>
-          <div class="form-field"><label>Bio</label><div class="input" style="height:50px;align-items:flex-start;padding-top:8px;color:var(--ink)">Estudiante de Ing. Software, me gusta enseñar cálculo…</div></div>
-          <div class="form-field"><label>Universidad · Carrera</label><div class="input">UPC · Ing. Software</div></div>
-          <div class="toast mt"><span class="ic">ℹ</span><div>No se detectaron cambios todavía</div></div>
-          <div style="margin-top:auto;padding-bottom:12px"><div class="btn">Guardar cambios
+          <div class="form-field mt"><label>Nombre</label><div class="input-wrap"><input id="edit-name" class="field-search" placeholder="Tu nombre completo"></div></div>
+          <div class="form-field"><label>Bio</label><div class="input-wrap"><textarea id="edit-bio" class="field-search" placeholder="Cuéntanos sobre ti…" style="height:60px;resize:none;"></textarea></div></div>
+          <div class="form-field"><label>Universidad</label><div class="input-wrap"><input id="edit-univ" class="field-search" placeholder="Ej: UPC"></div></div>
+          <div class="form-field"><label>Carrera</label><div class="input-wrap"><input id="edit-career" class="field-search" placeholder="Ej: Ing. Software"></div></div>
+          <div id="edit-toast" class="toast mt" style="display:none;"><span class="ic">✓</span><div id="edit-toast-msg">Cambios guardados</div></div>
+          <div style="margin-top:auto;padding-bottom:12px"><button type="button" class="btn" id="btn-save-profile" style="width:100%;">Guardar cambios</button>
         </div>
       </div>
     </div>
