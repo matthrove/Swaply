@@ -756,39 +756,26 @@ function setupCustomFlows(frame, screenId) {
         }
         
         if (errorDiv) errorDiv.style.display = 'none';
-        
-        const studentProfile = {
-          univ: frame.querySelector('#reg-univ').value,
-          field: frame.querySelector('#reg-field').value,
-          career: frame.querySelector('#reg-career').value
-        };
-        
-        const tutorProfile = role === 'tutor' ? {
-          subject: frame.querySelector('#reg-tutor-subject').value.trim() || 'Cálculo Diferencial',
-          bio: frame.querySelector('#reg-tutor-bio').value.trim() || 'Biografía de tutor',
-          exp: frame.querySelector('#reg-tutor-exp').value.trim() || '1 año',
-          level: frame.querySelector('#reg-tutor-level').value,
-          hours: Array.from(selectedHours)
-        } : null;
-        
+
+        // Save user with basic info — profile details se completan en us05/us06
         const newUser = {
           name,
           email,
           password,
           role,
-          studentProfile,
-          tutorProfile
+          studentProfile: null,
+          tutorProfile: null
         };
-        
+
         localStorage.setItem('currentUser', JSON.stringify(newUser));
-        
+
         let users = JSON.parse(localStorage.getItem('users') || '[]');
         users = users.filter(u => u.email !== email);
         users.push(newUser);
         localStorage.setItem('users', JSON.stringify(users));
-        
-        history.length = 0;
-        navigateTo('us15');
+
+        // Ir a configurar perfil según rol
+        navigateTo(role === 'tutor' ? 'us06' : 'us05');
       });
     }
   }
@@ -923,47 +910,44 @@ function setupCustomFlows(frame, screenId) {
   }
   
   else if (screenId === 'us05') {
-    if (!user) return;
+    if (!user) { navigateTo('us45'); return; }
     const btnSave = frame.querySelector('.btn');
     if (btnSave) {
       btnSave.onclick = (e) => {
         e.preventDefault();
-        const univ = frame.querySelector('select')?.value || 'UPC';
-        const career = frame.querySelector('select:nth-of-type(2)')?.value || 'Ingeniería Civil';
-        user.studentProfile = { univ, field: 'Ingeniería, Industria y Construcción', career };
+        const selects = frame.querySelectorAll('select');
+        const univ = selects[0]?.value || 'UPC';
+        const field = selects[1]?.value || 'Ingeniería, Industria y Construcción';
+        const career = selects[2]?.value || 'Ingeniería Civil';
+        user.studentProfile = { univ, field, career };
         user.role = 'estudiante';
         localStorage.setItem('currentUser', JSON.stringify(user));
-        
         let users = JSON.parse(localStorage.getItem('users') || '[]');
         users = users.map(u => u.email === user.email ? user : u);
         localStorage.setItem('users', JSON.stringify(users));
-        
-        navigateTo('us09');
+        navigateTo('us15');
       };
     }
   }
-  
+
   else if (screenId === 'us06') {
-    if (!user) return;
+    if (!user) { navigateTo('us45'); return; }
     const btnSave = frame.querySelector('.btn');
     if (btnSave) {
       btnSave.onclick = (e) => {
         e.preventDefault();
-        user.tutorProfile = {
-          subject: 'Cálculo Diferencial',
-          bio: 'Estudiante de ingeniería, me encanta resolver dudas de cálculo.',
-          exp: '2 años',
-          level: 'Intermedio',
-          hours: ["8:00 AM", "10:00 AM"]
-        };
+        const inputs = frame.querySelectorAll('input[type="text"], textarea');
+        const subject = inputs[0]?.value.trim() || 'Cálculo Diferencial';
+        const bio = frame.querySelector('textarea')?.value.trim() || '';
+        const selects = frame.querySelectorAll('select');
+        const level = selects[0]?.value || 'Intermedio';
+        user.tutorProfile = { subject, bio, level, hours: [] };
         user.role = 'tutor';
         localStorage.setItem('currentUser', JSON.stringify(user));
-        
         let users = JSON.parse(localStorage.getItem('users') || '[]');
         users = users.map(u => u.email === user.email ? user : u);
         localStorage.setItem('users', JSON.stringify(users));
-        
-        navigateTo('us09');
+        navigateTo('us15');
       };
     }
   }
