@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#8B1A2B">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>US50 · Soporte y ayuda — Swaply</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body class="app-body" data-screen-id="us50">
+  <div class="app-shell">
+    <aside id="appSidebar" class="app-sidebar" aria-label="Historias de usuario"></aside>
+    <div class="app-main">
+      <header class="app-topbar" id="appTopbar">
+        <!-- Configuration settings gear button on the far left -->
+        <button type="button" class="btn-settings" id="btnSettings" aria-label="Ajustes" style="background:none; border:none; font-size:20px; cursor:pointer; padding:0 8px; color:var(--primary);">⚙️</button>
+        <span class="app-topbar-title" id="screenTitle">US50 · Soporte y ayuda</span>
+        <button type="button" class="hu-toggle" id="huToggle" aria-label="Ver historias de usuario">50 HU</button>
+      </header>
+      <div class="app-viewport">
+        <div class="app-frame" id="appFrame" role="main" aria-live="polite">
+          
+    <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
+    <div class="scr" style="display:flex; flex-direction:column; height:100%;">
+      <div class="head"><span class="back">‹</span><h2>Soporte</h2></div>
+      
+      <div class="col" style="gap:12px; flex:1; overflow-y:auto; padding-bottom:12px;">
+        <div class="section-label" style="font-weight:700;">Preguntas frecuentes</div>
+        <div id="faq-list" style="display:flex; flex-direction:column; gap:8px;">
+          <!-- Will be populated dynamically -->
+        </div>
+        
+        <div class="section-label" style="font-weight:700;">Contactar soporte</div>
+        <div class="form-field">
+          <label>Describe tu problema</label>
+          <div class="input-wrap" style="border:1.5px solid #c9c7c2; border-radius:8px; padding:6px;">
+            <textarea id="support-msg" rows="3" style="width:100%; border:none; outline:none; font-family:inherit; font-size:12px; resize:none;" placeholder="Cuéntanos qué pasó…"></textarea>
+          </div>
+        </div>
+        
+        <button type="button" class="btn" id="btn-send-support" style="width:100%;">Enviar mensaje</button>
+        
+        <div class="toast" style="margin-top:4px;">
+          <span>💬</span>
+          <div>Respondemos en menos de 24h en días hábiles.</div>
+        </div>
+      </div>
+    </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="js/screens-data.js"></script>
+  <script src="js/app-meta.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
