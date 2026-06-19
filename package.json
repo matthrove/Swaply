@@ -1,0 +1,12 @@
+{
+  "name": "swaply",
+  "version": "1.0.0",
+  "description": "Plataforma de intercambio de conocimiento entre universitarios",
+  "scripts": {
+    "generate": "node scripts/generate-pages.js",
+    "start": "npx serve public"
+  },
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}
