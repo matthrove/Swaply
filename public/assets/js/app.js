@@ -497,7 +497,9 @@ function bindInteractions(container, screenId) {
     });
   });
 
+  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion']);
   container.querySelectorAll('.btn, .btn.ghost, .btn.sm').forEach(btn => {
+    if (btn.id && SKIP_IDS.has(btn.id)) return;
     const text = btn.textContent.trim();
     if (nav[text]) {
       btn.setAttribute('data-nav', nav[text]);
@@ -822,7 +824,8 @@ function setupCustomFlows(frame, screenId) {
   }
   
   else if (screenId === 'us15') {
-    const activeUser = user || { name: 'Juan Pérez', role: 'estudiante' };
+    if (!user) { navigateTo('us45'); return; }
+    const activeUser = user;
     const roleDiv = frame.querySelector('#home-user-role');
     const nameDiv = frame.querySelector('#home-user-name');
     
@@ -988,8 +991,16 @@ function setupCustomFlows(frame, screenId) {
       sContainer.innerHTML = '';
       
       if (activeTab === 'completadas') {
-        if (tabComp) tabComp.style.borderBottomColor = 'var(--primary)';
-        if (tabProx) tabProx.style.borderBottomColor = 'transparent';
+        const setTab = (active, inactive) => {
+          if (!active || !inactive) return;
+          active.style.background = 'var(--primary)';
+          active.style.color = '#fff';
+          active.style.borderBottom = 'none';
+          inactive.style.background = 'transparent';
+          inactive.style.color = 'var(--primary)';
+          inactive.style.borderBottom = '2px solid transparent';
+        };
+        setTab(tabComp, tabProx);
         
         if (completed.length === 0) {
           sContainer.innerHTML = '<div class="small center" style="margin-top:30px;">No hay sesiones completadas.</div>';
@@ -1027,8 +1038,7 @@ function setupCustomFlows(frame, screenId) {
           sContainer.appendChild(card);
         });
       } else {
-        if (tabProx) tabProx.style.borderBottomColor = 'var(--primary)';
-        if (tabComp) tabComp.style.borderBottomColor = 'transparent';
+        setTab(tabProx, tabComp);
         
         if (upcoming.length === 0) {
           sContainer.innerHTML = '<div class="small center" style="margin-top:30px;">No hay sesiones programadas.</div>';
