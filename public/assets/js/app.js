@@ -1392,10 +1392,7 @@ function setupCustomFlows(frame, screenId) {
       div.innerHTML = `<div style="font-size:12px;font-weight:700;">${r.name} · ${'★'.repeat(r.rating)}</div><div style="font-size:11px;color:var(--ink);margin-top:2px;">"${r.text}"</div>`;
       reviewsEl.appendChild(div);
     });
-    if (solicitarBtn) solicitarBtn.onclick = () => {
-      localStorage.setItem('selectedTutorForScheduling', JSON.stringify({ name: tutor.name, subject: tutor.course }));
-      navigateTo('us26');
-    };
+    if (solicitarBtn) solicitarBtn.onclick = () => navigateTo('us19');
   }
 
   else if (screenId === 'us12') {
