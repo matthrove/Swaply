@@ -1202,7 +1202,14 @@ function setupCustomFlows(frame, screenId) {
             localStorage.setItem('completedSessions', JSON.stringify(completed));
             renderList();
           };
-          
+
+          card.style.cursor = 'pointer';
+          card.onclick = (e) => {
+            if (e.target.classList.contains('btn-clear-session')) return;
+            localStorage.setItem('selectedSession', JSON.stringify(s));
+            navigateTo('us28');
+          };
+
           sContainer.appendChild(card);
         });
       } else {
@@ -1331,7 +1338,7 @@ function setupCustomFlows(frame, screenId) {
         if (upcoming.length > 0) {
           localStorage.setItem('pendingReminder', JSON.stringify(upcoming[0]));
         }
-        navigateTo('us28');
+        navigateTo('us27');
       };
       headEl.appendChild(bellBtn);
     }
@@ -1838,53 +1845,90 @@ function setupCustomFlows(frame, screenId) {
   }
 
   else if (screenId === 'us27') {
-    const btnComplete = frame.querySelector('#btn-reminder-complete');
-    const pendingReminder = JSON.parse(localStorage.getItem('pendingReminder') || 'null');
-
-    if (pendingReminder) {
-      const titleEl = frame.querySelector('#reminder-title');
-      const dtEl = frame.querySelector('#reminder-datetime');
-      const tutorEl = frame.querySelector('#reminder-tutor');
-      const subjEl = frame.querySelector('#reminder-subject');
-      const durEl = frame.querySelector('#reminder-duration');
-      if (titleEl) titleEl.textContent = `Sesión con ${pendingReminder.tutor}`;
-      if (dtEl) dtEl.textContent = `${pendingReminder.date} · ${pendingReminder.time}`;
-      if (tutorEl) tutorEl.textContent = pendingReminder.tutor;
-      if (subjEl) subjEl.textContent = pendingReminder.subject;
-      if (durEl) durEl.textContent = pendingReminder.duration;
+    // Reminder configuration screen — populated from pendingReminder in localStorage
+    const session = JSON.parse(localStorage.getItem('pendingReminder') || 'null');
+    if (session) {
+      const titleEl = frame.querySelector('#rem-title');
+      const dtEl = frame.querySelector('#rem-datetime');
+      const subjEl = frame.querySelector('#rem-subject');
+      if (titleEl) titleEl.textContent = `Sesión con ${session.tutor}`;
+      if (dtEl) dtEl.textContent = `${session.date} · ${session.time}`;
+      if (subjEl) subjEl.textContent = `${session.subject} · ${session.duration}`;
     }
 
-    if (btnComplete) {
-      btnComplete.onclick = () => {
-        localStorage.removeItem('pendingReminder');
-        navigateTo('us30');
+    const btnSave = frame.querySelector('#btn-save-reminder');
+    if (btnSave) {
+      btnSave.onclick = () => {
+        const check24 = frame.querySelector('#check-24h');
+        const check1h = frame.querySelector('#check-1h');
+        const check15m = frame.querySelector('#check-15m');
+        const prefs = {
+          h24: check24 ? check24.checked : true,
+          h1: check1h ? check1h.checked : true,
+          m15: check15m ? check15m.checked : false
+        };
+        if (session) {
+          session.reminderPrefs = prefs;
+          localStorage.setItem('pendingReminder', JSON.stringify(session));
+          // Update upcoming sessions too
+          let upcoming = JSON.parse(localStorage.getItem('upcomingSessions') || '[]');
+          const idx = upcoming.findIndex(s => s.id === session.id);
+          if (idx !== -1) { upcoming[idx].reminder = true; upcoming[idx].reminderPrefs = prefs; }
+          localStorage.setItem('upcomingSessions', JSON.stringify(upcoming));
+        }
+        btnSave.textContent = '✓ Guardado';
+        btnSave.style.background = '#3aa56b';
+        setTimeout(() => history.back(), 1200);
       };
     }
   }
 
   else if (screenId === 'us28') {
-    // Reminder detail
-    const btnDone = frame.querySelector('#btn-reminder-done');
-    const pendingReminder = JSON.parse(localStorage.getItem('pendingReminder') || 'null');
+    // Session detail + Mark as complete — populated from selectedSession in localStorage
+    const session = JSON.parse(localStorage.getItem('selectedSession') || 'null');
 
-    if (pendingReminder) {
-      const titleEl = frame.querySelector('#reminder-title');
-      const dtEl = frame.querySelector('#reminder-datetime');
-      const tutorEl = frame.querySelector('#reminder-tutor');
-      const subjEl = frame.querySelector('#reminder-subject');
-      const durEl = frame.querySelector('#reminder-duration');
-      if (titleEl) titleEl.textContent = `Sesión con ${pendingReminder.tutor}`;
-      if (dtEl) dtEl.textContent = `${pendingReminder.date} · ${pendingReminder.time}`;
-      if (tutorEl) tutorEl.textContent = pendingReminder.tutor;
-      if (subjEl) subjEl.textContent = pendingReminder.subject;
-      if (durEl) durEl.textContent = pendingReminder.duration;
+    if (session) {
+      const avatarEl = frame.querySelector('#us28-avatar');
+      const tutorEl = frame.querySelector('#us28-tutor');
+      const subjectEl = frame.querySelector('#us28-subject');
+      const dateEl = frame.querySelector('#us28-date');
+      const durEl = frame.querySelector('#us28-duration');
+      if (avatarEl) {
+        avatarEl.textContent = session.tutor ? session.tutor.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase() : 'AP';
+      }
+      if (tutorEl) tutorEl.textContent = session.tutor || 'Tutor';
+      if (subjectEl) subjectEl.textContent = session.subject || '';
+      if (dateEl) dateEl.textContent = `${session.date || ''} · ${session.time || ''}`;
+      if (durEl) durEl.textContent = session.duration || '60 min';
     }
 
-    if (btnDone) {
-      btnDone.onclick = () => {
-        localStorage.removeItem('pendingReminder');
-        navigateTo('us30');
+    const btnMark = frame.querySelector('#btn-mark-complete');
+    const btnRate = frame.querySelector('#btn-rate-session');
+    const statusEl = frame.querySelector('#us28-status');
+    const creditsBlock = frame.querySelector('#us28-credits-block');
+
+    if (btnMark) {
+      btnMark.onclick = () => {
+        // Mark session as complete, award credits
+        if (statusEl) { statusEl.textContent = '✓ Completada'; statusEl.style.background = '#d1fae5'; statusEl.style.color = '#065f46'; }
+        if (creditsBlock) creditsBlock.style.display = 'flex';
+        btnMark.style.display = 'none';
+        if (btnRate) btnRate.style.display = 'block';
+
+        // Move from upcoming to completed in localStorage
+        if (session) {
+          let upcoming = JSON.parse(localStorage.getItem('upcomingSessions') || '[]');
+          upcoming = upcoming.filter(s => s.id !== session.id);
+          localStorage.setItem('upcomingSessions', JSON.stringify(upcoming));
+          let completed = JSON.parse(localStorage.getItem('completedSessions') || '[]');
+          completed.unshift({ id: session.id || Date.now(), tutor: session.tutor, subject: session.subject, date: session.date, duration: session.duration, rating: 0 });
+          localStorage.setItem('completedSessions', JSON.stringify(completed));
+        }
       };
+    }
+
+    if (btnRate) {
+      btnRate.onclick = () => navigateTo('us31');
     }
   }
 

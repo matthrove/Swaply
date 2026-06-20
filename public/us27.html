@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#8B1A2B">
-  <title>US27 · Detalle de recordatorio — Swaply</title>
+  <title>US27 · Recordatorio de sesión — Swaply</title>
   <link rel="stylesheet" href="assets/styles/app.css">
 </head>
 <body class="app-body" data-screen-id="us27">
@@ -13,36 +13,71 @@
     <div class="app-main">
       <header class="app-topbar" id="appTopbar">
         <button type="button" id="btnSettings" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0 8px;color:var(--primary);">⚙️</button>
-        <span class="app-topbar-title" id="screenTitle">US27 · Detalle de recordatorio</span>
+        <span class="app-topbar-title" id="screenTitle">US27 · Recordatorio</span>
         <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
       </header>
       <div class="app-viewport">
         <div class="app-frame" id="appFrame" role="main">
+          <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
+          <div class="scr" style="display:flex; flex-direction:column; height:100%;">
+            <div class="head"><span class="back">‹</span><h2>Recordatorio</h2></div>
 
-    <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
-    <div class="scr" style="display:flex; flex-direction:column; height:100%;">
-      <div class="head"><span class="back">‹</span><h2>Detalle de recordatorio</h2></div>
-      <div class="col" style="gap:12px; flex:1; overflow-y:auto; padding-bottom:12px;">
-        <div style="border:1.5px solid var(--primary); border-radius:14px; padding:16px; background:#fff;">
-          <div style="font-size:24px; text-align:center; margin-bottom:8px;">🔔</div>
-          <div style="font-weight:700; font-size:15px; color:var(--primary); text-align:center;" id="reminder-title">Sesión con Andrea Paredes</div>
-          <div class="small" style="margin-top:6px; text-align:center;" id="reminder-datetime">Jueves 7 Nov · 19:00</div>
-        </div>
-        <div class="section-label" style="font-weight:700; text-transform:uppercase; font-size:11px; color:#888; letter-spacing:.05em; margin-top:4px;">Detalles</div>
-        <div class="kv"><span class="k">Tutor</span><span class="v" id="reminder-tutor">Andrea Paredes</span></div>
-        <div class="kv"><span class="k">Materia</span><span class="v" id="reminder-subject">Cálculo Diferencial</span></div>
-        <div class="kv"><span class="k">Duración</span><span class="v" id="reminder-duration">60 min</span></div>
-        <div class="kv"><span class="k">Enlace</span><span class="v"><a href="https://meet.google.com/abc-xyz" target="_blank" style="color:var(--primary);">meet.google.com/abc-xyz</a></span></div>
-        <div style="border:1.5px solid var(--primary); border-radius:10px; padding:12px 14px; background:#fdf4f5; display:flex; gap:10px; align-items:flex-start; margin-top:4px;">
-          <span>💡</span>
-          <div style="font-size:13px;">Recuerda preparar tus dudas antes de la sesión.</div>
-        </div>
-      </div>
-      <div style="padding:0 0 12px;">
-        <button type="button" class="btn" id="btn-reminder-complete" style="width:100%; background:#C9A227;">Marcar como completado</button>
-      </div>
-    </div>
+            <!-- Sesión card -->
+            <div style="border:1.5px solid var(--primary); border-radius:14px; padding:16px; background:#fff; margin-bottom:16px; text-align:center;">
+              <div style="font-size:28px; margin-bottom:8px;">🔔</div>
+              <div style="font-weight:700; font-size:14px; color:var(--primary);" id="rem-title">Sesión con Andrea Paredes</div>
+              <div style="font-size:12px; color:var(--muted); margin-top:4px;" id="rem-datetime">Jueves 7 Nov · 19:00</div>
+              <div style="font-size:11px; color:var(--muted); margin-top:2px;" id="rem-subject">Cálculo Diferencial · 60 min</div>
+            </div>
 
+            <!-- Configurar recordatorio -->
+            <div style="font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin-bottom:10px;">Avisarme antes de la sesión</div>
+
+            <div style="display:flex; flex-direction:column; gap:8px; flex:1;">
+              <label id="rem-opt-24h" style="display:flex; align-items:center; justify-content:space-between; background:#fff; border:1.5px solid var(--soft); border-radius:10px; padding:12px 14px; cursor:pointer;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <span style="font-size:18px;">⏰</span>
+                  <div>
+                    <div style="font-weight:600; font-size:13px;">24 horas antes</div>
+                    <div style="font-size:11px; color:var(--muted);">Notificación el día anterior</div>
+                  </div>
+                </div>
+                <input type="checkbox" id="check-24h" style="width:18px; height:18px; accent-color:var(--primary);" checked>
+              </label>
+
+              <label id="rem-opt-1h" style="display:flex; align-items:center; justify-content:space-between; background:#fff; border:1.5px solid var(--soft); border-radius:10px; padding:12px 14px; cursor:pointer;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <span style="font-size:18px;">🚨</span>
+                  <div>
+                    <div style="font-weight:600; font-size:13px;">1 hora antes</div>
+                    <div style="font-size:11px; color:var(--muted);">Recordatorio justo antes de empezar</div>
+                  </div>
+                </div>
+                <input type="checkbox" id="check-1h" style="width:18px; height:18px; accent-color:var(--primary);" checked>
+              </label>
+
+              <label id="rem-opt-15m" style="display:flex; align-items:center; justify-content:space-between; background:#fff; border:1.5px solid var(--soft); border-radius:10px; padding:12px 14px; cursor:pointer;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <span style="font-size:18px;">📲</span>
+                  <div>
+                    <div style="font-weight:600; font-size:13px;">15 minutos antes</div>
+                    <div style="font-size:11px; color:var(--muted);">Para que tengas tiempo de prepararte</div>
+                  </div>
+                </div>
+                <input type="checkbox" id="check-15m" style="width:18px; height:18px; accent-color:var(--primary);">
+              </label>
+
+              <!-- Tip -->
+              <div style="background:#fdf4f5; border:1px solid rgba(139,26,43,.2); border-radius:10px; padding:12px 14px; display:flex; gap:10px; align-items:flex-start; margin-top:4px;">
+                <span>💡</span>
+                <div style="font-size:12px; color:var(--muted); line-height:1.5;">Recuerda preparar tus dudas y tener el enlace de la sesión a mano antes de empezar.</div>
+              </div>
+            </div>
+
+            <div style="padding:12px 0 8px;">
+              <button type="button" class="btn" id="btn-save-reminder" style="width:100%;">Guardar recordatorio</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
