@@ -5,13 +5,16 @@ const screensById = Object.fromEntries(screensData.map(s => [s.id, s]));
 
 // Add custom screen if not present
 if (!screensById['us36-custom']) {
-  screensById['us36-custom'] = {
-    id: 'us36-custom',
-    us: 'US36c',
-    title: 'Nueva sesión',
-    frameAttrs: '',
-    html: ''
-  };
+  screensById['us36-custom'] = { id: 'us36-custom', us: 'US36c', title: 'Nueva sesión', frameAttrs: '', html: '' };
+}
+if (!screensById['configuracion']) {
+  screensById['configuracion'] = { id: 'configuracion', us: 'C', title: 'Configuración', frameAttrs: '', html: '' };
+}
+if (!screensById['sesiones-tutor']) {
+  screensById['sesiones-tutor'] = { id: 'sesiones-tutor', us: 'C', title: 'Mis Sesiones', frameAttrs: '', html: '' };
+}
+if (!screensById['buscar-solicitudes']) {
+  screensById['buscar-solicitudes'] = { id: 'buscar-solicitudes', us: 'C', title: 'Solicitudes', frameAttrs: '', html: '' };
 }
 
 const navigation = meta.navigation;
@@ -63,6 +66,18 @@ const SUBJECTS = [
   'Base de Datos',
   'Economía',
   'Contabilidad',
+];
+
+const TUTORS_DATA = [
+  { id:'t01', initials:'AP', name:'Andrea Paredes', univ:'PUCP', career:'Ing. Industrial', cycle:'7° ciclo', rating:4.9, reviews:32, course:'Cálculo Diferencial', bio:'Me especializo en Cálculo, Álgebra y Estadística. He dado más de 80 tutorías y me encanta encontrar formas creativas de explicar conceptos complejos.', subjects:['Cálculo Diferencial','Cálculo Integral','Álgebra Lineal'], avail:['Lunes','Miércoles','Viernes'], schedule:'Tarde (12 PM – 6 PM)', credits:3, color:'linear-gradient(135deg,#f4d4d8,#8B1A2B)', reviewsList:[{name:'Carlos M.',rating:5,text:'Excelente tutora, explica muy bien y tiene mucha paciencia.'},{name:'Valeria R.',rating:5,text:'Gracias a Andrea pude aprobar mi examen parcial de Cálculo.'}] },
+  { id:'t02', initials:'LM', name:'Luis Mendoza', univ:'UNMSM', career:'Ciencias Físicas', cycle:'Egresado', rating:4.5, reviews:18, course:'Cálculo Diferencial', bio:'Me apasiona la física teórica y el cálculo aplicado. Con más de 2 años de experiencia como tutor, tengo metodologías probadas para que los conceptos difíciles parezcan sencillos.', subjects:['Cálculo Diferencial','Física General','Mecánica Clásica'], avail:['Martes','Jueves','Sábado'], schedule:'Mañana (8 AM – 12 PM)', credits:2, color:'linear-gradient(135deg,#c8daf4,#3a6bb5)', reviewsList:[{name:'Pedro A.',rating:5,text:'Luis tiene una manera increíble de explicar Física.'},{name:'María F.',rating:4,text:'Muy buen tutor, puntual y organizado.'}] },
+  { id:'t03', initials:'KR', name:'Karen Ríos', univ:'UPC', career:'Ing. de Sistemas', cycle:'4° ciclo', rating:4.2, reviews:9, course:'Cálculo Diferencial', bio:'Estudiante de 4to año de Ing. de Sistemas en la UPC. Me especializo en programación y cálculo. Tengo experiencia como monitora en mi universidad.', subjects:['Cálculo Diferencial','Programación en Python','Bases de Datos'], avail:['Lunes','Martes','Viernes'], schedule:'Noche (6 PM – 10 PM)', credits:2, color:'linear-gradient(135deg,#d4f4e4,#2a8a55)', reviewsList:[{name:'Diego L.',rating:5,text:'Karen explica programación de forma muy clara, ideal para principiantes.'},{name:'Ana P.',rating:4,text:'Buena tutora, muy paciente y siempre dispuesta a resolver dudas.'}] },
+  { id:'t04', initials:'MS', name:'Marco Silva', univ:'UTEC', career:'Cs. de la Computación', cycle:'6° ciclo', rating:4.7, reviews:25, course:'Programación', bio:'Apasionado por los algoritmos y estructuras de datos. Trabajo como desarrollador junior y enseño lo que aplico en el mundo real.', subjects:['Python','Estructuras de Datos','Algoritmos','JavaScript'], avail:['Lunes','Miércoles','Sábado'], schedule:'Mañana y Tarde', credits:3, color:'linear-gradient(135deg,#fde8c8,#d68a2a)', reviewsList:[{name:'Sofía T.',rating:5,text:'Marco tiene mucha paciencia y explica con ejemplos reales.'},{name:'Rodrigo B.',rating:4,text:'Muy bueno con Python y algoritmos, lo recomiendo.'}] },
+  { id:'t05', initials:'VC', name:'Valeria Cruz', univ:'UPC', career:'Ing. de Software', cycle:'8° ciclo', rating:4.8, reviews:41, course:'Programación', bio:'Especialista en desarrollo web y móvil. He dado tutorías a más de 100 estudiantes y me encanta enseñar programación desde cero.', subjects:['HTML/CSS','JavaScript','React','Node.js'], avail:['Martes','Jueves','Domingo'], schedule:'Tarde y Noche', credits:3, color:'linear-gradient(135deg,#e8d4f4,#7a2a8b)', reviewsList:[{name:'Miguel A.',rating:5,text:'Valeria es increíble enseñando JavaScript, super didáctica.'},{name:'Lucía M.',rating:5,text:'Con Valeria empecé de cero en programación y ahora tengo mi primer proyecto.'}] },
+  { id:'t06', initials:'DH', name:'Diego Huanca', univ:'UNMSM', career:'Ing. de Sistemas', cycle:'5° ciclo', rating:4.4, reviews:14, course:'Programación', bio:'Estudiante de Sistemas con experiencia en desarrollo backend. Enseño C++, Python y bases de datos relacionales.', subjects:['C++','Python','SQL','Bases de Datos'], avail:['Lunes','Miércoles','Viernes'], schedule:'Noche', credits:2, color:'linear-gradient(135deg,#c8f4e0,#2a7a5a)', reviewsList:[{name:'Fátima G.',rating:4,text:'Diego explica bien los conceptos de C++ y bases de datos.'},{name:'Ernesto P.',rating:5,text:'Muy buen profesor, me ayudó a entender SQL.'}] },
+  { id:'t07', initials:'CV', name:'Carmen Vargas', univ:'PUCP', career:'Física', cycle:'Egresada', rating:4.6, reviews:28, course:'Física General', bio:'Egresada de Física con maestría en curso. He enseñado Física en pre-universitarias y universidades por 3 años.', subjects:['Física General','Mecánica','Electromagnetismo','Termodinámica'], avail:['Lunes','Martes','Jueves'], schedule:'Mañana (8 AM – 1 PM)', credits:3, color:'linear-gradient(135deg,#f4f0c8,#8b7a1a)', reviewsList:[{name:'Jorge R.',rating:5,text:'Carmen tiene mucha experiencia, hace que la física sea fácil.'},{name:'Paola N.',rating:4,text:'Muy buena profesora, puntual y bien preparada.'}] },
+  { id:'t08', initials:'RL', name:'Roberto Llanos', univ:'UNI', career:'Ing. Mecánica', cycle:'9° ciclo', rating:4.3, reviews:11, course:'Física General', bio:'Estudiante de Ing. Mecánica en la UNI. Me especializo en mecánica clásica y física aplicada a la ingeniería.', subjects:['Física General','Mecánica Clásica','Dinámica'], avail:['Miércoles','Viernes','Sábado'], schedule:'Tarde', credits:2, color:'linear-gradient(135deg,#c8e4f4,#2a5a8b)', reviewsList:[{name:'César H.',rating:4,text:'Roberto es bueno explicando mecánica con diagramas de cuerpo libre.'},{name:'Daniela V.',rating:4,text:'Buen tutor, claro con los ejercicios prácticos.'}] },
+  { id:'t09', initials:'SP', name:'Sofía Parodi', univ:'UNMSM', career:'Ciencias Físicas', cycle:'7° ciclo', rating:4.5, reviews:19, course:'Física General', bio:'Apasionada por la física teórica. Enseño con enfoque en entender los fenómenos antes de memorizar fórmulas.', subjects:['Física General','Ondas y Óptica','Física Moderna'], avail:['Lunes','Miércoles','Sábado'], schedule:'Tarde y Noche', credits:2, color:'linear-gradient(135deg,#f4c8e4,#8b2a6a)', reviewsList:[{name:'Alejandro Q.',rating:5,text:'Sofía hace que la física moderna sea muy comprensible.'},{name:'Ximena F.',rating:4,text:'Muy buena tutora, siempre llega preparada con ejemplos.'}] },
 ];
 
 function getScreenIdFromPath() {
@@ -497,7 +512,7 @@ function bindInteractions(container, screenId) {
     });
   });
 
-  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy']);
+  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy', 'btn-save-photo', 'btn-solicitar-sesion']);
   container.querySelectorAll('.btn, .btn.ghost, .btn.sm').forEach(btn => {
     if (btn.id && SKIP_IDS.has(btn.id)) return;
     const text = btn.textContent.trim();
@@ -678,54 +693,6 @@ function setupCustomFlows(frame, screenId) {
       fieldSelect.addEventListener('change', updateCareers);
       updateCareers();
     }
-    
-    const chipM = frame.querySelector('#chip-disp-m, #setup-tutor-disp-m');
-    const chipT = frame.querySelector('#chip-disp-t, #setup-tutor-disp-t');
-    const chipN = frame.querySelector('#chip-disp-n, #setup-tutor-disp-n');
-    const hoursContainer = frame.querySelector('#tutor-hours-chips');
-    
-    const hoursMap = {
-      m: ["6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM"],
-      t: ["12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM"],
-      n: ["6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM"]
-    };
-    
-    let selectedHours = new Set();
-    
-    const renderHours = (period) => {
-      if (!hoursContainer) return;
-      hoursContainer.innerHTML = '';
-      const hours = hoursMap[period] || [];
-      hours.forEach(h => {
-        const span = document.createElement('span');
-        span.className = 'chip' + (selectedHours.has(h) ? ' on' : '');
-        span.textContent = h;
-        span.style.cursor = 'pointer';
-        span.addEventListener('click', () => {
-          span.classList.toggle('on');
-          if (span.classList.contains('on')) {
-            selectedHours.add(h);
-          } else {
-            selectedHours.delete(h);
-          }
-        });
-        hoursContainer.appendChild(span);
-      });
-    };
-    
-    if (hoursContainer) {
-      renderHours('m');
-    }
-    
-    const selectPeriod = (period, activeChip, otherChips) => {
-      activeChip.classList.add('on');
-      otherChips.forEach(c => c.classList.remove('on'));
-      renderHours(period);
-    };
-    
-    if (chipM) chipM.addEventListener('click', () => selectPeriod('m', chipM, [chipT, chipN]));
-    if (chipT) chipT.addEventListener('click', () => selectPeriod('t', chipT, [chipM, chipN]));
-    if (chipN) chipN.addEventListener('click', () => selectPeriod('n', chipN, [chipM, chipT]));
     
     const btnSubmit = frame.querySelector('#btn-register-submit');
     if (btnSubmit) {
@@ -996,6 +963,40 @@ function setupCustomFlows(frame, screenId) {
 
   else if (screenId === 'us06') {
     if (!user) { navigateTo('us45'); return; }
+
+    // Chips Mañana / Tarde / Noche
+    const _chipM = frame.querySelector('#chip-disp-m, #setup-tutor-disp-m');
+    const _chipT = frame.querySelector('#chip-disp-t, #setup-tutor-disp-t');
+    const _chipN = frame.querySelector('#chip-disp-n, #setup-tutor-disp-n');
+    const _hoursContainer = frame.querySelector('#tutor-hours-chips');
+    const _hoursMap = {
+      m: ['6:00 AM','7:00 AM','8:00 AM','9:00 AM','10:00 AM','11:00 AM'],
+      t: ['12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM'],
+      n: ['6:00 PM','7:00 PM','8:00 PM','9:00 PM','10:00 PM']
+    };
+    let _selectedHours = new Set();
+    const _renderHours = (period) => {
+      if (!_hoursContainer) return;
+      _hoursContainer.innerHTML = '';
+      (_hoursMap[period] || []).forEach(h => {
+        const sp = document.createElement('span');
+        sp.className = 'chip' + (_selectedHours.has(h) ? ' on' : '');
+        sp.textContent = h; sp.style.cursor = 'pointer';
+        sp.addEventListener('click', () => { sp.classList.toggle('on'); _selectedHours[sp.classList.contains('on') ? 'add' : 'delete'](h); });
+        _hoursContainer.appendChild(sp);
+      });
+    };
+    const _selPeriod = (period, active, others) => {
+      active.classList.add('on');
+      active.style.background = 'var(--primary)'; active.style.color = '#fff';
+      others.forEach(c => { if (c) { c.classList.remove('on'); c.style.background = 'transparent'; c.style.color = 'var(--primary)'; } });
+      _renderHours(period);
+    };
+    if (_chipM) _chipM.addEventListener('click', () => _selPeriod('m', _chipM, [_chipT, _chipN]));
+    if (_chipT) _chipT.addEventListener('click', () => _selPeriod('t', _chipT, [_chipM, _chipN]));
+    if (_chipN) _chipN.addEventListener('click', () => _selPeriod('n', _chipN, [_chipM, _chipT]));
+    if (_hoursContainer) _renderHours('m');
+
     const btnSave = frame.querySelector('.btn');
     if (btnSave) {
       btnSave.onclick = (e) => {
@@ -1017,6 +1018,7 @@ function setupCustomFlows(frame, screenId) {
   }
   
   else if (screenId === 'us30') {
+    if (user && user.role === 'tutor') { navigateTo('sesiones-tutor'); return; }
     let completed = JSON.parse(localStorage.getItem('completedSessions')) || [
       { id: 1, tutor: "Andrea Paredes", subject: "Cálculo Inicial", date: "28 oct", duration: "1h", rating: 5 },
       { id: 2, tutor: "Luis Mendoza", subject: "Física I", date: "15 oct", duration: "1.5h", rating: 4 },
@@ -1037,17 +1039,18 @@ function setupCustomFlows(frame, screenId) {
     const renderList = () => {
       if (!sContainer) return;
       sContainer.innerHTML = '';
-      
+
+      const setTab = (active, inactive) => {
+        if (!active || !inactive) return;
+        active.style.background = 'var(--primary)';
+        active.style.color = '#fff';
+        active.style.borderBottom = 'none';
+        inactive.style.background = 'transparent';
+        inactive.style.color = 'var(--primary)';
+        inactive.style.borderBottom = '2px solid transparent';
+      };
+
       if (activeTab === 'completadas') {
-        const setTab = (active, inactive) => {
-          if (!active || !inactive) return;
-          active.style.background = 'var(--primary)';
-          active.style.color = '#fff';
-          active.style.borderBottom = 'none';
-          inactive.style.background = 'transparent';
-          inactive.style.color = 'var(--primary)';
-          inactive.style.borderBottom = '2px solid transparent';
-        };
         setTab(tabComp, tabProx);
         
         if (completed.length === 0) {
@@ -1284,30 +1287,305 @@ function setupCustomFlows(frame, screenId) {
   }
   
   else if (screenId === 'us11') {
-    frame.querySelectorAll('.card').forEach(card => {
+    if (!user) { navigateTo('us45'); return; }
+    if (user.role === 'tutor') { navigateTo('buscar-solicitudes'); return; }
+
+    const searchInput = frame.querySelector('#search-input');
+    const resultsEl = frame.querySelector('#search-results');
+    const btnUniv = frame.querySelector('#btn-filter-univ');
+    const btnDisp = frame.querySelector('#btn-filter-disp');
+
+    const univFilter = localStorage.getItem('filterUniv') || null;
+    const dispFilter = localStorage.getItem('filterDisp') || null;
+
+    if (univFilter && btnUniv) { btnUniv.style.background = 'var(--primary)'; btnUniv.style.color = '#fff'; btnUniv.textContent = '🏛 ' + univFilter; }
+    if (dispFilter && btnDisp) { btnDisp.style.background = 'var(--primary)'; btnDisp.style.color = '#fff'; btnDisp.textContent = '🕐 ' + dispFilter; }
+
+    if (btnUniv) btnUniv.addEventListener('click', () => navigateTo('us12'));
+    if (btnDisp) btnDisp.addEventListener('click', () => navigateTo('us13'));
+
+    const makeTutorCard = (t) => {
+      const card = document.createElement('div');
+      card.style.cssText = 'display:flex;align-items:center;gap:10px;padding:10px;cursor:pointer;border:1px solid #e8e6e1;border-radius:12px;margin-bottom:8px;background:#fff;';
+      const fullStars = Math.floor(t.rating);
+      const stars = '★'.repeat(fullStars) + '☆'.repeat(5 - fullStars);
+      card.innerHTML = `
+        <div class="av" style="background:${t.color};color:#fff;font-weight:700;flex-shrink:0;">${t.initials}</div>
+        <div style="flex:1;">
+          <div style="font-weight:700;font-size:12px;">${t.name}</div>
+          <div style="font-size:10px;color:var(--muted);">${t.univ} · ${t.career}</div>
+          <div style="font-size:10px;color:#f5a623;">${stars} <b style="color:var(--ink);">${t.rating} (${t.reviews})</b></div>
+          <span class="tag" style="font-size:10px;margin-top:2px;">${t.course}</span>
+        </div>
+        <span style="color:#f5a623;font-size:16px;">★</span>
+      `;
       card.addEventListener('click', () => {
-        const nameEl = card.querySelector('.name') || card.querySelector('div[style*="font-weight:600"]');
-        const subjectEl = card.querySelector('.meta') || card.querySelector('.small');
-        if (nameEl) {
-          const name = nameEl.textContent.trim();
-          const subject = subjectEl ? subjectEl.textContent.split('·')[0].trim() : 'Cálculo';
-          localStorage.setItem('selectedTutorForScheduling', JSON.stringify({ name, subject }));
-        }
+        localStorage.setItem('selectedTutor', JSON.stringify(t));
+        navigateTo('us10');
+      });
+      return card;
+    };
+
+    const renderResults = (query) => {
+      if (!resultsEl) return;
+      resultsEl.innerHTML = '';
+      let filtered = TUTORS_DATA;
+      if (univFilter) filtered = filtered.filter(t => t.univ === univFilter);
+      if (dispFilter) {
+        const kw = dispFilter.replace('Mañanas','mañan').replace('Tardes','tarde').replace('Noches','noche').toLowerCase();
+        filtered = filtered.filter(t => t.schedule.toLowerCase().includes(kw));
+      }
+      if (query) {
+        const q = query.toLowerCase();
+        filtered = filtered.filter(t => t.name.toLowerCase().includes(q) || t.course.toLowerCase().includes(q) || t.univ.toLowerCase().includes(q) || t.subjects.some(s => s.toLowerCase().includes(q)));
+      }
+      if (filtered.length === 0) {
+        resultsEl.innerHTML = '<div style="text-align:center;margin-top:30px;font-size:13px;color:var(--muted);">No se encontraron tutores.</div>';
+        return;
+      }
+      const courses = [...new Set(filtered.map(t => t.course))];
+      courses.forEach(course => {
+        const hdr = document.createElement('div');
+        hdr.style.cssText = 'font-weight:700;font-size:12px;color:var(--primary);margin:12px 0 6px;';
+        hdr.textContent = '📘 ' + course;
+        resultsEl.appendChild(hdr);
+        filtered.filter(t => t.course === course).forEach(t => resultsEl.appendChild(makeTutorCard(t)));
+      });
+    };
+
+    renderResults('');
+    if (searchInput) searchInput.addEventListener('input', e => renderResults(e.target.value));
+  }
+
+  else if (screenId === 'us10') {
+    const tutor = JSON.parse(localStorage.getItem('selectedTutor')) || TUTORS_DATA[0];
+    const avatarEl = frame.querySelector('#tutor-avatar');
+    const nameEl = frame.querySelector('#tutor-name');
+    const metaEl = frame.querySelector('#tutor-meta');
+    const starsEl = frame.querySelector('#tutor-stars');
+    const badgeEl = frame.querySelector('#tutor-badge');
+    const bioEl = frame.querySelector('#tutor-bio');
+    const subjectsEl = frame.querySelector('#tutor-subjects');
+    const availEl = frame.querySelector('#tutor-avail');
+    const scheduleEl = frame.querySelector('#tutor-schedule');
+    const creditsEl = frame.querySelector('#tutor-credits');
+    const reviewsEl = frame.querySelector('#tutor-reviews');
+    const solicitarBtn = frame.querySelector('#btn-solicitar-sesion');
+
+    if (avatarEl) { avatarEl.style.background = tutor.color; avatarEl.textContent = tutor.initials; avatarEl.style.color = '#fff'; }
+    if (nameEl) nameEl.textContent = tutor.name;
+    if (metaEl) metaEl.textContent = tutor.univ + ' · ' + tutor.career + ' · ' + tutor.cycle;
+    if (starsEl) {
+      const full = Math.floor(tutor.rating);
+      const stars = '★'.repeat(full) + '☆'.repeat(5 - full);
+      starsEl.innerHTML = `<span style="color:#f5a623;font-size:13px;">${stars}</span>&nbsp;<span style="font-weight:700;font-size:12px;">${tutor.rating}</span>&nbsp;<span style="font-size:11px;color:var(--muted);">(${tutor.reviews} reseñas)</span>`;
+    }
+    if (badgeEl) { badgeEl.textContent = tutor.reviews >= 20 ? '📚 Tutor verificado' : '🌱 Tutor activo'; badgeEl.style.background = 'var(--brand-bg)'; badgeEl.style.color = 'var(--primary)'; }
+    if (bioEl) bioEl.textContent = tutor.bio;
+    if (subjectsEl) tutor.subjects.forEach(s => { const sp = document.createElement('span'); sp.className = 'chip on'; sp.textContent = s; subjectsEl.appendChild(sp); });
+    if (availEl) tutor.avail.forEach(a => { const sp = document.createElement('span'); sp.className = 'chip on'; sp.textContent = a; availEl.appendChild(sp); });
+    if (scheduleEl) scheduleEl.textContent = '🕐 ' + tutor.schedule;
+    if (creditsEl) creditsEl.textContent = tutor.credits + ' créditos / hora';
+    if (reviewsEl) tutor.reviewsList.forEach(r => {
+      const div = document.createElement('div');
+      div.style.cssText = 'background:#f9f9f9;border-radius:10px;padding:10px;margin-top:6px;';
+      div.innerHTML = `<div style="font-size:12px;font-weight:700;">${r.name} · ${'★'.repeat(r.rating)}</div><div style="font-size:11px;color:var(--ink);margin-top:2px;">"${r.text}"</div>`;
+      reviewsEl.appendChild(div);
+    });
+    if (solicitarBtn) solicitarBtn.onclick = () => {
+      localStorage.setItem('selectedTutorForScheduling', JSON.stringify({ name: tutor.name, subject: tutor.course }));
+      navigateTo('us26');
+    };
+  }
+
+  else if (screenId === 'us12') {
+    const checklines = frame.querySelectorAll('.ckline');
+    let selectedUniv = localStorage.getItem('filterUniv') || null;
+    const applyBtn = frame.querySelector('.btn');
+    const clearEl = frame.querySelector('.right');
+
+    checklines.forEach(line => {
+      const ck = line.querySelector('.ck');
+      const univName = line.textContent.replace('✓','').split('(')[0].trim();
+      if (selectedUniv && univName === selectedUniv && ck) { ck.classList.add('on'); ck.textContent = '✓'; }
+      line.style.cursor = 'pointer';
+      line.addEventListener('click', () => {
+        checklines.forEach(l => { const c = l.querySelector('.ck'); if (c) { c.classList.remove('on'); c.textContent = ''; } });
+        if (ck) { ck.classList.add('on'); ck.textContent = '✓'; }
+        selectedUniv = univName;
       });
     });
+    if (clearEl) clearEl.style.cursor = 'pointer';
+    if (clearEl) clearEl.addEventListener('click', () => {
+      localStorage.removeItem('filterUniv');
+      checklines.forEach(l => { const c = l.querySelector('.ck'); if (c) { c.classList.remove('on'); c.textContent = ''; } });
+      selectedUniv = null;
+    });
+    if (applyBtn) applyBtn.addEventListener('click', () => {
+      if (selectedUniv) localStorage.setItem('filterUniv', selectedUniv);
+      else localStorage.removeItem('filterUniv');
+      navigateTo('us11');
+    });
   }
-  
-  else if (screenId === 'us10') {
-    const btnSol = frame.querySelector('.btn');
-    if (btnSol) {
-      btnSol.textContent = 'Programar sesión';
-      btnSol.onclick = (e) => {
-        e.preventDefault();
-        navigateTo('us26');
-      };
+
+  else if (screenId === 'us13') {
+    const labels = ['Mañanas','Tardes','Noches'];
+    const optDivs = Array.from(frame.querySelectorAll('.col > div'));
+    let selectedDisp = localStorage.getItem('filterDisp') || null;
+    const applyBtn = frame.querySelector('.btn:not(.ghost)');
+    const clearBtn = frame.querySelector('.btn.ghost');
+
+    optDivs.forEach((div, idx) => {
+      const label = labels[idx];
+      if (!label) return;
+      div.style.cursor = 'pointer';
+      if (selectedDisp === label) div.style.border = '2px solid var(--primary)';
+      else div.style.border = '1.5px solid #c9c7c2';
+      div.addEventListener('click', () => {
+        optDivs.forEach(d => { d.style.border = '1.5px solid #c9c7c2'; });
+        div.style.border = '2px solid var(--primary)';
+        selectedDisp = label;
+      });
+    });
+    if (clearBtn) clearBtn.addEventListener('click', () => {
+      localStorage.removeItem('filterDisp');
+      optDivs.forEach(d => { d.style.border = '1.5px solid #c9c7c2'; });
+      selectedDisp = null;
+    });
+    if (applyBtn) applyBtn.addEventListener('click', () => {
+      if (selectedDisp) localStorage.setItem('filterDisp', selectedDisp);
+      else localStorage.removeItem('filterDisp');
+      navigateTo('us11');
+    });
+  }
+
+  else if (screenId === 'us08') {
+    const photoInput = frame.querySelector('#photo-input');
+    const previewEl = frame.querySelector('#photo-preview');
+    const photoIcon = frame.querySelector('#photo-icon');
+    const errorDiv = frame.querySelector('#photo-error');
+    const previewName = frame.querySelector('#photo-preview-name');
+    const previewUniv = frame.querySelector('#photo-preview-univ');
+    const saveBtn = frame.querySelector('#btn-save-photo');
+
+    if (user) {
+      if (previewName) previewName.textContent = user.name || '';
+      const profile = user.studentProfile || user.tutorProfile || {};
+      if (previewUniv) previewUniv.textContent = (profile.univ && profile.career) ? profile.univ + ' · ' + profile.career : '';
+      if (user.photo && previewEl) {
+        previewEl.innerHTML = `<img src="${user.photo}" style="width:100%;height:100%;object-fit:cover;" alt="Foto">`;
+      } else if (previewEl) {
+        previewEl.textContent = user.name ? user.name.charAt(0).toUpperCase() : '?';
+        previewEl.style.background = 'var(--primary)'; previewEl.style.color = '#fff'; previewEl.style.fontWeight = '700';
+      }
+    }
+
+    let pendingPhoto = null;
+    if (photoInput) {
+      photoInput.addEventListener('change', e => {
+        const file = e.target.files[0];
+        if (!file) return;
+        if (file.size > 5 * 1024 * 1024) { if (errorDiv) errorDiv.style.display = 'flex'; return; }
+        if (errorDiv) errorDiv.style.display = 'none';
+        const reader = new FileReader();
+        reader.onload = ev => {
+          pendingPhoto = ev.target.result;
+          if (previewEl) previewEl.innerHTML = `<img src="${pendingPhoto}" style="width:100%;height:100%;object-fit:cover;" alt="Foto">`;
+          if (photoIcon) photoIcon.textContent = '✅';
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+    if (saveBtn) {
+      saveBtn.addEventListener('click', () => {
+        if (pendingPhoto && user) {
+          user.photo = pendingPhoto;
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          let users = JSON.parse(localStorage.getItem('users') || '[]');
+          users = users.map(u => u.email === user.email ? user : u);
+          localStorage.setItem('users', JSON.stringify(users));
+        }
+        navigateTo('us07');
+      });
     }
   }
-  
+
+  else if (screenId === 'sesiones-tutor') {
+    const container = frame.querySelector('#tutor-sesiones-container');
+    const tabProx = frame.querySelector('#tab-tutor-prox');
+    const tabComp = frame.querySelector('#tab-tutor-comp');
+    let activeTab = 'proximas';
+    const upcoming = [
+      { student:'Carlos Mendoza', subject:'Cálculo Diferencial', date:'Jueves 7 Nov', time:'15:00', univ:'UNMSM' },
+      { student:'Fátima García', subject:'Álgebra Lineal', date:'Viernes 8 Nov', time:'18:00', univ:'UPC' },
+    ];
+    const completed = [
+      { student:'Pedro Alva', subject:'Cálculo Diferencial', date:'28 oct', rating:5 },
+      { student:'Daniela Vega', subject:'Estadística', date:'22 oct', rating:4 },
+      { student:'Omar Quispe', subject:'Cálculo Integral', date:'15 oct', rating:5 },
+    ];
+    const setTabST = (a, b) => {
+      if (!a || !b) return;
+      a.style.background = 'var(--primary)'; a.style.color = '#fff'; a.style.borderBottom = 'none';
+      b.style.background = 'transparent'; b.style.color = 'var(--primary)'; b.style.borderBottom = '2px solid transparent';
+    };
+    const renderST = () => {
+      if (!container) return;
+      container.innerHTML = '';
+      if (activeTab === 'proximas') {
+        setTabST(tabProx, tabComp);
+        upcoming.forEach(s => {
+          const card = document.createElement('div');
+          card.style.cssText = 'background:#fff;border:1px solid var(--primary);border-radius:10px;padding:12px;margin-bottom:8px;';
+          card.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><span style="font-weight:700;font-size:12px;color:var(--primary);">${s.subject}</span><span style="font-size:10px;background:var(--brand-bg);padding:2px 6px;border-radius:6px;font-weight:600;color:var(--primary);">${s.date} ${s.time}</span></div><div style="font-size:11px;">Estudiante: <b>${s.student}</b> · ${s.univ}</div>`;
+          container.appendChild(card);
+        });
+      } else {
+        setTabST(tabComp, tabProx);
+        completed.forEach(s => {
+          const card = document.createElement('div');
+          card.style.cssText = 'background:#fff;border:1px solid #e8e6e1;border-radius:10px;padding:10px;margin-bottom:8px;';
+          card.innerHTML = `<div style="font-weight:600;font-size:12px;">${s.student}</div><div style="font-size:10px;color:var(--muted);">${s.subject} · ${s.date}</div><div style="font-size:10px;color:#f5a623;">${'★'.repeat(s.rating)}${'☆'.repeat(5-s.rating)} <b style="color:var(--ink);">calificación: ${s.rating}</b></div>`;
+          container.appendChild(card);
+        });
+      }
+    };
+    renderST();
+    if (tabProx) tabProx.addEventListener('click', () => { activeTab = 'proximas'; renderST(); });
+    if (tabComp) tabComp.addEventListener('click', () => { activeTab = 'completadas'; renderST(); });
+  }
+
+  else if (screenId === 'buscar-solicitudes') {
+    const container = frame.querySelector('#solicitudes-container');
+    const solicitudes = [
+      { initials:'CM', name:'Carlos Mendoza', univ:'UNMSM', subject:'Cálculo Diferencial', note:'Busco tutor para preparar examen parcial', time:'hace 2h', color:'linear-gradient(135deg,#c8daf4,#3a6bb5)' },
+      { initials:'FG', name:'Fátima García', univ:'UPC', subject:'Álgebra Lineal', note:'Necesito ayuda con matrices y vectores', time:'hace 3h', color:'linear-gradient(135deg,#d4f4e4,#2a8a55)' },
+      { initials:'PA', name:'Pedro Alva', univ:'PUCP', subject:'Cálculo Diferencial', note:'Clases regulares, 2 veces por semana', time:'hace 5h', color:'linear-gradient(135deg,#fde8c8,#d68a2a)' },
+      { initials:'LQ', name:'Lucía Quispe', univ:'UNI', subject:'Estadística', note:'Apoyo con probabilidades y distribuciones', time:'hace 1d', color:'linear-gradient(135deg,#f4d4d8,#8B1A2B)' },
+      { initials:'JR', name:'Jorge Rojas', univ:'UNMSM', subject:'Cálculo Diferencial', note:'Primera semana de clases, necesito base sólida', time:'hace 1d', color:'linear-gradient(135deg,#e8d4f4,#7a2a8b)' },
+    ];
+    if (container) {
+      solicitudes.forEach(s => {
+        const card = document.createElement('div');
+        card.style.cssText = 'background:#fff;border:1px solid #e8e6e1;border-radius:12px;padding:12px;margin-bottom:10px;';
+        card.innerHTML = `
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="av" style="background:${s.color};color:#fff;font-weight:700;flex-shrink:0;">${s.initials}</div>
+            <div style="flex:1;"><div style="font-weight:700;font-size:12px;">${s.name}</div><div style="font-size:10px;color:var(--muted);">${s.univ}</div></div>
+            <div style="font-size:10px;color:var(--muted);">${s.time}</div>
+          </div>
+          <span class="tag" style="font-size:10px;margin-bottom:6px;display:inline-block;">${s.subject}</span>
+          <div style="font-size:11px;color:var(--ink);margin-bottom:10px;">"${s.note}"</div>
+          <div style="display:flex;gap:8px;">
+            <button type="button" style="flex:1;padding:6px;background:var(--primary);color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;">Aceptar</button>
+            <button type="button" style="flex:1;padding:6px;background:transparent;color:#d64545;border:1px solid #d64545;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;">Rechazar</button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+  }
+
   else if (screenId === 'us04') {
     // Settings: view mode toggle + logout
     const viewSelect = frame.querySelector('#config-view-mode');

@@ -20,17 +20,18 @@
       <div class="app-viewport">
         <div class="app-frame" id="appFrame" role="main" aria-live="polite">
           <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
-        <div class="scr">
-          <div class="head"><span class="back">‹</span><h2>Buscar tutores</h2></div>
-          <div class="input"><span class="ic">🔍</span><span>Cálculo Diferencial</span></div>
-          <div class="chips"><span class="chip on">Todos</span><span class="chip">UPC</span><span class="chip">PUCP</span><span class="chip">UNMSM</span></div>
-          <div class="small"><b>3 tutores</b> encontrados</div>
-          <div class="col mt">
-            <div class="card" style="cursor:pointer;" onclick="window.location.href='tutor-andrea.html'"><div class="av">AP</div><div class="body"><div class="name">Andrea Paredes</div><div class="meta">PUCP · Ingeniería</div><div class="stars">★★★★★ <b>4.9 (32)</b></div><span class="tag">Cálculo Diferencial</span></div><div class="fav">★</div></div>
-            <div class="card" style="cursor:pointer;" onclick="window.location.href='tutor-luis.html'"><div class="av">LM</div><div class="body"><div class="name">Luis Mendoza</div><div class="meta">UNMSM · Ciencias</div><div class="stars">★★★★☆ <b>4.5 (18)</b></div><span class="tag">Cálculo Diferencial</span></div></div>
-            <div class="card" style="cursor:pointer;" onclick="window.location.href='tutor-karen.html'"><div class="av">KR</div><div class="body"><div class="name">Karen Ríos</div><div class="meta">UPC · Sistemas</div><div class="stars">★★★★☆ <b>4.2 (9)</b></div><span class="tag">Cálculo Diferencial</span></div></div>
+          <div class="scr" style="display:flex; flex-direction:column; height:100%;">
+            <div class="head"><span class="back">‹</span><h2>Buscar</h2></div>
+            <div class="input-wrap" style="margin-bottom:10px; display:flex; align-items:center; gap:8px; padding:0 10px;">
+              <span>🔍</span>
+              <input id="search-input" class="field-search" type="search" placeholder="Curso, materia o tutor…" style="min-height:36px;">
+            </div>
+            <div style="display:flex; gap:8px; margin-bottom:12px; flex-shrink:0;">
+              <button type="button" id="btn-filter-univ" style="display:flex; align-items:center; gap:4px; border:1.5px solid var(--primary); background:transparent; color:var(--primary); font-size:11px; padding:5px 10px; border-radius:20px; cursor:pointer; font-weight:600;">🏛 Universidad</button>
+              <button type="button" id="btn-filter-disp" style="display:flex; align-items:center; gap:4px; border:1.5px solid var(--primary); background:transparent; color:var(--primary); font-size:11px; padding:5px 10px; border-radius:20px; cursor:pointer; font-weight:600;">🕐 Disponibilidad</button>
+            </div>
+            <div style="flex:1; overflow-y:auto; padding-bottom:12px;" id="search-results"></div>
           </div>
-        </div>
         </div>
       </div>
     </div>
