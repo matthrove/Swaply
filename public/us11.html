@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#8B1A2B">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>US11 · Buscar tutores por habilidad — Swaply</title>
+  <link rel="stylesheet" href="assets/styles/app.css">
+</head>
+<body class="app-body" data-screen-id="us11">
+  <div class="app-shell">
+    <aside id="appSidebar" class="app-sidebar" aria-label="Historias de usuario"></aside>
+    <div class="app-main">
+      <header class="app-topbar" id="appTopbar">
+        <button type="button" class="btn-settings" id="btnSettings" aria-label="Ajustes" style="background:none; border:none; font-size:20px; cursor:pointer; padding:0 8px; color:var(--primary);">⚙️</button>
+        <span class="app-topbar-title" id="screenTitle">US11 · Buscar tutores por habilidad</span>
+        <button type="button" class="hu-toggle" id="huToggle" aria-label="Ver historias de usuario">50 HU</button>
+      </header>
+      <div class="app-viewport">
+        <div class="app-frame" id="appFrame" role="main" aria-live="polite">
+          <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
+          <div class="scr" style="display:flex; flex-direction:column; height:100%;">
+            <div class="head"><span class="back">‹</span><h2>Buscar</h2></div>
+            <div class="input-wrap" style="margin-bottom:10px; display:flex; align-items:center; gap:8px; padding:0 10px;">
+              <span>🔍</span>
+              <input id="search-input" class="field-search" type="search" placeholder="Curso, materia o tutor…" style="min-height:36px;">
+            </div>
+            <div style="display:flex; gap:8px; margin-bottom:12px; flex-shrink:0;">
+              <button type="button" id="btn-filter-univ" style="display:flex; align-items:center; gap:4px; border:1.5px solid var(--primary); background:transparent; color:var(--primary); font-size:11px; padding:5px 10px; border-radius:20px; cursor:pointer; font-weight:600;">🏛 Universidad</button>
+              <button type="button" id="btn-filter-disp" style="display:flex; align-items:center; gap:4px; border:1.5px solid var(--primary); background:transparent; color:var(--primary); font-size:11px; padding:5px 10px; border-radius:20px; cursor:pointer; font-weight:600;">🕐 Disponibilidad</button>
+            </div>
+            <div style="flex:1; overflow-y:auto; padding-bottom:12px;" id="search-results"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/screens-data.js"></script>
+  <script src="assets/js/app-meta.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#8B1A2B">
+  <title>US24 · Chats — Swaply</title>
+  <link rel="stylesheet" href="assets/styles/app.css">
+</head>
+<body class="app-body" data-screen-id="us24">
+  <div class="app-shell">
+    <aside id="appSidebar" class="app-sidebar"></aside>
+    <div class="app-main">
+      <header class="app-topbar" id="appTopbar">
+        <button type="button" id="btnSettings" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0 8px;color:var(--primary);">⚙️</button>
+        <span class="app-topbar-title" id="screenTitle">US24 · Chats</span>
+        <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
+      </header>
+      <div class="app-viewport">
+        <div class="app-frame" id="appFrame">
+          <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
+          <div class="scr">
+            <div class="head"><h2>Chats</h2><div class="right">✏️</div></div>
+            <div class="input mt"><span class="ic">🔍</span>Buscar mensajes…</div>
+            <div class="col mt">
+              <div class="card" style="align-items:center;cursor:pointer;" onclick="window.location.href='us21.html'">
+                <div class="av lg">AP</div>
+                <div class="body">
+                  <div class="flex"><div class="name" style="flex:1">Andrea Paredes</div><div class="small">12:30</div></div>
+                  <div class="small" style="margin-top:2px">Confírmame por favor 🙏</div>
+                </div>
+                <span class="pill dark" style="font-size:9px;padding:1px 6px">2</span>
+              </div>
+              <div class="card" style="align-items:center;cursor:pointer;" onclick="window.location.href='us21.html'">
+                <div class="av lg">LM</div>
+                <div class="body">
+                  <div class="flex"><div class="name" style="flex:1">Luis Mendoza</div><div class="small">ayer</div></div>
+                  <div class="small" style="margin-top:2px">Te paso la fórmula que aplicamos…</div>
+                </div>
+              </div>
+              <div class="card" style="align-items:center;cursor:pointer;" onclick="window.location.href='us21.html'">
+                <div class="av lg">KR</div>
+                <div class="body">
+                  <div class="flex"><div class="name" style="flex:1">Karen Ríos</div><div class="small">lun</div></div>
+                  <div class="small" style="margin-top:2px">¡Gracias por la sesión! 😊</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/screens-data.js"></script>
+  <script src="assets/js/app-meta.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#8B1A2B">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Configuración — Swaply</title>
+  <link rel="stylesheet" href="assets/styles/app.css">
+</head>
+<body class="app-body" data-screen-id="configuracion">
+  <div class="app-shell">
+    <aside id="appSidebar" class="app-sidebar" aria-label="Historias de usuario"></aside>
+    <div class="app-main">
+      <header class="app-topbar" id="appTopbar">
+        <button type="button" class="btn-settings" id="btnSettings" aria-label="Ajustes" style="background:none; border:none; font-size:20px; cursor:pointer; padding:0 8px; color:var(--primary);">⚙️</button>
+        <span class="app-topbar-title" id="screenTitle">Configuración</span>
+        <button type="button" class="hu-toggle" id="huToggle" aria-label="Ver historias de usuario">50 HU</button>
+      </header>
+      <div class="app-viewport">
+        <div class="app-frame" id="appFrame" role="main" aria-live="polite">
+          <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
+          <div class="scr" style="display:flex; flex-direction:column; height:100%;">
+            <div class="head"><span class="back">‹</span><h2>Configuración</h2></div>
+
+            <div class="col" style="gap:0; flex:1; overflow-y:auto; padding-bottom:12px;">
+
+              <div class="section-label" style="font-weight:700; margin-bottom:4px;">Mi cuenta</div>
+
+              <div class="row-line" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center;" onclick="window.location.href='us07.html'">
+                <div class="l">👤 Editar perfil</div>
+                <div class="r">›</div>
+              </div>
+
+              <div class="row-line" id="cfg-toggle-privacy" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+                <div class="l">🔒 Modo Privacidad</div>
+                <div class="r"><button type="button" id="btn-privacy" style="border:1.5px solid var(--primary); background:transparent; color:var(--primary); font-size:11px; padding:4px 10px; border-radius:6px; cursor:pointer; font-weight:600;">Inactivo</button></div>
+              </div>
+
+              <div class="section-label" style="font-weight:700; margin-top:12px; margin-bottom:4px;">Preferencias</div>
+
+              <div class="row-line" style="display:flex; justify-content:space-between; align-items:center;">
+                <div class="l">🌓 Modo Oscuro</div>
+                <div class="r"><button type="button" id="btn-dark" style="border:1.5px solid var(--primary); background:transparent; color:var(--primary); font-size:11px; padding:4px 10px; border-radius:6px; cursor:pointer; font-weight:600;">Desactivado</button></div>
+              </div>
+
+              <div class="row-line" style="display:flex; justify-content:space-between; align-items:center;">
+                <div class="l">🌐 Idioma</div>
+                <div class="r">
+                  <select id="cfg-lang" class="field-select" style="padding:4px 8px; border-radius:6px; font-size:12px;">
+                    <option value="es">Español</option>
+                    <option value="en">English</option>
+                    <option value="pt">Português</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row-line" id="cfg-delete-account" style="cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+                <div class="l" style="color:#d64545; font-weight:600;" id="btn-delete-account">🗑 Borrar cuenta</div>
+                <div class="r" style="color:#d64545;">›</div>
+              </div>
+
+              <div class="section-label" style="font-weight:700; margin-top:12px; margin-bottom:4px;">Soporte</div>
+
+              <div class="row-line" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer;">
+                <div class="l">❓ Preguntas frecuentes</div>
+                <div class="r">›</div>
+              </div>
+
+              <div class="row-line" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer;">
+                <div class="l">📄 Políticas de privacidad</div>
+                <div class="r">›</div>
+              </div>
+            </div>
+
+            <div style="padding-top:8px; padding-bottom:12px;">
+              <button type="button" class="btn" id="btn-logout-submit" style="width:100%; background:#d64545;">Cerrar sesión</button>
+            </div>
+
+            <!-- Logout confirmation overlay -->
+            <div id="logout-overlay-cfg" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:999; align-items:center; justify-content:center;">
+              <div style="background:#fff; border-radius:16px; padding:24px 20px; max-width:260px; width:90%; box-shadow:0 8px 32px rgba(0,0,0,0.18); text-align:center;">
+                <div style="font-size:22px; margin-bottom:8px;">🚪</div>
+                <div style="font-weight:700; font-size:14px; color:var(--ink); margin-bottom:6px;">¿Cerrar sesión?</div>
+                <div style="font-size:12px; color:var(--muted); margin-bottom:16px;">Tu perfil y contraseña se conservarán para cuando vuelvas.</div>
+                <div style="display:flex; gap:8px;">
+                  <button id="logout-cfg-no" type="button" style="flex:1; padding:10px; border:1.5px solid var(--primary); background:transparent; color:var(--primary); border-radius:10px; font-weight:600; font-size:13px; cursor:pointer;">No</button>
+                  <button id="logout-cfg-si" type="button" style="flex:1; padding:10px; background:#d64545; border:none; color:#fff; border-radius:10px; font-weight:600; font-size:13px; cursor:pointer;">Sí</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/screens-data.js"></script>
+  <script src="assets/js/app-meta.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
