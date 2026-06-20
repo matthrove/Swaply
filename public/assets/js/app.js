@@ -1232,11 +1232,37 @@ function setupCustomFlows(frame, screenId) {
           
           card.querySelector('.btn-cancel-session').onclick = (e) => {
             e.stopPropagation();
-            if (confirm(`¿Estás seguro de que deseas cancelar la sesión con ${s.tutor}?`)) {
+            const existing = frame.querySelector('#cancel-modal');
+            if (existing) existing.remove();
+            const modal = document.createElement('div');
+            modal.id = 'cancel-modal';
+            modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:999;display:flex;align-items:center;justify-content:center;';
+            modal.innerHTML = `
+              <div style="background:#fff;border-radius:16px;padding:20px;max-width:280px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,0.18);">
+                <div style="font-weight:700;font-size:14px;color:var(--ink);margin-bottom:4px;">Cancelar sesión</div>
+                <div style="font-size:11px;color:var(--muted);margin-bottom:12px;">Estás por cancelar la sesión con <b style="color:var(--ink);">${s.tutor}</b> del <b style="color:var(--ink);">${s.date} · ${s.time}</b>.</div>
+                <div style="background:#fff3cd;border-radius:8px;padding:8px;font-size:10px;color:#856404;margin-bottom:12px;">⚠ Cancelaciones tardías pueden afectar tu reputación.</div>
+                <div style="margin-bottom:12px;">
+                  <label style="font-size:11px;font-weight:600;color:var(--ink);display:block;margin-bottom:4px;">Motivo (obligatorio)</label>
+                  <textarea id="cancel-reason" placeholder="Ej: Se me cruzó una clase obligatoria…" style="width:100%;height:60px;font-size:11px;padding:8px;border:1.5px solid #e8e6e1;border-radius:8px;resize:none;box-sizing:border-box;"></textarea>
+                </div>
+                <div style="font-size:9px;color:var(--muted);margin-bottom:12px;">Política: +2h sin penalidad · 2h–1h advertencia · &lt;1h afecta reputación</div>
+                <div style="display:flex;gap:8px;">
+                  <button id="cancel-modal-no" type="button" style="flex:1;padding:10px;border:1.5px solid var(--primary);background:transparent;color:var(--primary);border-radius:10px;font-weight:600;font-size:12px;cursor:pointer;">Volver</button>
+                  <button id="cancel-modal-si" type="button" style="flex:1;padding:10px;background:#d64545;border:none;color:#fff;border-radius:10px;font-weight:600;font-size:12px;cursor:pointer;">Cancelar igual</button>
+                </div>
+              </div>
+            `;
+            frame.appendChild(modal);
+            modal.querySelector('#cancel-modal-no').onclick = () => modal.remove();
+            modal.querySelector('#cancel-modal-si').onclick = () => {
+              const reason = modal.querySelector('#cancel-reason').value.trim();
+              if (!reason) { modal.querySelector('#cancel-reason').style.border = '1.5px solid #d64545'; return; }
+              modal.remove();
               upcoming = upcoming.filter(x => x.id !== s.id);
               localStorage.setItem('upcomingSessions', JSON.stringify(upcoming));
               renderList();
-            }
+            };
           };
           
           card.querySelector('.btn-complete-session').onclick = (e) => {
