@@ -643,6 +643,11 @@ function setupCustomFlows(frame, screenId) {
     }, 4000);
   }
   
+  else if (screenId === 'us46') {
+    const btnStart = frame.querySelector('#btn-tour-start');
+    if (btnStart) btnStart.onclick = () => navigateTo('us11');
+  }
+
   else if (screenId === 'us01') {
     const radioEst = frame.querySelector('input[value="estudiante"]');
     const radioTut = frame.querySelector('input[value="tutor"]');
@@ -870,9 +875,25 @@ function setupCustomFlows(frame, screenId) {
   else if (screenId === 'us49') {
     const btnSi = frame.querySelector('#btn-delete-si');
     const btnNo = frame.querySelector('#btn-delete-no');
+    const checkbox = frame.querySelector('#delete-confirm-check');
+    const passInput = frame.querySelector('#delete-password');
+    const passError = frame.querySelector('#delete-pass-error');
+
+    const updateBtn = () => {
+      const enabled = checkbox && checkbox.checked;
+      if (btnSi) { btnSi.disabled = !enabled; btnSi.style.opacity = enabled ? '1' : '.4'; }
+    };
+    if (checkbox) checkbox.addEventListener('change', updateBtn);
+
     if (btnSi) {
       btnSi.addEventListener('click', () => {
         const u = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        // In demo: accept any password (non-empty)
+        if (passInput && !passInput.value) {
+          if (passError) passError.style.display = 'block';
+          return;
+        }
+        if (passError) passError.style.display = 'none';
         if (u) {
           let users = JSON.parse(localStorage.getItem('users') || '[]');
           users = users.filter(x => x.email !== u.email);
@@ -882,9 +903,7 @@ function setupCustomFlows(frame, screenId) {
         window.location.href = 'index.html';
       });
     }
-    if (btnNo) {
-      btnNo.addEventListener('click', () => history.back());
-    }
+    if (btnNo) btnNo.addEventListener('click', () => history.back());
   }
 
   else if (screenId === 'configuracion') {
@@ -1558,6 +1577,15 @@ function setupCustomFlows(frame, screenId) {
     const sendBtn = frame.querySelector('#btn-send-solicitud');
     if (sendBtn) {
       sendBtn.addEventListener('click', () => {
+        // Demo: always has enough credits
+        const u = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        const credits = u ? (u.credits ?? 10) : 10;
+        const cost = tutor ? (tutor.credits || 3) : 3;
+        if (credits < cost) {
+          // Show insufficient credits state (us37)
+          navigateTo('us37');
+          return;
+        }
         if (toast) toast.style.display = 'flex';
         sendBtn.disabled = true;
         sendBtn.textContent = 'Enviada ✓';

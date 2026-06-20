@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#8B1A2B">
-  <title>US49 · Borrar cuenta — Swaply</title>
+  <title>US49 · Eliminar cuenta — Swaply</title>
   <link rel="stylesheet" href="assets/styles/app.css">
 </head>
 <body class="app-body" data-screen-id="us49">
@@ -13,19 +13,44 @@
     <div class="app-main">
       <header class="app-topbar" id="appTopbar">
         <button type="button" id="btnSettings" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0 8px;color:var(--primary);">⚙️</button>
-        <span class="app-topbar-title" id="screenTitle">US49 · Borrar cuenta</span>
+        <span class="app-topbar-title" id="screenTitle">US49 · Eliminar cuenta</span>
         <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
       </header>
       <div class="app-viewport">
         <div class="app-frame" id="appFrame" role="main">
           <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
-          <div class="scr" style="display:flex; flex-direction:column; height:100%; align-items:center; justify-content:center; text-align:center; padding:24px 20px;">
-            <div style="font-size:48px; margin-bottom:12px;">⚠️</div>
-            <div style="font-weight:700; font-size:16px; color:var(--ink); margin-bottom:8px;">¿Eliminar tu cuenta?</div>
-            <div style="font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:28px;">Esta acción es permanente. Se borrarán todos tus datos, historial de sesiones y créditos. No podrás recuperar tu cuenta.</div>
-            <div style="display:flex; flex-direction:column; gap:10px; width:100%; max-width:280px;">
-              <button type="button" class="btn" id="btn-delete-si" style="width:100%; background:#d64545;">Sí, eliminar mi cuenta</button>
-              <button type="button" class="btn" id="btn-delete-no" style="width:100%; background:transparent; border:1.5px solid var(--primary); color:var(--primary);">No, mantener cuenta</button>
+          <div class="scr" style="display:flex; flex-direction:column; height:100%;">
+            <div class="head"><span class="back">‹</span><h2>Eliminar cuenta</h2></div>
+
+            <div style="flex:1; display:flex; flex-direction:column; gap:14px; padding:4px 0 16px;">
+
+              <!-- Advertencia -->
+              <div style="background:#fff3f3; border:1.5px solid #d64545; border-radius:10px; padding:12px 14px; display:flex; gap:10px; align-items:flex-start;">
+                <span style="font-size:18px;">⚠️</span>
+                <div style="font-size:12px; color:#d64545; line-height:1.5;">
+                  <strong>Acción irreversible.</strong> Se borrarán todos tus datos, sesiones y créditos. Tienes 30 días para cancelar el proceso.
+                </div>
+              </div>
+
+              <!-- Campo contraseña -->
+              <div>
+                <div class="field-label" style="font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px;">Contraseña</div>
+                <input type="password" id="delete-password" class="input" placeholder="••••••••" style="width:100%; box-sizing:border-box;">
+                <div id="delete-pass-error" style="display:none; font-size:11px; color:#d64545; margin-top:4px;">Contraseña incorrecta</div>
+              </div>
+
+              <!-- Checkbox confirmación -->
+              <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; font-size:13px; line-height:1.5;">
+                <input type="checkbox" id="delete-confirm-check" style="margin-top:2px; width:16px; height:16px; accent-color:#d64545; flex-shrink:0;">
+                <span>Entiendo que esta acción es <strong>permanente e irreversible</strong> y que perderé todos mis datos.</span>
+              </label>
+
+            </div>
+
+            <!-- Botones -->
+            <div style="display:flex; flex-direction:column; gap:10px; padding-bottom:8px;">
+              <button type="button" class="btn" id="btn-delete-si" style="width:100%; background:#d64545; opacity:.4;" disabled>Eliminar mi cuenta</button>
+              <button type="button" class="btn" id="btn-delete-no" style="width:100%; background:transparent; border:1.5px solid var(--primary); color:var(--primary);">Cancelar</button>
             </div>
           </div>
         </div>

@@ -4,8 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#8B1A2B">
-  <title>US46 · Insignias — Swaply</title>
+  <title>US46 · Tour guiado — Swaply</title>
   <link rel="stylesheet" href="assets/styles/app.css">
+  <style>
+    .tour-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: #fff;
+      border: 1.5px solid rgba(139,26,43,.18);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+    .tour-step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .tour-step-icon { font-size: 22px; flex-shrink: 0; }
+    .tour-step-body h3 { margin: 0 0 4px; font-size: 13px; font-weight: 700; }
+    .tour-step-body p  { margin: 0; font-size: 12px; color: var(--muted); line-height: 1.5; }
+  </style>
 </head>
 <body class="app-body" data-screen-id="us46">
   <div class="app-shell">
@@ -13,21 +40,77 @@
     <div class="app-main">
       <header class="app-topbar" id="appTopbar">
         <button type="button" id="btnSettings" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0 8px;color:var(--primary);">⚙️</button>
-        <span class="app-topbar-title" id="screenTitle">US46 · Insignias</span>
+        <span class="app-topbar-title" id="screenTitle">US46 · Tour guiado</span>
         <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
       </header>
       <div class="app-viewport">
         <div class="app-frame" id="appFrame" role="main">
-          
-    <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
-    <div class="scr">
-      <div class="head"><span class="back">‹</span><h2>Insignias</h2></div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px;">
-        <div class="card" style="text-align:center;"><div style="font-size:32px;">🏆</div><div style="font-size:11px; font-weight:700;">Top Tutor</div></div>
-        <div class="card" style="text-align:center; opacity:.4;"><div style="font-size:32px;">🔥</div><div style="font-size:11px;">10 sesiones</div></div>
-      </div>
-    </div>
-  
+          <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
+          <div class="scr" style="display:flex; flex-direction:column; height:100%;">
+            <div class="head"><span class="back">‹</span><h2>Tour guiado</h2></div>
+
+            <!-- Header intro -->
+            <div style="text-align:center; padding:10px 0 16px;">
+              <div style="font-size:36px; margin-bottom:6px;">🎓</div>
+              <div style="font-weight:700; font-size:15px;">Bienvenido a Swaply</div>
+              <div style="font-size:12px; color:var(--muted); margin-top:4px;">Aprende a usar la plataforma en 5 pasos</div>
+            </div>
+
+            <!-- Steps -->
+            <div style="display:flex; flex-direction:column; gap:10px; flex:1; overflow-y:auto; padding-bottom:16px;">
+
+              <div class="tour-step">
+                <div class="tour-step-num">1</div>
+                <div class="tour-step-icon">🔍</div>
+                <div class="tour-step-body">
+                  <h3>Busca un tutor</h3>
+                  <p>Usa la barra de búsqueda para encontrar tutores por materia, universidad o disponibilidad.</p>
+                </div>
+              </div>
+
+              <div class="tour-step">
+                <div class="tour-step-num">2</div>
+                <div class="tour-step-icon">📩</div>
+                <div class="tour-step-body">
+                  <h3>Envía una solicitud</h3>
+                  <p>Elige el tema y la disponibilidad, y envía tu solicitud. Cuesta 3 créditos por sesión.</p>
+                </div>
+              </div>
+
+              <div class="tour-step">
+                <div class="tour-step-num">3</div>
+                <div class="tour-step-icon">💬</div>
+                <div class="tour-step-body">
+                  <h3>Coordina por chat</h3>
+                  <p>Una vez aceptada la solicitud, usa el chat para coordinar detalles con tu tutor.</p>
+                </div>
+              </div>
+
+              <div class="tour-step">
+                <div class="tour-step-num">4</div>
+                <div class="tour-step-icon">📅</div>
+                <div class="tour-step-body">
+                  <h3>Programa y asiste</h3>
+                  <p>Confirma fecha y hora. Recibirás un recordatorio 24h y 1h antes de la sesión.</p>
+                </div>
+              </div>
+
+              <div class="tour-step">
+                <div class="tour-step-num">5</div>
+                <div class="tour-step-icon">⭐</div>
+                <div class="tour-step-body">
+                  <h3>Califica y gana créditos</h3>
+                  <p>Al terminar, califica la sesión. Si enseñas, ganas +3 créditos para solicitar más tutorías.</p>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- CTA -->
+            <div style="padding-bottom:8px;">
+              <button type="button" class="btn" id="btn-tour-start" style="width:100%;">¡Empezar ahora!</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
