@@ -1809,6 +1809,31 @@ function setupCustomFlows(frame, screenId) {
     }
   }
 
+  else if (screenId === 'us27') {
+    const btnComplete = frame.querySelector('#btn-reminder-complete');
+    const pendingReminder = JSON.parse(localStorage.getItem('pendingReminder') || 'null');
+
+    if (pendingReminder) {
+      const titleEl = frame.querySelector('#reminder-title');
+      const dtEl = frame.querySelector('#reminder-datetime');
+      const tutorEl = frame.querySelector('#reminder-tutor');
+      const subjEl = frame.querySelector('#reminder-subject');
+      const durEl = frame.querySelector('#reminder-duration');
+      if (titleEl) titleEl.textContent = `Sesión con ${pendingReminder.tutor}`;
+      if (dtEl) dtEl.textContent = `${pendingReminder.date} · ${pendingReminder.time}`;
+      if (tutorEl) tutorEl.textContent = pendingReminder.tutor;
+      if (subjEl) subjEl.textContent = pendingReminder.subject;
+      if (durEl) durEl.textContent = pendingReminder.duration;
+    }
+
+    if (btnComplete) {
+      btnComplete.onclick = () => {
+        localStorage.removeItem('pendingReminder');
+        navigateTo('us30');
+      };
+    }
+  }
+
   else if (screenId === 'us28') {
     // Reminder detail
     const btnDone = frame.querySelector('#btn-reminder-done');

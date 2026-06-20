@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#8B1A2B">
+  <title>US27 · Detalle de recordatorio — Swaply</title>
+  <link rel="stylesheet" href="assets/styles/app.css">
+</head>
+<body class="app-body" data-screen-id="us27">
+  <div class="app-shell">
+    <aside id="appSidebar" class="app-sidebar"></aside>
+    <div class="app-main">
+      <header class="app-topbar" id="appTopbar">
+        <button type="button" id="btnSettings" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0 8px;color:var(--primary);">⚙️</button>
+        <span class="app-topbar-title" id="screenTitle">US27 · Detalle de recordatorio</span>
+        <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
+      </header>
+      <div class="app-viewport">
+        <div class="app-frame" id="appFrame" role="main">
+
+    <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
+    <div class="scr" style="display:flex; flex-direction:column; height:100%;">
+      <div class="head"><span class="back">‹</span><h2>Detalle de recordatorio</h2></div>
+      <div class="col" style="gap:12px; flex:1; overflow-y:auto; padding-bottom:12px;">
+        <div style="border:1.5px solid var(--primary); border-radius:14px; padding:16px; background:#fff;">
+          <div style="font-size:24px; text-align:center; margin-bottom:8px;">🔔</div>
+          <div style="font-weight:700; font-size:15px; color:var(--primary); text-align:center;" id="reminder-title">Sesión con Andrea Paredes</div>
+          <div class="small" style="margin-top:6px; text-align:center;" id="reminder-datetime">Jueves 7 Nov · 19:00</div>
+        </div>
+        <div class="section-label" style="font-weight:700; text-transform:uppercase; font-size:11px; color:#888; letter-spacing:.05em; margin-top:4px;">Detalles</div>
+        <div class="kv"><span class="k">Tutor</span><span class="v" id="reminder-tutor">Andrea Paredes</span></div>
+        <div class="kv"><span class="k">Materia</span><span class="v" id="reminder-subject">Cálculo Diferencial</span></div>
+        <div class="kv"><span class="k">Duración</span><span class="v" id="reminder-duration">60 min</span></div>
+        <div class="kv"><span class="k">Enlace</span><span class="v"><a href="https://meet.google.com/abc-xyz" target="_blank" style="color:var(--primary);">meet.google.com/abc-xyz</a></span></div>
+        <div style="border:1.5px solid var(--primary); border-radius:10px; padding:12px 14px; background:#fdf4f5; display:flex; gap:10px; align-items:flex-start; margin-top:4px;">
+          <span>💡</span>
+          <div style="font-size:13px;">Recuerda preparar tus dudas antes de la sesión.</div>
+        </div>
+      </div>
+      <div style="padding:0 0 12px;">
+        <button type="button" class="btn" id="btn-reminder-complete" style="width:100%; background:#C9A227;">Marcar como completado</button>
+      </div>
+    </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="assets/js/screens-data.js"></script>
+  <script src="assets/js/app-meta.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
