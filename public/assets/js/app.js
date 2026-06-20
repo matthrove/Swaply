@@ -25,6 +25,7 @@ const navigation = meta.navigation;
 const MAIN_NAV = {
   Inicio: 'us15',
   Buscar: 'us11',
+  Solicitudes: 'us19',
   Chats: 'us24',
   Perfil: 'us07',
 };
@@ -122,13 +123,15 @@ function goBack() {
 }
 
 function createBottomNav() {
+  const u = JSON.parse(localStorage.getItem('currentUser') || 'null');
+  const isTutor = u && u.role === 'tutor';
   const nav = document.createElement('div');
   nav.className = 'nav';
   nav.setAttribute('role', 'navigation');
   nav.setAttribute('aria-label', 'Navegación principal');
   nav.innerHTML = `
     <div class="it" data-label="Inicio"><span class="gl">🏠</span>Inicio</div>
-    <div class="it" data-label="Buscar"><span class="gl">🔍</span>Buscar</div>
+    <div class="it" data-label="${isTutor ? 'Solicitudes' : 'Buscar'}"><span class="gl">${isTutor ? '📩' : '🔍'}</span>${isTutor ? 'Solicitudes' : 'Buscar'}</div>
     <div class="it" data-label="Chats"><span class="gl">💬</span>Chats</div>
     <div class="it" data-label="Perfil"><span class="gl">👤</span>Perfil</div>
   `;
@@ -515,7 +518,7 @@ function bindInteractions(container, screenId) {
     });
   });
 
-  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy', 'btn-save-photo', 'btn-solicitar-sesion', 'btn-logout-us07', 'btn-delete-si', 'btn-delete-no', 'btn-delete-account', 'btn-send-solicitud']);
+  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy', 'btn-save-photo', 'btn-solicitar-sesion', 'btn-logout-us07', 'btn-delete-si', 'btn-delete-no', 'btn-delete-account', 'btn-send-solicitud', 'btn-us17-aceptar', 'btn-us17-rechazar', 'btn-us18-cancelar', 'btn-us18-confirmar', 'btn-mark-complete', 'btn-rate-session', 'btn-save-reminder', 'btn-send-code', 'btn-update-pass', 'btn-save-privacy']);
   container.querySelectorAll('.btn, .btn.ghost, .btn.sm').forEach(btn => {
     if (btn.id && SKIP_IDS.has(btn.id)) return;
     const text = btn.textContent.trim();
@@ -1684,6 +1687,125 @@ function setupCustomFlows(frame, screenId) {
       reviewsEl.appendChild(div);
     });
     if (solicitarBtn) solicitarBtn.onclick = () => navigateTo('us16');
+  }
+
+  else if (screenId === 'us19') {
+    // Tutor's pending requests list — only pending, each tappable → us17
+    const list = frame.querySelector('#us19-list');
+    if (!list) return;
+
+    const defaultSolicitudes = [
+      { id: 1, initials:'AP', name:'Andrea Paredes', univ:'UPC', cycle:'3° ciclo', rating:'4.8', subject:'Cálculo Diferencial', avail:'Tarde / Noche', time:'hace 2h', message:'Busco tutor para preparar el examen parcial. Tengo dudas con derivadas implícitas.', color:'#3a6bb5' },
+      { id: 2, initials:'CM', name:'Carlos Montes', univ:'UNMSM', cycle:'5° ciclo', rating:'4.2', subject:'Física I', avail:'Mañana', time:'enviada ayer', message:'Necesito ayuda con cinemática y dinámica para el examen.', color:'#2a8a55' },
+      { id: 3, initials:'LQ', name:'Lucía Quispe', univ:'PUCP', cycle:'2° ciclo', rating:'4.6', subject:'Cálculo Diferencial', avail:'Noche', time:'hace 3 días', message:'Clases regulares, 2 veces por semana si es posible.', color:'#8B1A2B' },
+    ];
+    let solicitudes = JSON.parse(localStorage.getItem('tutorSolicitudes') || 'null') || defaultSolicitudes;
+
+    const render = () => {
+      list.innerHTML = '';
+      const pending = solicitudes.filter(s => !s.rejected && !s.accepted);
+      if (pending.length === 0) {
+        list.innerHTML = '<div style="text-align:center; margin-top:40px; color:var(--muted);"><div style="font-size:36px; margin-bottom:8px;">📭</div><div style="font-weight:700; font-size:14px;">Sin solicitudes pendientes</div><div style="font-size:12px; margin-top:4px;">Cuando alguien te solicite, aparecerá aquí.</div></div>';
+        return;
+      }
+      pending.forEach(s => {
+        const card = document.createElement('div');
+        card.style.cssText = 'display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--soft); border-radius:12px; padding:14px; margin-bottom:10px; cursor:pointer;';
+        card.innerHTML = `
+          <div style="width:44px; height:44px; border-radius:50%; background:${s.color}; color:#fff; font-weight:700; font-size:16px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">${s.initials}</div>
+          <div style="flex:1; min-width:0;">
+            <div style="font-weight:700; font-size:13px;">${s.name}</div>
+            <div style="font-size:11px; color:var(--muted);">${s.subject} · ${s.time}</div>
+          </div>
+          <span style="background:#fff3cd; color:#856404; font-size:10px; font-weight:700; padding:3px 8px; border-radius:6px; white-space:nowrap;">Pendiente</span>
+        `;
+        card.addEventListener('click', () => {
+          localStorage.setItem('selectedSolicitud', JSON.stringify(s));
+          navigateTo('us17');
+        });
+        list.appendChild(card);
+      });
+    };
+    render();
+  }
+
+  else if (screenId === 'us17') {
+    // Solicitud detail — tutor accepts or rejects
+    const sol = JSON.parse(localStorage.getItem('selectedSolicitud') || 'null');
+    if (sol) {
+      const av = frame.querySelector('#us17-avatar');
+      const nm = frame.querySelector('#us17-name');
+      const mt = frame.querySelector('#us17-meta');
+      const rt = frame.querySelector('#us17-rating');
+      const sb = frame.querySelector('#us17-subject');
+      const av2 = frame.querySelector('#us17-avail');
+      const ti = frame.querySelector('#us17-time');
+      const ms = frame.querySelector('#us17-message');
+      if (av) { av.textContent = sol.initials; av.style.background = sol.color; }
+      if (nm) nm.textContent = sol.name;
+      if (mt) mt.textContent = `${sol.univ} · ${sol.cycle}`;
+      if (rt) rt.innerHTML = `★★★★☆ <span style="color:var(--muted);">${sol.rating}</span>`;
+      if (sb) sb.textContent = sol.subject;
+      if (av2) av2.textContent = sol.avail;
+      if (ti) ti.textContent = sol.time;
+      if (ms) ms.textContent = `"${sol.message}"`;
+    }
+
+    const btnAceptar = frame.querySelector('#btn-us17-aceptar');
+    const btnRechazar = frame.querySelector('#btn-us17-rechazar');
+
+    if (btnAceptar) {
+      btnAceptar.addEventListener('click', () => {
+        if (sol) {
+          let sols = JSON.parse(localStorage.getItem('tutorSolicitudes') || '[]');
+          const idx = sols.findIndex(s => s.id === sol.id);
+          if (idx !== -1) { sols[idx].accepted = true; localStorage.setItem('tutorSolicitudes', JSON.stringify(sols)); }
+          // Also add to upcoming sessions
+          let upcoming = JSON.parse(localStorage.getItem('upcomingSessions') || '[]');
+          upcoming.push({ id: Date.now(), tutor: sol.name, subject: sol.subject, date: 'Por definir', time: '--:--', duration: '60 min', reminder: false });
+          localStorage.setItem('upcomingSessions', JSON.stringify(upcoming));
+        }
+        btnAceptar.textContent = '✓ Aceptada';
+        btnAceptar.style.background = '#3aa56b';
+        btnAceptar.disabled = true;
+        if (btnRechazar) btnRechazar.disabled = true;
+        setTimeout(() => navigateTo('us19'), 1200);
+      });
+    }
+
+    if (btnRechazar) {
+      btnRechazar.addEventListener('click', () => navigateTo('us18'));
+    }
+  }
+
+  else if (screenId === 'us18') {
+    // Reject with motivo — radio buttons + textarea
+    const rows = frame.querySelectorAll('.motivo-row');
+    rows.forEach(row => {
+      row.addEventListener('click', () => {
+        rows.forEach(r => r.classList.remove('selected'));
+        row.classList.add('selected');
+      });
+    });
+
+    const btnCancelar = frame.querySelector('#btn-us18-cancelar');
+    const btnConfirmar = frame.querySelector('#btn-us18-confirmar');
+
+    if (btnCancelar) btnCancelar.addEventListener('click', () => history.back());
+
+    if (btnConfirmar) {
+      btnConfirmar.addEventListener('click', () => {
+        const sol = JSON.parse(localStorage.getItem('selectedSolicitud') || 'null');
+        if (sol) {
+          let sols = JSON.parse(localStorage.getItem('tutorSolicitudes') || '[]');
+          const idx = sols.findIndex(s => s.id === sol.id);
+          if (idx !== -1) { sols[idx].rejected = true; localStorage.setItem('tutorSolicitudes', JSON.stringify(sols)); }
+        }
+        btnConfirmar.textContent = '✓ Rechazada';
+        btnConfirmar.style.background = '#3aa56b';
+        setTimeout(() => navigateTo('us19'), 1000);
+      });
+    }
   }
 
   else if (screenId === 'us16') {

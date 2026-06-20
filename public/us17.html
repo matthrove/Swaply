@@ -4,25 +4,58 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#8B1A2B">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>US17 · Aceptar solicitud — Swaply</title>
+  <title>US17 · Detalle de solicitud — Swaply</title>
   <link rel="stylesheet" href="assets/styles/app.css">
 </head>
 <body class="app-body" data-screen-id="us17">
   <div class="app-shell">
-    <aside id="appSidebar" class="app-sidebar" aria-label="Historias de usuario"></aside>
+    <aside id="appSidebar" class="app-sidebar"></aside>
     <div class="app-main">
       <header class="app-topbar" id="appTopbar">
-        <button type="button" class="btn-settings" id="btnSettings" aria-label="Ajustes" style="background:none; border:none; font-size:20px; cursor:pointer; padding:0 8px; color:var(--primary);">⚙️</button>
-        <span class="app-topbar-title" id="screenTitle">US17 · Aceptar solicitud</span>
-        <button type="button" class="hu-toggle" id="huToggle" aria-label="Ver historias de usuario">50 HU</button>
+        <button type="button" id="btnSettings" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0 8px;color:var(--primary);">⚙️</button>
+        <span class="app-topbar-title" id="screenTitle">US17 · Solicitud recibida</span>
+        <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
       </header>
       <div class="app-viewport">
-        <div class="app-frame" id="appFrame" role="main" aria-live="polite">
+        <div class="app-frame" id="appFrame" role="main">
           <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
-        <div class="scr">
-          <div class="head"><span class="back">‹</span><h2>Solicitud recibida</h2></div>
-          <div class="flex"><div class="av lg">RE</div><div><div style="font-weight:600;font-size:12px">Rogger Escalante</div><div class="small">UPC · 4° ciclo</div><div class="stars" style="font-size:10px">★★★★☆ 4.4
+          <div class="scr" style="display:flex; flex-direction:column; height:100%;">
+            <div class="head"><span class="back">‹</span><h2>Solicitud recibida</h2></div>
+
+            <div style="flex:1; display:flex; flex-direction:column; gap:12px; overflow-y:auto; padding-bottom:12px;">
+
+              <!-- Aprendiz info -->
+              <div style="display:flex; align-items:center; gap:12px; background:#fff; border:1px solid var(--soft); border-radius:14px; padding:14px;">
+                <div id="us17-avatar" style="width:48px; height:48px; border-radius:50%; background:var(--primary); color:#fff; font-weight:700; font-size:18px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">RE</div>
+                <div style="flex:1;">
+                  <div style="font-weight:700; font-size:14px;" id="us17-name">Rogger Escalante</div>
+                  <div style="font-size:11px; color:var(--muted);" id="us17-meta">UPC · 4° ciclo</div>
+                  <div style="font-size:12px; color:#f59e0b; margin-top:2px;" id="us17-rating">★★★★☆ <span style="color:var(--muted);">4.4</span></div>
+                </div>
+              </div>
+
+              <!-- Detalles de la solicitud -->
+              <div style="background:#fff; border:1px solid var(--soft); border-radius:14px; padding:14px; display:flex; flex-direction:column; gap:10px;">
+                <div style="font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em;">Detalles de la solicitud</div>
+                <div class="kv"><span class="k">Materia</span><span class="v" id="us17-subject">Cálculo Diferencial</span></div>
+                <div class="kv"><span class="k">Disponibilidad</span><span class="v" id="us17-avail">Tarde / Noche</span></div>
+                <div class="kv"><span class="k">Enviada</span><span class="v" id="us17-time">hace 2h</span></div>
+              </div>
+
+              <!-- Mensaje del aprendiz -->
+              <div style="background:var(--brand-bg); border-radius:12px; padding:12px 14px;">
+                <div style="font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px;">Mensaje</div>
+                <div style="font-size:13px; line-height:1.6;" id="us17-message">"Busco tutor para preparar el examen parcial. Tengo dudas con derivadas implícitas."</div>
+              </div>
+
+            </div>
+
+            <!-- Botones -->
+            <div style="display:flex; gap:10px; padding-bottom:8px;">
+              <button type="button" id="btn-us17-rechazar" style="flex:1; padding:14px; border:1.5px solid #d64545; background:transparent; color:#d64545; border-radius:10px; font-weight:700; font-size:14px; cursor:pointer;">Rechazar</button>
+              <button type="button" id="btn-us17-aceptar" style="flex:1; padding:14px; background:var(--primary); color:#fff; border:none; border-radius:10px; font-weight:700; font-size:14px; cursor:pointer;">Aceptar</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
