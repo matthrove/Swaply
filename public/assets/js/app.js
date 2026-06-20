@@ -648,6 +648,155 @@ function setupCustomFlows(frame, screenId) {
     if (btnStart) btnStart.onclick = () => navigateTo('us11');
   }
 
+  else if (screenId === 'us03') {
+    const emailInput = frame.querySelector('#us03-email');
+    const errEl = frame.querySelector('#us03-err');
+    const btnSend = frame.querySelector('#btn-send-code');
+    const formDiv = frame.querySelector('#us03-form');
+    const loadingDiv = frame.querySelector('#us03-loading');
+    const btnWrap = frame.querySelector('#us03-btn-wrap');
+
+    if (btnSend) {
+      btnSend.addEventListener('click', () => {
+        const email = emailInput ? emailInput.value.trim() : '';
+        if (!email || !email.includes('@')) {
+          if (errEl) errEl.style.display = 'block';
+          return;
+        }
+        if (errEl) errEl.style.display = 'none';
+        // Show loading
+        if (formDiv) formDiv.style.display = 'none';
+        if (loadingDiv) { loadingDiv.style.display = 'flex'; }
+        if (btnWrap) btnWrap.style.display = 'none';
+        // After 3 seconds go to change password (from recovery, no current pass needed)
+        setTimeout(() => {
+          localStorage.setItem('passFromRecovery', '1');
+          localStorage.removeItem('passFromSettings');
+          navigateTo('us50');
+        }, 3000);
+      });
+    }
+  }
+
+  else if (screenId === 'us47') {
+    const searchInput = frame.querySelector('#faq-search');
+    const catBtns = frame.querySelectorAll('.cat-chip');
+    const items = frame.querySelectorAll('.faq-item');
+
+    // Expand/collapse
+    items.forEach(item => {
+      const q = item.querySelector('.faq-q');
+      const a = item.querySelector('.faq-a');
+      if (q && a) {
+        q.addEventListener('click', () => {
+          const isOpen = a.classList.toggle('open');
+          q.classList.toggle('open', isOpen);
+        });
+      }
+    });
+
+    // Category filter
+    catBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        catBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.cat;
+        items.forEach(item => {
+          const show = cat === 'todos' || item.dataset.cat === cat || item.dataset.cat === 'todos';
+          item.style.display = show ? '' : 'none';
+        });
+      });
+    });
+
+    // Search
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        const q = searchInput.value.toLowerCase();
+        items.forEach(item => {
+          const text = item.textContent.toLowerCase();
+          item.style.display = text.includes(q) ? '' : 'none';
+        });
+      });
+    }
+  }
+
+  else if (screenId === 'us48') {
+    const privadoChk = frame.querySelector('#priv-privado');
+    const aviso = frame.querySelector('#priv-aviso');
+    if (privadoChk && aviso) {
+      privadoChk.addEventListener('change', () => {
+        aviso.style.display = privadoChk.checked ? 'block' : 'none';
+      });
+    }
+    const btnSave = frame.querySelector('#btn-save-privacy');
+    if (btnSave) {
+      btnSave.addEventListener('click', () => {
+        btnSave.textContent = '✓ Guardado';
+        btnSave.style.background = '#3aa56b';
+        setTimeout(() => { btnSave.textContent = 'Guardar cambios'; btnSave.style.background = ''; }, 1500);
+      });
+    }
+  }
+
+  else if (screenId === 'us50') {
+    const fromRecovery = localStorage.getItem('passFromRecovery') === '1';
+    const currentBlock = frame.querySelector('#current-pass-block');
+    // Hide current password field if coming from recovery flow
+    if (fromRecovery && currentBlock) currentBlock.style.display = 'none';
+
+    // Show/hide password toggles
+    frame.querySelectorAll('.pass-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const inp = frame.querySelector('#' + btn.dataset.target);
+        if (inp) { inp.type = inp.type === 'password' ? 'text' : 'password'; }
+      });
+    });
+
+    // Live requirements check
+    const passNew = frame.querySelector('#pass-new');
+    const reqLen   = frame.querySelector('#req-len');
+    const reqUpper = frame.querySelector('#req-upper');
+    const reqNum   = frame.querySelector('#req-num');
+    const reqSym   = frame.querySelector('#req-sym');
+    const setReq = (el, ok) => { if (el) { el.classList.toggle('ok', ok); el.textContent = ok ? '✓' : ''; } };
+
+    if (passNew) {
+      passNew.addEventListener('input', () => {
+        const v = passNew.value;
+        setReq(reqLen,   v.length >= 8);
+        setReq(reqUpper, /[A-Z]/.test(v));
+        setReq(reqNum,   /[0-9]/.test(v));
+        setReq(reqSym,   /[^A-Za-z0-9]/.test(v));
+      });
+    }
+
+    const btnUpdate = frame.querySelector('#btn-update-pass');
+    if (btnUpdate) {
+      btnUpdate.addEventListener('click', () => {
+        const newPass = passNew ? passNew.value : '';
+        const confirmPass = frame.querySelector('#pass-confirm');
+        const errMatch = frame.querySelector('#err-match');
+
+        if (newPass.length < 8 || !/[A-Z]/.test(newPass) || !/[0-9]/.test(newPass)) return;
+        if (confirmPass && confirmPass.value !== newPass) {
+          if (errMatch) errMatch.style.display = 'block';
+          return;
+        }
+        if (errMatch) errMatch.style.display = 'none';
+
+        // Update password in localStorage (demo)
+        const u = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        if (u) { u.password = newPass; localStorage.setItem('currentUser', JSON.stringify(u)); }
+        localStorage.removeItem('passFromRecovery');
+        localStorage.removeItem('passFromSettings');
+
+        btnUpdate.textContent = '✓ Contraseña actualizada';
+        btnUpdate.style.background = '#3aa56b';
+        setTimeout(() => navigateTo('us02'), 1800);
+      });
+    }
+  }
+
   else if (screenId === 'us01') {
     const radioEst = frame.querySelector('input[value="estudiante"]');
     const radioTut = frame.querySelector('input[value="tutor"]');
@@ -925,27 +1074,19 @@ function setupCustomFlows(frame, screenId) {
       window.location.href = 'index.html';
     });
     const btnDeleteAccount = frame.querySelector('#btn-delete-account');
-    if (btnDeleteAccount) {
-      btnDeleteAccount.addEventListener('click', () => navigateTo('us49'));
-    }
-    const darkBtn = frame.querySelector('#btn-dark');
-    const privBtn = frame.querySelector('#btn-privacy');
-    if (darkBtn) {
-      darkBtn.addEventListener('click', () => {
-        const on = darkBtn.textContent.trim() === 'Activado';
-        darkBtn.textContent = on ? 'Desactivado' : 'Activado';
-        darkBtn.style.background = on ? 'transparent' : 'var(--primary)';
-        darkBtn.style.color = on ? 'var(--primary)' : '#fff';
-      });
-    }
-    if (privBtn) {
-      privBtn.addEventListener('click', () => {
-        const on = privBtn.textContent.trim() === 'Activo';
-        privBtn.textContent = on ? 'Inactivo' : 'Activo';
-        privBtn.style.background = on ? 'transparent' : 'var(--primary)';
-        privBtn.style.color = on ? 'var(--primary)' : '#fff';
-      });
-    }
+    if (btnDeleteAccount) btnDeleteAccount.addEventListener('click', () => navigateTo('us49'));
+
+    const navPrivacy = frame.querySelector('#cfg-nav-privacy');
+    if (navPrivacy) navPrivacy.addEventListener('click', () => navigateTo('us48'));
+
+    const navPassword = frame.querySelector('#cfg-nav-password');
+    if (navPassword) navPassword.addEventListener('click', () => {
+      localStorage.setItem('passFromSettings', '1');
+      navigateTo('us50');
+    });
+
+    const navFaq = frame.querySelector('#cfg-nav-faq');
+    if (navFaq) navFaq.addEventListener('click', () => navigateTo('us47'));
   }
 
   else if (screenId === 'us09') {

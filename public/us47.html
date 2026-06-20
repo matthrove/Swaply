@@ -4,8 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#8B1A2B">
-  <title>US47 · Recuperar contraseña — Swaply</title>
+  <title>US47 · Ayuda y FAQ — Swaply</title>
   <link rel="stylesheet" href="assets/styles/app.css">
+  <style>
+    .faq-item { border-bottom: 1px solid var(--soft); }
+    .faq-q {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 13px 0; cursor: pointer; font-size: 13px; font-weight: 500;
+    }
+    .faq-q .faq-icon { font-size: 18px; color: var(--primary); transition: transform .2s; flex-shrink:0; }
+    .faq-q.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      display: none; font-size: 12px; color: var(--muted);
+      line-height: 1.6; padding: 0 0 12px;
+      background: var(--brand-bg); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;
+    }
+    .faq-a.open { display: block; }
+    .cat-chip {
+      padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
+      border: 1.5px solid var(--primary); background: transparent; color: var(--primary);
+      cursor: pointer; white-space: nowrap;
+    }
+    .cat-chip.active { background: var(--primary); color: #fff; }
+  </style>
 </head>
 <body class="app-body" data-screen-id="us47">
   <div class="app-shell">
@@ -13,20 +34,79 @@
     <div class="app-main">
       <header class="app-topbar" id="appTopbar">
         <button type="button" id="btnSettings" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0 8px;color:var(--primary);">⚙️</button>
-        <span class="app-topbar-title" id="screenTitle">US47 · Recuperar contraseña</span>
+        <span class="app-topbar-title" id="screenTitle">US47 · Ayuda y FAQ</span>
         <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
       </header>
       <div class="app-viewport">
         <div class="app-frame" id="appFrame" role="main">
-          
-    <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
-    <div class="scr">
-      <div class="head"><span class="back">‹</span><h2>Recuperar contraseña</h2></div>
-      <div class="small" style="margin-bottom:12px;">Te enviaremos un enlace a tu correo institucional.</div>
-      <div class="form-field"><label>Correo institucional</label><div class="input"></div></div>
-      <div class="btn mt">Enviar enlace</div>
-    </div>
-  
+          <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
+          <div class="scr" style="display:flex; flex-direction:column; height:100%;">
+            <div class="head"><span class="back">‹</span><h2>Ayuda</h2></div>
+
+            <!-- Buscador -->
+            <div style="position:relative; margin-bottom:14px;">
+              <span style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--muted); font-size:14px;">🔍</span>
+              <input type="search" id="faq-search" placeholder="¿Cómo gano créditos?" style="width:100%; box-sizing:border-box; padding:10px 12px 10px 36px; border:1.5px solid var(--soft); border-radius:10px; font-size:13px; outline:none; background:#fff;">
+            </div>
+
+            <!-- Categorías -->
+            <div style="display:flex; gap:8px; overflow-x:auto; padding-bottom:10px; margin-bottom:4px;" id="faq-cats">
+              <button class="cat-chip active" data-cat="todos">Cuenta</button>
+              <button class="cat-chip" data-cat="creditos">Créditos</button>
+              <button class="cat-chip" data-cat="sesiones">Sesiones</button>
+              <button class="cat-chip" data-cat="seguridad">Seguridad</button>
+            </div>
+
+            <!-- FAQ list -->
+            <div style="flex:1; overflow-y:auto;" id="faq-list">
+
+              <div class="faq-item" data-cat="todos">
+                <div class="faq-q"><span>¿Cómo verifico mi correo institucional?</span><span class="faq-icon">+</span></div>
+                <div class="faq-a">Al registrarte recibirás un código de verificación en tu correo institucional. Ingrésalo en la pantalla de verificación para activar tu cuenta.</div>
+              </div>
+
+              <div class="faq-item" data-cat="creditos">
+                <div class="faq-q"><span>¿Cómo gano créditos?</span><span class="faq-icon">+</span></div>
+                <div class="faq-a">Ganas 3 créditos por cada sesión completada, +1 por reseñas de 5★ y +5 al lograr la insignia "Tutor destacado".</div>
+              </div>
+
+              <div class="faq-item" data-cat="todos">
+                <div class="faq-q"><span>¿Puedo enseñar y aprender a la vez?</span><span class="faq-icon">+</span></div>
+                <div class="faq-a">Sí. Puedes tener rol dual: ser aprendiz en una materia y tutor en otra. Activa el rol desde tu perfil en Configuración → Editar perfil.</div>
+              </div>
+
+              <div class="faq-item" data-cat="sesiones">
+                <div class="faq-q"><span>¿Qué pasa si cancelo tarde?</span><span class="faq-icon">+</span></div>
+                <div class="faq-a">Si cancelas con menos de 1 hora de anticipación, afecta tu reputación. Entre 1h y 2h recibirás una advertencia. Con más de 2h no hay penalidad.</div>
+              </div>
+
+              <div class="faq-item" data-cat="seguridad">
+                <div class="faq-q"><span>¿Cómo reporto a un usuario?</span><span class="faq-icon">+</span></div>
+                <div class="faq-a">Puedes reportar desde el perfil del usuario o desde una reseña. Nuestro equipo revisará el reporte en un plazo de 48 horas.</div>
+              </div>
+
+              <div class="faq-item" data-cat="sesiones">
+                <div class="faq-q"><span>¿Cómo programo una sesión?</span><span class="faq-icon">+</span></div>
+                <div class="faq-a">Busca un tutor, envía una solicitud, y una vez aceptada coordina por chat para elegir fecha y hora. Luego confirma la sesión desde "Mis sesiones".</div>
+              </div>
+
+              <div class="faq-item" data-cat="seguridad">
+                <div class="faq-q"><span>¿Mis datos están seguros?</span><span class="faq-icon">+</span></div>
+                <div class="faq-a">Sí. Solo mostramos tu información según tus preferencias de privacidad. Puedes configurar qué datos son visibles desde Configuración → Privacidad.</div>
+              </div>
+
+              <div class="faq-item" data-cat="creditos">
+                <div class="faq-q"><span>¿Cuánto cuesta solicitar una tutoría?</span><span class="faq-icon">+</span></div>
+                <div class="faq-a">Cada solicitud de tutoría cuesta 3 créditos. Si el tutor rechaza la solicitud, los créditos te son devueltos automáticamente.</div>
+              </div>
+
+            </div>
+
+            <!-- Soporte -->
+            <div style="text-align:center; padding:14px 0 8px; font-size:12px; color:var(--muted); border-top:1px solid var(--soft);">
+              ¿No encuentras tu respuesta? <a href="#" style="color:var(--primary); font-weight:700; text-decoration:underline;" id="btn-contactar-soporte">Contactar soporte</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

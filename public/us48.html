@@ -4,8 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#8B1A2B">
-  <title>US48 · Onboarding — Swaply</title>
+  <title>US48 · Privacidad — Swaply</title>
   <link rel="stylesheet" href="assets/styles/app.css">
+  <style>
+    .toggle-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 0; border-bottom: 1px solid var(--soft);
+    }
+    .toggle-row:last-child { border-bottom: none; }
+    .toggle-info h3 { margin: 0 0 2px; font-size: 13px; font-weight: 600; }
+    .toggle-info p  { margin: 0; font-size: 11px; color: var(--muted); }
+
+    /* Toggle switch */
+    .sw { position: relative; width: 46px; height: 26px; flex-shrink: 0; }
+    .sw input { opacity: 0; width: 0; height: 0; }
+    .sw-track {
+      position: absolute; inset: 0;
+      background: #ccc; border-radius: 13px;
+      transition: background .2s; cursor: pointer;
+    }
+    .sw-track::before {
+      content: ''; position: absolute;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: #fff; top: 3px; left: 3px;
+      transition: transform .2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,.3);
+    }
+    .sw input:checked + .sw-track { background: var(--primary); }
+    .sw input:checked + .sw-track::before { transform: translateX(20px); }
+  </style>
 </head>
 <body class="app-body" data-screen-id="us48">
   <div class="app-shell">
@@ -13,20 +40,80 @@
     <div class="app-main">
       <header class="app-topbar" id="appTopbar">
         <button type="button" id="btnSettings" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0 8px;color:var(--primary);">⚙️</button>
-        <span class="app-topbar-title" id="screenTitle">US48 · Onboarding</span>
+        <span class="app-topbar-title" id="screenTitle">US48 · Privacidad</span>
         <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
       </header>
       <div class="app-viewport">
         <div class="app-frame" id="appFrame" role="main">
-          
-    <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
-    <div class="scr" style="text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%;">
-      <div style="font-size:48px;">🎓</div>
-      <h2 style="margin-top:12px; color:var(--primary);">¡Bienvenido a Swaply!</h2>
-      <div class="small" style="margin:8px 0 24px;">Conecta, aprende y enseña con estudiantes de todo el Perú.</div>
-      <div class="btn" style="width:100%;">Empezar</div>
-    </div>
-  
+          <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
+          <div class="scr" style="display:flex; flex-direction:column; height:100%;">
+            <div class="head"><span class="back">‹</span><h2>Privacidad</h2></div>
+
+            <!-- Visibilidad del perfil -->
+            <div style="font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px;">Visibilidad del perfil</div>
+
+            <div class="toggle-row">
+              <div class="toggle-info">
+                <h3>Mostrar universidad</h3>
+                <p>Tu universidad aparece en tu perfil público</p>
+              </div>
+              <label class="sw"><input type="checkbox" id="priv-univ" checked><span class="sw-track"></span></label>
+            </div>
+
+            <div class="toggle-row">
+              <div class="toggle-info">
+                <h3>Mostrar nombre completo</h3>
+                <p>Los demás pueden ver tu nombre real</p>
+              </div>
+              <label class="sw"><input type="checkbox" id="priv-nombre" checked><span class="sw-track"></span></label>
+            </div>
+
+            <div class="toggle-row">
+              <div class="toggle-info">
+                <h3>Mostrar carrera</h3>
+                <p>Tu carrera es visible en búsquedas y perfil</p>
+              </div>
+              <label class="sw"><input type="checkbox" id="priv-carrera"><span class="sw-track"></span></label>
+            </div>
+
+            <div class="toggle-row">
+              <div class="toggle-info">
+                <h3>Mostrar calificación</h3>
+                <p>Tu puntuación promedio es pública</p>
+              </div>
+              <label class="sw"><input type="checkbox" id="priv-rating" checked><span class="sw-track"></span></label>
+            </div>
+
+            <!-- Contacto -->
+            <div style="font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin-top:16px; margin-bottom:8px;">Contacto</div>
+
+            <div class="toggle-row">
+              <div class="toggle-info">
+                <h3>Permitir solicitudes de desconocidos</h3>
+                <p>Cualquier usuario puede enviarte solicitudes</p>
+              </div>
+              <label class="sw"><input type="checkbox" id="priv-solicitudes" checked><span class="sw-track"></span></label>
+            </div>
+
+            <div class="toggle-row">
+              <div class="toggle-info">
+                <h3>Perfil privado</h3>
+                <p>No apareces en búsquedas. Solo tú puedes iniciar contacto</p>
+              </div>
+              <label class="sw"><input type="checkbox" id="priv-privado"><span class="sw-track"></span></label>
+            </div>
+
+            <!-- Aviso perfil privado -->
+            <div id="priv-aviso" style="display:none; background:#fff3cd; border:1px solid #f59e0b; border-radius:10px; padding:10px 12px; margin-top:12px; font-size:12px; color:#856404;">
+              🙈 Con perfil privado no apareces en búsquedas. Solo tú puedes iniciar contacto con otros usuarios.
+            </div>
+
+            <div style="flex:1;"></div>
+
+            <div style="padding-bottom:8px;">
+              <button type="button" class="btn" id="btn-save-privacy" style="width:100%;">Guardar cambios</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
