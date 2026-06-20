@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#8B1A2B">
-  <title>US49 · Privacidad — Swaply</title>
+  <title>US49 · Borrar cuenta — Swaply</title>
   <link rel="stylesheet" href="assets/styles/app.css">
 </head>
 <body class="app-body" data-screen-id="us49">
@@ -13,21 +13,21 @@
     <div class="app-main">
       <header class="app-topbar" id="appTopbar">
         <button type="button" id="btnSettings" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0 8px;color:var(--primary);">⚙️</button>
-        <span class="app-topbar-title" id="screenTitle">US49 · Privacidad</span>
+        <span class="app-topbar-title" id="screenTitle">US49 · Borrar cuenta</span>
         <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
       </header>
       <div class="app-viewport">
         <div class="app-frame" id="appFrame" role="main">
-          
-    <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
-    <div class="scr">
-      <div class="head"><span class="back">‹</span><h2>Privacidad</h2></div>
-      <div class="col" style="gap:12px;">
-        <div class="row-line" style="display:flex; justify-content:space-between; align-items:center;"><div class="l">Perfil público</div><div class="r"><input type="checkbox" checked></div></div>
-        <div class="row-line" style="display:flex; justify-content:space-between; align-items:center;"><div class="l">Mostrar calificaciones</div><div class="r"><input type="checkbox" checked></div></div>
-      </div>
-    </div>
-  
+          <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
+          <div class="scr" style="display:flex; flex-direction:column; height:100%; align-items:center; justify-content:center; text-align:center; padding:24px 20px;">
+            <div style="font-size:48px; margin-bottom:12px;">⚠️</div>
+            <div style="font-weight:700; font-size:16px; color:var(--ink); margin-bottom:8px;">¿Eliminar tu cuenta?</div>
+            <div style="font-size:13px; color:var(--muted); line-height:1.6; margin-bottom:28px;">Esta acción es permanente. Se borrarán todos tus datos, historial de sesiones y créditos. No podrás recuperar tu cuenta.</div>
+            <div style="display:flex; flex-direction:column; gap:10px; width:100%; max-width:280px;">
+              <button type="button" class="btn" id="btn-delete-si" style="width:100%; background:#d64545;">Sí, eliminar mi cuenta</button>
+              <button type="button" class="btn" id="btn-delete-no" style="width:100%; background:transparent; border:1.5px solid var(--primary); color:var(--primary);">No, mantener cuenta</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

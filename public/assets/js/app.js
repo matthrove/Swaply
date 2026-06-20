@@ -16,6 +16,9 @@ if (!screensById['sesiones-tutor']) {
 if (!screensById['buscar-solicitudes']) {
   screensById['buscar-solicitudes'] = { id: 'buscar-solicitudes', us: 'C', title: 'Solicitudes', frameAttrs: '', html: '' };
 }
+if (!screensById['us49']) {
+  screensById['us49'] = { id: 'us49', us: 'US49', title: 'Borrar cuenta', frameAttrs: '', html: '' };
+}
 
 const navigation = meta.navigation;
 
@@ -512,7 +515,7 @@ function bindInteractions(container, screenId) {
     });
   });
 
-  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy', 'btn-save-photo', 'btn-solicitar-sesion']);
+  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy', 'btn-save-photo', 'btn-solicitar-sesion', 'btn-logout-us07', 'btn-delete-si', 'btn-delete-no', 'btn-delete-account']);
   container.querySelectorAll('.btn, .btn.ghost, .btn.sm').forEach(btn => {
     if (btn.id && SKIP_IDS.has(btn.id)) return;
     const text = btn.textContent.trim();
@@ -839,15 +842,72 @@ function setupCustomFlows(frame, screenId) {
         setTimeout(() => { if (toast) toast.style.display = 'none'; }, 2500);
       });
     }
+
+    // Logout button in us07
+    const logoutBtn07 = frame.querySelector('#btn-logout-us07');
+    if (logoutBtn07) {
+      logoutBtn07.addEventListener('click', () => {
+        const overlay = frame.querySelector('#logout-overlay');
+        if (overlay) overlay.style.display = 'flex';
+      });
+    }
+    const overlayNo07 = frame.querySelector('#logout-overlay-no');
+    if (overlayNo07) {
+      overlayNo07.addEventListener('click', () => {
+        const overlay = frame.querySelector('#logout-overlay');
+        if (overlay) overlay.style.display = 'none';
+      });
+    }
+    const overlaySi07 = frame.querySelector('#logout-overlay-si');
+    if (overlaySi07) {
+      overlaySi07.addEventListener('click', () => {
+        localStorage.removeItem('currentUser');
+        window.location.href = 'index.html';
+      });
+    }
+  }
+
+  else if (screenId === 'us49') {
+    const btnSi = frame.querySelector('#btn-delete-si');
+    const btnNo = frame.querySelector('#btn-delete-no');
+    if (btnSi) {
+      btnSi.addEventListener('click', () => {
+        const u = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        if (u) {
+          let users = JSON.parse(localStorage.getItem('users') || '[]');
+          users = users.filter(x => x.email !== u.email);
+          localStorage.setItem('users', JSON.stringify(users));
+        }
+        localStorage.removeItem('currentUser');
+        window.location.href = 'index.html';
+      });
+    }
+    if (btnNo) {
+      btnNo.addEventListener('click', () => history.back());
+    }
   }
 
   else if (screenId === 'configuracion') {
     const btnLogout = frame.querySelector('#btn-logout-submit');
     if (btnLogout) {
       btnLogout.onclick = () => {
-        localStorage.removeItem('currentUser');
-        navigateTo('us45');
+        const overlay = frame.querySelector('#logout-overlay-cfg');
+        if (overlay) overlay.style.display = 'flex';
       };
+    }
+    const cfgNo = frame.querySelector('#logout-cfg-no');
+    if (cfgNo) cfgNo.addEventListener('click', () => {
+      const overlay = frame.querySelector('#logout-overlay-cfg');
+      if (overlay) overlay.style.display = 'none';
+    });
+    const cfgSi = frame.querySelector('#logout-cfg-si');
+    if (cfgSi) cfgSi.addEventListener('click', () => {
+      localStorage.removeItem('currentUser');
+      window.location.href = 'index.html';
+    });
+    const btnDeleteAccount = frame.querySelector('#btn-delete-account');
+    if (btnDeleteAccount) {
+      btnDeleteAccount.addEventListener('click', () => navigateTo('us49'));
     }
     const darkBtn = frame.querySelector('#btn-dark');
     const privBtn = frame.querySelector('#btn-privacy');
@@ -942,15 +1002,53 @@ function setupCustomFlows(frame, screenId) {
   
   else if (screenId === 'us05') {
     if (!user) { navigateTo('us45'); return; }
-    const btnSave = frame.querySelector('.btn');
+
+    const careersMap = {
+      'Educación': ['Educación Primaria', 'Educación Secundaria', 'Educación Inicial', 'Educación Especial'],
+      'Humanidades y Arte': ['Literatura', 'Historia', 'Filosofía', 'Artes Visuales', 'Música', 'Lingüística'],
+      'Ciencias Sociales, Comerciales y Derecho': ['Derecho', 'Administración', 'Economía', 'Contabilidad', 'Marketing', 'Psicología', 'Sociología'],
+      'Ingeniería, Industria y Construcción': ['Ingeniería Civil', 'Ingeniería de Software', 'Ingeniería Industrial', 'Ingeniería Mecánica', 'Ingeniería Eléctrica', 'Ingeniería de Sistemas', 'Arquitectura'],
+      'Ciencias de la Salud': ['Medicina', 'Enfermería', 'Odontología', 'Farmacia', 'Nutrición', 'Psicología Clínica'],
+    };
+
+    const fieldSel = frame.querySelector('#setup-field');
+    const careerSel = frame.querySelector('#setup-career');
+
+    const updateCareers = () => {
+      if (!careerSel || !fieldSel) return;
+      const careers = careersMap[fieldSel.value] || [];
+      careerSel.innerHTML = careers.map(c => `<option value="${c}">${c}</option>`).join('');
+    };
+
+    if (fieldSel) {
+      fieldSel.addEventListener('change', updateCareers);
+      updateCareers();
+    }
+
+    // Populate learn chips
+    const learnChips = frame.querySelector('#setup-learn-chips');
+    if (learnChips && !learnChips.dataset.enhanced) {
+      learnChips.dataset.enhanced = '1';
+      learnChips.innerHTML = '';
+      SUBJECTS.forEach(s => {
+        const chip = document.createElement('span');
+        chip.className = 'chip';
+        chip.textContent = s;
+        chip.addEventListener('click', () => chip.classList.toggle('on'));
+        learnChips.appendChild(chip);
+      });
+    }
+
+    const btnSave = frame.querySelector('#btn-setup-student-submit') || frame.querySelector('.btn');
     if (btnSave) {
       btnSave.onclick = (e) => {
         e.preventDefault();
-        const selects = frame.querySelectorAll('select');
-        const univ = selects[0]?.value || 'UPC';
-        const field = selects[1]?.value || 'Ingeniería, Industria y Construcción';
-        const career = selects[2]?.value || 'Ingeniería Civil';
-        user.studentProfile = { univ, field, career };
+        const univ = frame.querySelector('#setup-univ')?.value || 'UPC';
+        const field = fieldSel?.value || 'Ingeniería, Industria y Construcción';
+        const career = careerSel?.value || 'Ingeniería Civil';
+        const cycle = frame.querySelector('#setup-cycle')?.value || '1° ciclo';
+        const subjects = [...(learnChips?.querySelectorAll('.chip.on') || [])].map(c => c.textContent);
+        user.studentProfile = { univ, field, career, cycle, subjects };
         user.role = 'estudiante';
         localStorage.setItem('currentUser', JSON.stringify(user));
         let users = JSON.parse(localStorage.getItem('users') || '[]');
