@@ -382,8 +382,16 @@ function buildHuSidebar() {
   const mainLinks = document.createElement('nav');
   mainLinks.className = 'sidebar-main-nav';
   mainLinks.setAttribute('aria-label', 'Secciones principales');
-  Object.entries(MAIN_NAV).forEach(([label, id]) => {
-    const icons = { Inicio: '🏠', Buscar: '🔍', Chats: '💬', Perfil: '👤' };
+  const sidebarUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+  const sidebarIsTutor = sidebarUser && sidebarUser.role === 'tutor';
+  const icons = { Inicio: '🏠', Buscar: '🔍', Solicitudes: '📩', Chats: '💬', Perfil: '👤' };
+  const sidebarNav = [
+    ['Inicio', 'us15'],
+    sidebarIsTutor ? ['Solicitudes', 'us19'] : ['Buscar', 'us11'],
+    ['Chats', 'us24'],
+    ['Perfil', 'us07'],
+  ];
+  sidebarNav.forEach(([label, id]) => {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'sidebar-main-link';
