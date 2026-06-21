@@ -1353,25 +1353,24 @@ function setupCustomFlows(frame, screenId) {
     const tabComp = frame.querySelector('#tab-sesiones-completadas');
     const tabPend = frame.querySelector('#tab-sesiones-pendientes');
     
+    const allTabs = [tabProx, tabComp, tabPend];
+    const setTab = (active) => {
+      allTabs.forEach(t => {
+        if (!t) return;
+        t.classList.remove('on');
+        t.style.cssText = '';
+      });
+      if (active) active.classList.add('on');
+    };
+
     const renderList = () => {
       if (!sContainer) return;
       sContainer.innerHTML = '';
 
-      const allTabs = [tabProx, tabComp, tabPend];
-      const setTab = (active) => {
-        allTabs.forEach(t => {
-          if (!t) return;
-          t.classList.remove('on');
-          t.style.background = '';
-          t.style.color = '';
-        });
-        if (active) {
-          active.classList.add('on');
-        }
-      };
+      // update tab highlight
+      setTab(activeTab === 'proximas' ? tabProx : activeTab === 'completadas' ? tabComp : tabPend);
 
       if (activeTab === 'pendientes') {
-        setTab(tabPend);
         const visible = pendingSolicitudes.filter(p => p.status === 'pending');
         if (visible.length === 0) {
           sContainer.innerHTML = '<div class="small center" style="margin-top:30px;">No tienes solicitudes pendientes.</div>';
@@ -1399,8 +1398,6 @@ function setupCustomFlows(frame, screenId) {
       }
 
       if (activeTab === 'completadas') {
-        setTab(tabComp);
-        
         if (completed.length === 0) {
           sContainer.innerHTML = '<div class="small center" style="margin-top:30px;">No hay sesiones completadas.</div>';
           return;
@@ -1444,8 +1441,6 @@ function setupCustomFlows(frame, screenId) {
           sContainer.appendChild(card);
         });
       } else {
-        setTab(tabProx);
-        
         if (upcoming.length === 0) {
           sContainer.innerHTML = '<div class="small center" style="margin-top:30px;">No hay sesiones programadas.</div>';
           return;
