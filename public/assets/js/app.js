@@ -30,8 +30,8 @@ const MAIN_NAV = {
   Perfil: 'us07',
 };
 
-const EXCLUDE_BOTTOM_NAV = new Set(['us45', 'us01', 'us01b', 'us02', 'us03', 'us41', 'us42', 'us43', 'us44']);
-const EXCLUDE_BACK = new Set(['us45', 'us15', 'us41']);
+const EXCLUDE_BOTTOM_NAV = new Set(['us45', 'us01', 'us01b', 'us02', 'us03', 'us41', 'us42', 'us43', 'us44', 'admin-login']);
+const EXCLUDE_BACK = new Set(['us45', 'us15', 'us41', 'admin-login']);
 
 const FALLBACK_BACK = {
   us02: 'us45',
@@ -629,7 +629,23 @@ function setupCustomFlows(frame, screenId) {
 
   const user = JSON.parse(localStorage.getItem('currentUser')) || null;
 
-  if (screenId === 'us45') {
+  if (screenId === 'admin-login') {
+    const btn = frame.querySelector('#btn-admin-login');
+    const passInput = frame.querySelector('#admin-pass');
+    const errorDiv = frame.querySelector('#admin-error');
+    if (btn) btn.addEventListener('click', () => {
+      if (passInput && passInput.value === 'admin') {
+        const adminUser = { name: 'Admin Swaply', email: 'admin@swaply.pe', password: 'admin', role: 'admin' };
+        localStorage.setItem('currentUser', JSON.stringify(adminUser));
+        window.location.href = 'us41.html';
+      } else {
+        if (errorDiv) errorDiv.style.display = 'flex';
+      }
+    });
+    if (passInput) passInput.addEventListener('keydown', e => { if (e.key === 'Enter') btn?.click(); });
+  }
+
+  else if (screenId === 'us45') {
     history.length = 0; // Clear history on welcome
     const welcomeTitle = frame.querySelector('#welcome-carousel-title');
     const welcomeDesc = frame.querySelector('#welcome-carousel-desc');
