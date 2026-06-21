@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#8B1A2B">
-  <title>US41 · Editar perfil — Swaply</title>
+  <title>US41 · Admin · Panel — Swaply</title>
   <link rel="stylesheet" href="assets/styles/app.css">
 </head>
 <body class="app-body" data-screen-id="us41">
@@ -13,22 +13,80 @@
     <div class="app-main">
       <header class="app-topbar" id="appTopbar">
         <button type="button" id="btnSettings" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0 8px;color:var(--primary);">⚙️</button>
-        <span class="app-topbar-title" id="screenTitle">US41 · Editar perfil</span>
+        <span class="app-topbar-title" id="screenTitle">Admin · Panel</span>
         <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
       </header>
       <div class="app-viewport">
         <div class="app-frame" id="appFrame" role="main">
-          
-    <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
-    <div class="scr">
-      <div class="head"><span class="back">‹</span><h2>Editar perfil</h2></div>
-      <div class="col" style="gap:8px;">
-        <div class="form-field"><label>Nombre</label><div class="input">Juan Pérez</div></div>
-        <div class="form-field"><label>Bio</label><div class="input">Estudiante de Ing. de Software</div></div>
-      </div>
-      <div class="btn mt">Guardar cambios</div>
+          <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
+          <div class="scr" style="flex-direction:column;height:100%;padding:12px 16px;box-sizing:border-box;display:flex;overflow-y:auto;">
+  <div style="font-weight:700;font-size:16px;color:var(--primary);margin-bottom:4px;">Admin · Resumen</div>
+  <div class="small" style="margin-bottom:16px;color:var(--muted);">Datos actualizados hace 2h</div>
+
+  <!-- 2x2 stat grid -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+    <div style="background:var(--primary);color:#fff;padding:14px;border-radius:12px;text-align:center;">
+      <div style="font-size:24px;font-weight:800;">2 184</div>
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:.06em;opacity:.85;margin-top:4px;">Usuarios</div>
     </div>
-  
+    <div style="background:var(--primary);color:#fff;padding:14px;border-radius:12px;text-align:center;">
+      <div style="font-size:24px;font-weight:800;">412</div>
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:.06em;opacity:.85;margin-top:4px;">Sesiones mes</div>
+    </div>
+    <div style="background:var(--brand-bg,#fdf4f4);color:var(--primary);padding:14px;border-radius:12px;text-align:center;border:1px solid var(--soft);">
+      <div style="font-size:24px;font-weight:800;">8</div>
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:.06em;opacity:.85;margin-top:4px;">Universidades</div>
+    </div>
+    <div style="background:var(--brand-bg,#fdf4f4);color:var(--primary);padding:14px;border-radius:12px;text-align:center;border:1px solid var(--soft);">
+      <div style="font-size:24px;font-weight:800;">4.7</div>
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:.06em;opacity:.85;margin-top:4px;">Rating prom.</div>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:16px;">ACTIVIDAD SEMANAL</div>
+  <!-- Bar chart simulation -->
+  <div style="display:flex;align-items:flex-end;gap:6px;height:70px;margin-top:8px;padding:0 4px;">
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+      <div style="width:100%;background:var(--primary);border-radius:4px 4px 0 0;height:40px;"></div>
+      <span style="font-size:10px;color:var(--muted);">L</span>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+      <div style="width:100%;background:var(--primary);border-radius:4px 4px 0 0;height:55px;"></div>
+      <span style="font-size:10px;color:var(--muted);">M</span>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+      <div style="width:100%;background:var(--primary);border-radius:4px 4px 0 0;height:35px;"></div>
+      <span style="font-size:10px;color:var(--muted);">M</span>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+      <div style="width:100%;background:var(--primary);border-radius:4px 4px 0 0;height:62px;"></div>
+      <span style="font-size:10px;color:var(--muted);">J</span>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+      <div style="width:100%;background:var(--primary);border-radius:4px 4px 0 0;height:50px;"></div>
+      <span style="font-size:10px;color:var(--muted);">V</span>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+      <div style="width:100%;background:var(--primary);border-radius:4px 4px 0 0;height:28px;"></div>
+      <span style="font-size:10px;color:var(--muted);">S</span>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+      <div style="width:100%;background:var(--primary);border-radius:4px 4px 0 0;height:18px;"></div>
+      <span style="font-size:10px;color:var(--muted);">D</span>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:12px;">ACCESO RÁPIDO</div>
+  <div id="admin-nav-verif" style="display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--soft);cursor:pointer;">
+    <span style="font-size:13px;">✅ Verificar identidades</span><span style="color:var(--muted);">›</span>
+  </div>
+  <div id="admin-nav-reports" style="display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--soft);cursor:pointer;">
+    <span style="font-size:13px;">⚑ Gestión de reportes</span><span style="color:var(--muted);">›</span>
+  </div>
+  <div id="admin-nav-univs" style="display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--soft);cursor:pointer;">
+    <span style="font-size:13px;">🏫 Universidades</span><span style="color:var(--muted);">›</span>
+  </div>
+</div>
         </div>
       </div>
     </div>
