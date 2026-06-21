@@ -4,28 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#8B1A2B">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>US20 · Notificaciones — Swaply</title>
+  <title>US20 · Cancelar solicitud — Swaply</title>
   <link rel="stylesheet" href="assets/styles/app.css">
 </head>
 <body class="app-body" data-screen-id="us20">
   <div class="app-shell">
-    <aside id="appSidebar" class="app-sidebar" aria-label="Historias de usuario"></aside>
+    <aside id="appSidebar" class="app-sidebar"></aside>
     <div class="app-main">
       <header class="app-topbar" id="appTopbar">
-        <button type="button" class="btn-settings" id="btnSettings" aria-label="Ajustes" style="background:none; border:none; font-size:20px; cursor:pointer; padding:0 8px; color:var(--primary);">⚙️</button>
-        <span class="app-topbar-title" id="screenTitle">US20 · Notificaciones</span>
-        <button type="button" class="hu-toggle" id="huToggle" aria-label="Ver historias de usuario">50 HU</button>
+        <button type="button" id="btnSettings" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0 8px;color:var(--primary);">⚙️</button>
+        <span class="app-topbar-title" id="screenTitle">US20 · Cancelar solicitud</span>
+        <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
       </header>
       <div class="app-viewport">
-        <div class="app-frame" id="appFrame" role="main" aria-live="polite">
+        <div class="app-frame" id="appFrame" role="main">
           <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
-        <div class="scr">
-          <div class="head"><span class="back">‹</span><h2>Notificaciones</h2></div>
-          <div class="col">
-            <div class="notif unread"><div class="ic">📅</div><div><div style="font-size:12px;font-weight:600">Andrea aceptó tu solicitud</div><div class="small">Cálculo · Hoy 10:32</div></div></div>
-            <div class="notif unread"><div class="ic">⏰</div><div><div style="font-size:12px;font-weight:600">Sesión en 1 hora</div><div class="small">Física General · 14:00</div></div></div>
-            <div class="notif"><div class="ic">★</div><div><div style="font-size:12px;font-weight:600">Carlos te calificó</div><div class="small">★★★★★ · Ayer</div></div></div>
+          <div class="scr" style="display:flex; flex-direction:column; height:100%;">
+            <div class="head"><span class="back">‹</span><h2>Cancelar solicitud</h2></div>
+
+            <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; padding:24px 0;">
+
+              <div style="font-size:48px;">📋</div>
+
+              <div style="text-align:center;">
+                <div style="font-weight:700; font-size:16px; color:var(--ink); margin-bottom:8px;">¿Ya no deseas solicitar esta clase?</div>
+                <div style="font-size:13px; color:var(--muted); line-height:1.6;">El tutor no será notificado y podrás enviar la solicitud en otro momento.</div>
+              </div>
+
+              <!-- Tutor / subject info -->
+              <div id="us20-info" style="background:var(--brand-bg); border-radius:12px; padding:12px 16px; width:100%; box-sizing:border-box; text-align:center; display:none;">
+                <div style="font-weight:700; font-size:13px; color:var(--primary);" id="us20-tutor"></div>
+                <div style="font-size:11px; color:var(--muted); margin-top:2px;" id="us20-subject"></div>
+              </div>
+
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:8px; padding-bottom:12px;">
+              <button type="button" id="btn-us20-si" style="width:100%; padding:14px; background:#d64545; color:#fff; border:none; border-radius:10px; font-weight:700; font-size:14px; cursor:pointer;">Sí, cancelar solicitud</button>
+              <button type="button" id="btn-us20-no" style="width:100%; padding:14px; border:1.5px solid var(--primary); background:#fff; color:var(--primary); border-radius:10px; font-weight:700; font-size:14px; cursor:pointer;">No, volver</button>
+            </div>
           </div>
         </div>
       </div>

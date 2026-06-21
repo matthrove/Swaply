@@ -518,7 +518,7 @@ function bindInteractions(container, screenId) {
     });
   });
 
-  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy', 'btn-save-photo', 'btn-solicitar-sesion', 'btn-logout-us07', 'btn-delete-si', 'btn-delete-no', 'btn-delete-account', 'btn-send-solicitud', 'btn-us17-aceptar', 'btn-us17-rechazar', 'btn-us18-cancelar', 'btn-us18-confirmar', 'btn-mark-complete', 'btn-rate-session', 'btn-save-reminder', 'btn-send-code', 'btn-update-pass', 'btn-save-privacy']);
+  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy', 'btn-save-photo', 'btn-solicitar-sesion', 'btn-logout-us07', 'btn-delete-si', 'btn-delete-no', 'btn-delete-account', 'btn-send-solicitud', 'btn-cancel-solicitud', 'btn-us17-aceptar', 'btn-us17-rechazar', 'btn-us18-cancelar', 'btn-us18-confirmar', 'btn-mark-complete', 'btn-rate-session', 'btn-save-reminder', 'btn-send-code', 'btn-update-pass', 'btn-save-privacy', 'btn-us20-si', 'btn-us20-no']);
   container.querySelectorAll('.btn, .btn.ghost, .btn.sm').forEach(btn => {
     if (btn.id && SKIP_IDS.has(btn.id)) return;
     const text = btn.textContent.trim();
@@ -1291,28 +1291,68 @@ function setupCustomFlows(frame, screenId) {
       { id: 101, tutor: "Andrea Paredes", subject: "Cálculo Diferencial", date: "Jueves 7 Nov", time: "19:00", duration: "60 min", reminder: false }
     ];
     
+    let pendingSolicitudes = JSON.parse(localStorage.getItem('studentSolicitudes') || 'null') || [
+      { id: 201, tutor: "Andrea Paredes", subject: "Cálculo Diferencial", sent: "hace 1h", status: "pending" },
+      { id: 202, tutor: "Luis Mendoza", subject: "Física I", sent: "hace 3h", status: "pending" }
+    ];
+
     let activeTab = 'proximas';
-    
+
     const sContainer = frame.querySelector('#sesiones-container');
     const tabProx = frame.querySelector('#tab-sesiones-proximas');
     const tabComp = frame.querySelector('#tab-sesiones-completadas');
+    const tabPend = frame.querySelector('#tab-sesiones-pendientes');
     
     const renderList = () => {
       if (!sContainer) return;
       sContainer.innerHTML = '';
 
-      const setTab = (active, inactive) => {
-        if (!active || !inactive) return;
-        active.style.background = 'var(--primary)';
-        active.style.color = '#fff';
-        active.style.borderBottom = 'none';
-        inactive.style.background = 'transparent';
-        inactive.style.color = 'var(--primary)';
-        inactive.style.borderBottom = '2px solid transparent';
+      const allTabs = [tabProx, tabComp, tabPend];
+      const setTab = (active) => {
+        allTabs.forEach(t => {
+          if (!t) return;
+          if (t === active) {
+            t.style.background = 'var(--primary)';
+            t.style.color = '#fff';
+            t.style.borderBottom = 'none';
+          } else {
+            t.style.background = 'transparent';
+            t.style.color = 'var(--primary)';
+            t.style.borderBottom = '2px solid transparent';
+          }
+        });
       };
 
+      if (activeTab === 'pendientes') {
+        setTab(tabPend);
+        const visible = pendingSolicitudes.filter(p => p.status === 'pending');
+        if (visible.length === 0) {
+          sContainer.innerHTML = '<div class="small center" style="margin-top:30px;">No tienes solicitudes pendientes.</div>';
+          return;
+        }
+        visible.forEach(p => {
+          const card = document.createElement('div');
+          card.style.cssText = 'background:#fff; border:1px solid var(--soft); border-radius:10px; padding:12px; margin-bottom:8px;';
+          card.innerHTML = `
+            <div style="font-weight:700; font-size:12px; color:var(--ink);">${p.tutor}</div>
+            <div style="font-size:11px; color:var(--muted); margin-top:2px;">${p.subject} · Enviada ${p.sent}</div>
+            <div style="margin-top:8px; display:flex; align-items:center; justify-content:space-between;">
+              <span style="font-size:10px; background:var(--brand-bg); color:var(--primary); padding:2px 8px; border-radius:6px; font-weight:600;">⏳ En espera de respuesta</span>
+              <button type="button" class="btn-cancel-pend" style="border:1px solid #d64545; background:transparent; color:#d64545; padding:4px 10px; font-size:11px; border-radius:6px; cursor:pointer; font-weight:600;">Cancelar</button>
+            </div>
+          `;
+          card.querySelector('.btn-cancel-pend').onclick = (e) => {
+            e.stopPropagation();
+            localStorage.setItem('cancellingPendingSolicitud', JSON.stringify(p));
+            navigateTo('us20');
+          };
+          sContainer.appendChild(card);
+        });
+        return;
+      }
+
       if (activeTab === 'completadas') {
-        setTab(tabComp, tabProx);
+        setTab(tabComp);
         
         if (completed.length === 0) {
           sContainer.innerHTML = '<div class="small center" style="margin-top:30px;">No hay sesiones completadas.</div>';
@@ -1357,7 +1397,7 @@ function setupCustomFlows(frame, screenId) {
           sContainer.appendChild(card);
         });
       } else {
-        setTab(tabProx, tabComp);
+        setTab(tabProx);
         
         if (upcoming.length === 0) {
           sContainer.innerHTML = '<div class="small center" style="margin-top:30px;">No hay sesiones programadas.</div>';
@@ -1460,6 +1500,7 @@ function setupCustomFlows(frame, screenId) {
     
     if (tabProx) tabProx.onclick = () => { activeTab = 'proximas'; renderList(); };
     if (tabComp) tabComp.onclick = () => { activeTab = 'completadas'; renderList(); };
+    if (tabPend) tabPend.onclick = () => { activeTab = 'pendientes'; renderList(); };
     
     renderList();
     
@@ -1844,6 +1885,11 @@ function setupCustomFlows(frame, screenId) {
       });
     });
 
+    const cancelSolBtn = frame.querySelector('#btn-cancel-solicitud');
+    if (cancelSolBtn) {
+      cancelSolBtn.addEventListener('click', () => navigateTo('us20'));
+    }
+
     const sendBtn = frame.querySelector('#btn-send-solicitud');
     if (sendBtn) {
       sendBtn.addEventListener('click', () => {
@@ -1860,6 +1906,41 @@ function setupCustomFlows(frame, screenId) {
         sendBtn.disabled = true;
         sendBtn.textContent = 'Enviada ✓';
         setTimeout(() => navigateTo('us15'), 1800);
+      });
+    }
+  }
+
+  else if (screenId === 'us20') {
+    const tutor = JSON.parse(localStorage.getItem('selectedTutor') || 'null');
+    const cancellingPend = JSON.parse(localStorage.getItem('cancellingPendingSolicitud') || 'null');
+    const source = cancellingPend || tutor;
+    const infoEl = frame.querySelector('#us20-info');
+    const tutorEl = frame.querySelector('#us20-tutor');
+    const subjectEl = frame.querySelector('#us20-subject');
+    if (source && infoEl) {
+      infoEl.style.display = 'block';
+      if (tutorEl) tutorEl.textContent = source.name || source.tutor || 'Tutor';
+      if (subjectEl) subjectEl.textContent = source.subject || '';
+    }
+    const btnSi = frame.querySelector('#btn-us20-si');
+    const btnNo = frame.querySelector('#btn-us20-no');
+    if (btnSi) {
+      btnSi.addEventListener('click', () => {
+        if (cancellingPend) {
+          const pends = JSON.parse(localStorage.getItem('studentSolicitudes') || '[]');
+          const updated = pends.map(p => p.id === cancellingPend.id ? { ...p, status: 'cancelled' } : p);
+          localStorage.setItem('studentSolicitudes', JSON.stringify(updated));
+          localStorage.removeItem('cancellingPendingSolicitud');
+          navigateTo('us30');
+        } else {
+          navigateTo('us11');
+        }
+      });
+    }
+    if (btnNo) {
+      btnNo.addEventListener('click', () => {
+        localStorage.removeItem('cancellingPendingSolicitud');
+        history.back();
       });
     }
   }
