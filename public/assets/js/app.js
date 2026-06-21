@@ -1143,16 +1143,38 @@ function setupCustomFlows(frame, screenId) {
     
     updateRoleUI();
     
+    const showRoleConfirm = (role, label, icon, targetScreen) => {
+      const existing = frame.querySelector('#role-confirm-overlay');
+      if (existing) existing.remove();
+      const overlay = document.createElement('div');
+      overlay.id = 'role-confirm-overlay';
+      overlay.style.cssText = 'position:absolute;inset:0;background:rgba(0,0,0,0.45);z-index:999;display:flex;align-items:center;justify-content:center;';
+      overlay.innerHTML = `
+        <div style="background:#fff;border-radius:20px;padding:28px 22px;max-width:280px;width:90%;box-shadow:0 8px 32px rgba(0,0,0,0.18);text-align:center;">
+          <div style="font-size:40px;margin-bottom:12px;">${icon}</div>
+          <div style="font-weight:700;font-size:15px;color:var(--ink);margin-bottom:8px;">Cambiar a ${label}</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:20px;">
+            Para continuar necesitamos configurar tu perfil de <b style="color:var(--ink);">${label.toLowerCase()}</b>. ¿Deseas hacerlo ahora?
+          </div>
+          <div style="display:flex;gap:10px;">
+            <button id="role-confirm-no" type="button" style="flex:1;padding:12px;border:1.5px solid var(--primary);background:transparent;color:var(--primary);border-radius:10px;font-weight:600;font-size:13px;cursor:pointer;">Ahora no</button>
+            <button id="role-confirm-si" type="button" style="flex:1;padding:12px;background:var(--primary);border:none;color:#fff;border-radius:10px;font-weight:600;font-size:13px;cursor:pointer;">Configurar</button>
+          </div>
+        </div>
+      `;
+      frame.appendChild(overlay);
+      overlay.querySelector('#role-confirm-no').onclick = () => overlay.remove();
+      overlay.querySelector('#role-confirm-si').onclick = () => { overlay.remove(); navigateTo(targetScreen); };
+    };
+
     const switchRole = (newRole) => {
       if (newRole === 'estudiante' && !user.studentProfile) {
-        alert("Vamos a configurar tu perfil de estudiante.");
-        navigateTo('us05');
+        showRoleConfirm('estudiante', 'Estudiante', '🎓', 'us05');
         return;
       }
-      
+
       if (newRole === 'tutor' && !user.tutorProfile) {
-        alert("Vamos a configurar tu perfil de tutor.");
-        navigateTo('us06');
+        showRoleConfirm('tutor', 'Tutor', '👨‍🏫', 'us06');
         return;
       }
       
