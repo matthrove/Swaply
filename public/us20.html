@@ -6,6 +6,20 @@
   <meta name="theme-color" content="#8B1A2B">
   <title>US20 · Cancelar solicitud — Swaply</title>
   <link rel="stylesheet" href="assets/styles/app.css">
+  <style>
+    .motivo-opt {
+      display: flex; align-items: center; gap: 12px;
+      padding: 11px 0; border-bottom: 1px solid var(--soft); cursor: pointer; font-size: 13px;
+    }
+    .motivo-opt:last-child { border-bottom: none; }
+    .motivo-radio {
+      width: 20px; height: 20px; border-radius: 50%;
+      border: 2px solid #ccc; background: #fff; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; transition: all .15s;
+    }
+    .motivo-opt.sel .motivo-radio { border-color: var(--primary); background: var(--primary); }
+    .motivo-opt.sel .motivo-radio::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+  </style>
 </head>
 <body class="app-body" data-screen-id="us20">
   <div class="app-shell">
@@ -22,22 +36,39 @@
           <div class="scr" style="display:flex; flex-direction:column; height:100%;">
             <div class="head"><span class="back">‹</span><h2>Cancelar solicitud</h2></div>
 
-            <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; padding:24px 0;">
-
-              <div style="font-size:48px;">📋</div>
-
-              <div style="text-align:center;">
-                <div style="font-weight:700; font-size:16px; color:var(--ink); margin-bottom:8px;">¿Ya no deseas solicitar esta clase?</div>
-                <div style="font-size:13px; color:var(--muted); line-height:1.6;">El tutor no será notificado y podrás enviar la solicitud en otro momento.</div>
-              </div>
-
-              <!-- Tutor / subject info -->
-              <div id="us20-info" style="background:var(--brand-bg); border-radius:12px; padding:12px 16px; width:100%; box-sizing:border-box; text-align:center; display:none;">
-                <div style="font-weight:700; font-size:13px; color:var(--primary);" id="us20-tutor"></div>
-                <div style="font-size:11px; color:var(--muted); margin-top:2px;" id="us20-subject"></div>
-              </div>
-
+            <div style="font-size:13px; color:var(--muted); margin-bottom:16px; line-height:1.5;">
+              ¿Ya no deseas solicitar esta clase? El tutor no será notificado.
             </div>
+
+            <!-- Tutor/subject info -->
+            <div id="us20-info" style="display:none; background:var(--brand-bg); border-radius:12px; padding:10px 14px; margin-bottom:16px;">
+              <div style="font-weight:700; font-size:13px; color:var(--primary);" id="us20-tutor"></div>
+              <div style="font-size:11px; color:var(--muted); margin-top:2px;" id="us20-subject"></div>
+            </div>
+
+            <!-- Motivo -->
+            <div style="font-size:11px; font-weight:700; color:var(--primary); text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px;">Motivo (opcional)</div>
+            <div id="us20-motivos">
+              <div class="motivo-opt" data-val="No me interesa esta materia">
+                <div class="motivo-radio"></div><span>No me interesa esta materia</span>
+              </div>
+              <div class="motivo-opt" data-val="Tengo otras prioridades ahora">
+                <div class="motivo-radio"></div><span>Tengo otras prioridades ahora</span>
+              </div>
+              <div class="motivo-opt" data-val="El precio no es conveniente">
+                <div class="motivo-radio"></div><span>El precio no es conveniente</span>
+              </div>
+              <div class="motivo-opt" data-val="otro">
+                <div class="motivo-radio"></div><span>Otro motivo</span>
+              </div>
+            </div>
+
+            <!-- Otro: textarea (hidden by default) -->
+            <div id="us20-otro-wrap" style="display:none; margin-top:10px;">
+              <textarea id="us20-otro-text" placeholder="Cuéntanos brevemente el motivo…" style="width:100%; box-sizing:border-box; height:68px; padding:10px 12px; font-size:13px; border:1.5px solid var(--soft); border-radius:10px; resize:none; font-family:inherit; outline:none;"></textarea>
+            </div>
+
+            <div style="flex:1;"></div>
 
             <div style="display:flex; flex-direction:column; gap:8px; padding-bottom:12px;">
               <button type="button" id="btn-us20-si" style="width:100%; padding:14px; background:#d64545; color:#fff; border:none; border-radius:10px; font-weight:700; font-size:14px; cursor:pointer;">Sí, cancelar solicitud</button>

@@ -518,7 +518,7 @@ function bindInteractions(container, screenId) {
     });
   });
 
-  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy', 'btn-save-photo', 'btn-solicitar-sesion', 'btn-logout-us07', 'btn-delete-si', 'btn-delete-no', 'btn-delete-account', 'btn-send-solicitud', 'btn-cancel-solicitud', 'btn-us17-aceptar', 'btn-us17-rechazar', 'btn-us18-cancelar', 'btn-us18-confirmar', 'btn-mark-complete', 'btn-rate-session', 'btn-save-reminder', 'btn-send-code', 'btn-update-pass', 'btn-save-privacy', 'btn-us20-si', 'btn-us20-no']);
+  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy', 'btn-save-photo', 'btn-solicitar-sesion', 'btn-logout-us07', 'btn-delete-si', 'btn-delete-no', 'btn-delete-account', 'btn-send-solicitud', 'btn-cancel-solicitud', 'btn-us17-aceptar', 'btn-us17-rechazar', 'btn-us18-cancelar', 'btn-us18-confirmar', 'btn-mark-complete', 'btn-rate-session', 'btn-save-reminder', 'btn-send-code', 'btn-update-pass', 'btn-save-privacy', 'btn-us20-si', 'btn-us20-no', 'btn-us25-si', 'btn-us25-no', 'chat-send-btn']);
   container.querySelectorAll('.btn, .btn.ghost, .btn.sm').forEach(btn => {
     if (btn.id && SKIP_IDS.has(btn.id)) return;
     const text = btn.textContent.trim();
@@ -1922,6 +1922,20 @@ function setupCustomFlows(frame, screenId) {
       if (tutorEl) tutorEl.textContent = source.name || source.tutor || 'Tutor';
       if (subjectEl) subjectEl.textContent = source.subject || '';
     }
+
+    // Motivo radio options
+    let selectedMotivo = null;
+    const opts = frame.querySelectorAll('.motivo-opt');
+    const otroWrap = frame.querySelector('#us20-otro-wrap');
+    opts.forEach(opt => {
+      opt.addEventListener('click', () => {
+        opts.forEach(o => o.classList.remove('sel'));
+        opt.classList.add('sel');
+        selectedMotivo = opt.dataset.val;
+        if (otroWrap) otroWrap.style.display = selectedMotivo === 'otro' ? 'block' : 'none';
+      });
+    });
+
     const btnSi = frame.querySelector('#btn-us20-si');
     const btnNo = frame.querySelector('#btn-us20-no');
     if (btnSi) {
@@ -1940,6 +1954,212 @@ function setupCustomFlows(frame, screenId) {
     if (btnNo) {
       btnNo.addEventListener('click', () => {
         localStorage.removeItem('cancellingPendingSolicitud');
+        history.back();
+      });
+    }
+  }
+
+  else if (screenId === 'us24') {
+    const u = JSON.parse(localStorage.getItem('currentUser') || 'null');
+    const isTutor = u && u.role === 'tutor';
+    const listEl = frame.querySelector('#us24-list');
+    if (!listEl) return;
+
+    const tutorChats = [
+      { id: 't1', name: 'Rogger Escalante', initials: 'RE', last: '¿A qué hora sería la sesión profe?', time: '12:30', unread: 2,
+        messages: [
+          { text: 'Hola, vi su perfil y me interesa Cálculo Diferencial', mine: false, time: '12:10' },
+          { text: 'Claro Rogger, ¿qué temas necesitas reforzar?', mine: true, time: '12:15' },
+          { text: 'Derivadas implícitas sobre todo, tengo examen el viernes', mine: false, time: '12:20' },
+          { text: 'Perfecto, puedo el jueves a las 7pm por Meet', mine: true, time: '12:25' },
+          { text: '¿A qué hora sería la sesión profe?', mine: false, time: '12:30' }
+        ]
+      },
+      { id: 't2', name: 'Camila Torres', initials: 'CT', last: 'Muchas gracias por la clase 🙌', time: 'ayer',
+        messages: [
+          { text: 'Buenos días, ¿tiene disponibilidad esta semana para Física?', mine: false, time: '9:00' },
+          { text: 'Hola Camila, sí tengo el martes por la tarde', mine: true, time: '9:10' },
+          { text: 'Perfecto! Me anoto', mine: false, time: '9:12' },
+          { text: 'Aquí te paso el enlace de Meet: meet.google.com/xyz', mine: true, time: '9:15' },
+          { text: 'Muchas gracias por la clase 🙌', mine: false, time: 'ayer' }
+        ]
+      },
+      { id: 't3', name: 'Diego Quispe', initials: 'DQ', last: 'Entendido, nos vemos el lunes', time: 'lun',
+        messages: [
+          { text: 'Profe, ¿podría reforzarme Química Orgánica?', mine: false, time: 'lun 10:00' },
+          { text: 'Sí claro Diego, ¿qué temas exactamente?', mine: true, time: 'lun 10:05' },
+          { text: 'Hidrocarburos y reacciones de sustitución', mine: false, time: 'lun 10:08' },
+          { text: 'Ok, el lunes a las 6pm está bien?', mine: true, time: 'lun 10:10' },
+          { text: 'Entendido, nos vemos el lunes', mine: false, time: 'lun 10:11' }
+        ]
+      }
+    ];
+
+    const studentChats = [
+      { id: 's1', name: 'Andrea Paredes', initials: 'AP', last: 'Conéctate a las 7pm al enlace 👍', time: '12:30', unread: 1,
+        messages: [
+          { text: 'Hola Andrea, gracias por aceptar mi solicitud!', mine: true, time: '11:00' },
+          { text: 'Hola! Claro, ¿tienes dudas previas a la sesión?', mine: false, time: '11:05' },
+          { text: 'Sí, me cuesta mucho la regla de la cadena', mine: true, time: '11:10' },
+          { text: 'Tranquilo, lo vemos desde el inicio. Lleva ejercicios del libro', mine: false, time: '11:20' },
+          { text: 'Conéctate a las 7pm al enlace 👍', mine: false, time: '12:30' }
+        ]
+      },
+      { id: 's2', name: 'Luis Mendoza', initials: 'LM', last: 'Te paso la fórmula que aplicamos…', time: 'ayer',
+        messages: [
+          { text: 'Luis, ¿me puedes explicar los vectores de nuevo?', mine: true, time: 'ayer 15:00' },
+          { text: 'Claro, ¿qué parte te quedó confusa?', mine: false, time: 'ayer 15:10' },
+          { text: 'El producto cruzado, no entiendo cuándo usarlo', mine: true, time: 'ayer 15:15' },
+          { text: 'Ah es para calcular el área de paralelogramos o perpendiculares', mine: false, time: 'ayer 15:20' },
+          { text: 'Te paso la fórmula que aplicamos…', mine: false, time: 'ayer 15:22' }
+        ]
+      },
+      { id: 's3', name: 'Karen Ríos', initials: 'KR', last: '¡Gracias por la sesión! 😊', time: 'lun',
+        messages: [
+          { text: 'Hola Karen, ¿tiene espacio para Química esta semana?', mine: true, time: 'lun 9:00' },
+          { text: 'Hola! Sí tengo el miércoles a las 5pm', mine: false, time: 'lun 9:08' },
+          { text: 'Perfecto, ahí estaré', mine: true, time: 'lun 9:10' },
+          { text: 'Listo, te mando el link por acá', mine: false, time: 'lun 9:11' },
+          { text: '¡Gracias por la sesión! 😊', mine: true, time: 'lun 18:05' }
+        ]
+      }
+    ];
+
+    const chats = isTutor ? tutorChats : studentChats;
+    localStorage.setItem('chatList', JSON.stringify(chats));
+
+    chats.forEach(chat => {
+      const card = document.createElement('div');
+      card.style.cssText = 'display:flex; align-items:center; gap:12px; padding:12px; border-bottom:1px solid var(--soft); cursor:pointer; background:#fff;';
+      card.innerHTML = `
+        <div style="width:46px;height:46px;border-radius:50%;background:var(--primary);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${chat.initials}</div>
+        <div style="flex:1;min-width:0;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+            <span style="font-weight:700;font-size:13px;color:var(--ink);">${chat.name}</span>
+            <span style="font-size:10px;color:var(--muted);">${chat.time}</span>
+          </div>
+          <div style="font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${chat.last}</div>
+        </div>
+        ${chat.unread ? `<span style="background:var(--primary);color:#fff;border-radius:50%;min-width:18px;height:18px;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px;">${chat.unread}</span>` : ''}
+      `;
+      card.addEventListener('click', () => {
+        localStorage.setItem('selectedChat', JSON.stringify(chat));
+        navigateTo('us21');
+      });
+      listEl.appendChild(card);
+    });
+  }
+
+  else if (screenId === 'us21') {
+    const chat = JSON.parse(localStorage.getItem('selectedChat') || 'null');
+    const contact = chat || { name: 'Andrea Paredes', initials: 'AP', messages: [] };
+
+    const nameEl = frame.querySelector('#chat-name');
+    const avEl = frame.querySelector('#chat-av');
+    const messagesEl = frame.querySelector('#chat-messages');
+    const inputEl = frame.querySelector('#chat-input');
+    const sendBtn = frame.querySelector('#chat-send-btn');
+    const backBtn = frame.querySelector('#chat-back-btn');
+    const menuBtn = frame.querySelector('#chat-menu-btn');
+    const dropdown = frame.querySelector('#chat-dropdown');
+    const ddInfo = frame.querySelector('#dd-info');
+    const ddBlock = frame.querySelector('#dd-block');
+
+    if (nameEl) nameEl.textContent = contact.name;
+    if (avEl) avEl.textContent = contact.initials || contact.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+
+    let messages = contact.messages ? [...contact.messages] : [
+      { text: 'Hola, ¿cómo puedo ayudarte?', mine: false, time: '12:00' },
+      { text: '¡Hola! Tengo dudas con derivadas', mine: true, time: '12:01' }
+    ];
+
+    const renderMessages = () => {
+      if (!messagesEl) return;
+      messagesEl.innerHTML = '';
+      messages.forEach(msg => {
+        const wrap = document.createElement('div');
+        wrap.className = 'bubble-wrap' + (msg.mine ? ' mine' : '');
+        wrap.innerHTML = `<div class="bubble ${msg.mine ? 'mine' : 'theirs'}">${msg.text}<div class="bubble-time">${msg.time}</div></div>`;
+        messagesEl.appendChild(wrap);
+      });
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    };
+    renderMessages();
+
+    if (sendBtn && inputEl) {
+      const doSend = () => {
+        const txt = inputEl.value.trim();
+        if (!txt) return;
+        const now = new Date();
+        const time = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0');
+        messages.push({ text: txt, mine: true, time });
+        inputEl.value = '';
+        renderMessages();
+      };
+      sendBtn.addEventListener('click', doSend);
+      inputEl.addEventListener('keydown', e => { if (e.key === 'Enter') doSend(); });
+    }
+
+    if (backBtn) backBtn.addEventListener('click', () => navigateTo('us24'));
+
+    if (menuBtn && dropdown) {
+      menuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+      });
+      document.addEventListener('click', () => dropdown.classList.remove('open'), { once: false });
+    }
+
+    if (ddInfo) {
+      ddInfo.addEventListener('click', () => {
+        dropdown.classList.remove('open');
+        localStorage.setItem('selectedProfile', JSON.stringify(contact));
+        navigateTo('us15');
+      });
+    }
+
+    if (ddBlock) {
+      ddBlock.addEventListener('click', () => {
+        dropdown.classList.remove('open');
+        localStorage.setItem('blockingContact', JSON.stringify(contact));
+        navigateTo('us25');
+      });
+    }
+  }
+
+  else if (screenId === 'us25') {
+    const contact = JSON.parse(localStorage.getItem('blockingContact') || 'null');
+    const nameEl = frame.querySelector('#us25-name');
+    const fullnameEl = frame.querySelector('#us25-fullname');
+    const avEl = frame.querySelector('#us25-av');
+    const metaEl = frame.querySelector('#us25-meta');
+    const cardEl = frame.querySelector('#us25-card');
+
+    if (contact) {
+      if (nameEl) nameEl.textContent = contact.name;
+      if (cardEl) cardEl.style.display = 'flex';
+      if (avEl) avEl.textContent = contact.initials || (contact.name || '').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+      if (fullnameEl) fullnameEl.textContent = contact.name;
+      if (metaEl) metaEl.textContent = contact.meta || 'Contacto de Swaply';
+    }
+
+    const btnSi = frame.querySelector('#btn-us25-si');
+    const btnNo = frame.querySelector('#btn-us25-no');
+    if (btnSi) {
+      btnSi.addEventListener('click', () => {
+        const chats = JSON.parse(localStorage.getItem('chatList') || '[]');
+        const updated = chats.filter(c => c.id !== (contact && contact.id));
+        localStorage.setItem('chatList', JSON.stringify(updated));
+        localStorage.removeItem('blockingContact');
+        localStorage.removeItem('selectedChat');
+        btnSi.textContent = '✓ Bloqueado';
+        btnSi.style.background = '#555';
+        setTimeout(() => navigateTo('us24'), 1200);
+      });
+    }
+    if (btnNo) {
+      btnNo.addEventListener('click', () => {
+        localStorage.removeItem('blockingContact');
         history.back();
       });
     }

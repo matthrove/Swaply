@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#8B1A2B">
-  <title>US25 · Detalle de Sesión — Swaply</title>
+  <title>US25 · Bloquear persona — Swaply</title>
   <link rel="stylesheet" href="assets/styles/app.css">
 </head>
 <body class="app-body" data-screen-id="us25">
@@ -13,25 +13,47 @@
     <div class="app-main">
       <header class="app-topbar" id="appTopbar">
         <button type="button" id="btnSettings" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0 8px;color:var(--primary);">⚙️</button>
-        <span class="app-topbar-title" id="screenTitle">US25 · Detalle de Sesión</span>
+        <span class="app-topbar-title" id="screenTitle">US25 · Bloquear persona</span>
         <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
       </header>
       <div class="app-viewport">
         <div class="app-frame" id="appFrame" role="main">
-          
-    <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
-    <div class="scr">
-      <div class="head"><span class="back">‹</span><h2>Detalle de sesión</h2></div>
-      <div class="card">
-        <div class="flex"><div class="av">AP</div><div class="col"><b class="name">Andrea Paredes</b><div class="small">Cálculo Diferencial · 4.9★</div></div></div>
-        <div class="kv mt"><span class="k">Fecha</span><span class="v">Jueves 7 Nov · 19:00</span></div>
-        <div class="kv"><span class="k">Duración</span><span class="v">60 min</span></div>
-        <div class="kv"><span class="k">Modalidad</span><span class="v">Virtual (Meet)</span></div>
-        <div class="kv"><span class="k">Precio</span><span class="v">S/ 30</span></div>
-      </div>
-      <div class="btn mt">Confirmar sesión</div>
-    </div>
-  
+          <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
+          <div class="scr" style="display:flex; flex-direction:column; height:100%;">
+            <div class="head"><span class="back">‹</span><h2>Bloquear persona</h2></div>
+
+            <div style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; padding:24px 0;">
+
+              <div style="font-size:52px;">🚫</div>
+
+              <div style="text-align:center;">
+                <div style="font-weight:700; font-size:16px; color:var(--ink); margin-bottom:8px;">¿Deseas bloquear a <span id="us25-name">esta persona</span>?</div>
+                <div style="font-size:13px; color:var(--muted); line-height:1.6;">
+                  Ya no podrás enviarte mensajes ni ver el perfil del otro. Esta acción se puede revertir desde tu configuración.
+                </div>
+              </div>
+
+              <!-- Contact card -->
+              <div id="us25-card" style="display:none; background:#fff; border:1px solid var(--soft); border-radius:14px; padding:14px 16px; width:100%; box-sizing:border-box; display:flex; align-items:center; gap:12px;">
+                <div id="us25-av" style="width:44px; height:44px; border-radius:50%; background:var(--primary); color:#fff; font-weight:700; font-size:15px; display:flex; align-items:center; justify-content:center; flex-shrink:0;"></div>
+                <div>
+                  <div style="font-weight:700; font-size:13px; color:var(--ink);" id="us25-fullname"></div>
+                  <div style="font-size:11px; color:var(--muted); margin-top:2px;" id="us25-meta"></div>
+                </div>
+              </div>
+
+              <!-- Warning -->
+              <div style="background:#fff3cd; border-radius:10px; padding:10px 14px; width:100%; box-sizing:border-box;">
+                <div style="font-size:11px; color:#856404; line-height:1.5;">⚠ Si tienen sesiones programadas, deberás cancelarlas por separado antes de bloquear.</div>
+              </div>
+
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:8px; padding-bottom:12px;">
+              <button type="button" id="btn-us25-si" style="width:100%; padding:14px; background:#d64545; color:#fff; border:none; border-radius:10px; font-weight:700; font-size:14px; cursor:pointer;">Sí, bloquear</button>
+              <button type="button" id="btn-us25-no" style="width:100%; padding:14px; border:1.5px solid var(--primary); background:#fff; color:var(--primary); border-radius:10px; font-weight:700; font-size:14px; cursor:pointer;">No, volver</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

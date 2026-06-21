@@ -4,30 +4,120 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#8B1A2B">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>US21 · Chat de sesión — Swaply</title>
+  <title>US21 · Chat — Swaply</title>
   <link rel="stylesheet" href="assets/styles/app.css">
+  <style>
+    .chat-header {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px; background: #fff;
+      border-bottom: 1px solid var(--soft); flex-shrink: 0;
+    }
+    .chat-av {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--primary); color: #fff; font-weight: 700; font-size: 13px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .chat-contact-info { flex: 1; }
+    .chat-contact-name { font-weight: 700; font-size: 13px; color: var(--ink); }
+    .chat-contact-status { font-size: 10px; color: #3aa56b; font-weight: 600; }
+    .chat-menu-btn {
+      background: none; border: none; font-size: 20px; cursor: pointer;
+      color: var(--primary); padding: 4px 6px; border-radius: 6px;
+      position: relative;
+    }
+    .chat-dropdown {
+      position: absolute; right: 8px; top: 54px; background: #fff;
+      border: 1px solid var(--soft); border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12); z-index: 100;
+      min-width: 180px; display: none; flex-direction: column; overflow: hidden;
+    }
+    .chat-dropdown.open { display: flex; }
+    .chat-dd-item {
+      padding: 12px 16px; font-size: 13px; font-weight: 600; color: var(--ink);
+      cursor: pointer; display: flex; align-items: center; gap: 10px;
+      border-bottom: 1px solid var(--soft);
+    }
+    .chat-dd-item:last-child { border-bottom: none; }
+    .chat-dd-item:hover { background: var(--brand-bg); }
+    .chat-dd-item.danger { color: #d64545; }
+    .chat-messages {
+      flex: 1; overflow-y: auto; padding: 12px; display: flex;
+      flex-direction: column; gap: 8px; background: #f8f4f0;
+    }
+    .bubble-wrap { display: flex; }
+    .bubble-wrap.mine { justify-content: flex-end; }
+    .bubble {
+      max-width: 72%; padding: 9px 13px; border-radius: 18px;
+      font-size: 13px; line-height: 1.45; word-break: break-word;
+    }
+    .bubble.theirs {
+      background: #fff; color: var(--ink);
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    .bubble.mine {
+      background: var(--primary); color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+    .bubble-time { font-size: 9px; margin-top: 3px; opacity: .55; text-align: right; }
+    .chat-input-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 12px; background: #fff;
+      border-top: 1px solid var(--soft); flex-shrink: 0;
+    }
+    .chat-input {
+      flex: 1; padding: 9px 13px; border: 1.5px solid var(--soft);
+      border-radius: 20px; font-size: 13px; font-family: inherit;
+      outline: none; background: #f8f4f0; resize: none;
+    }
+    .chat-send-btn {
+      background: var(--primary); color: #fff; border: none;
+      border-radius: 50%; width: 36px; height: 36px;
+      font-size: 16px; cursor: pointer; display: flex;
+      align-items: center; justify-content: center; flex-shrink: 0;
+    }
+  </style>
 </head>
 <body class="app-body" data-screen-id="us21">
   <div class="app-shell">
-    <aside id="appSidebar" class="app-sidebar" aria-label="Historias de usuario"></aside>
+    <aside id="appSidebar" class="app-sidebar"></aside>
     <div class="app-main">
       <header class="app-topbar" id="appTopbar">
-        <button type="button" class="btn-settings" id="btnSettings" aria-label="Ajustes" style="background:none; border:none; font-size:20px; cursor:pointer; padding:0 8px; color:var(--primary);">⚙️</button>
-        <span class="app-topbar-title" id="screenTitle">US21 · Chat de sesión</span>
-        <button type="button" class="hu-toggle" id="huToggle" aria-label="Ver historias de usuario">50 HU</button>
+        <button type="button" id="btnSettings" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0 8px;color:var(--primary);">⚙️</button>
+        <span class="app-topbar-title" id="screenTitle">US21 · Chat</span>
+        <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
       </header>
       <div class="app-viewport">
-        <div class="app-frame" id="appFrame" role="main" aria-live="polite">
+        <div class="app-frame" id="appFrame" role="main">
           <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
-        <div class="scr">
-          <div class="head"><span class="back">‹</span><h2>Andrea Paredes</h2><div class="right">⋯</div></div>
-          <div class="col" style="flex:1;gap:6px;padding-bottom:4px">
-            <div class="msg r">Hola Andrea, ¿podemos ver límites?</div>
-            <div class="msg">Claro, conéctate a las 14:00</div>
-            <div class="msg r">Ok, ahí estaré 👍</div>
+          <div style="display:flex; flex-direction:column; height:calc(100% - 22px); position:relative;">
+
+            <!-- Chat header bar -->
+            <div class="chat-header">
+              <button type="button" id="chat-back-btn" style="background:none;border:none;font-size:20px;color:var(--primary);cursor:pointer;padding:0 4px;">‹</button>
+              <div class="chat-av" id="chat-av">AP</div>
+              <div class="chat-contact-info">
+                <div class="chat-contact-name" id="chat-name">Andrea Paredes</div>
+                <div class="chat-contact-status">En línea</div>
+              </div>
+              <button type="button" class="chat-menu-btn" id="chat-menu-btn">⋯</button>
+            </div>
+
+            <!-- Dropdown menu -->
+            <div class="chat-dropdown" id="chat-dropdown">
+              <div class="chat-dd-item" id="dd-info">👤 Info de la persona</div>
+              <div class="chat-dd-item danger" id="dd-block">🚫 Bloquear</div>
+            </div>
+
+            <!-- Messages -->
+            <div class="chat-messages" id="chat-messages"></div>
+
+            <!-- Input bar -->
+            <div class="chat-input-bar">
+              <input type="text" class="chat-input" id="chat-input" placeholder="Escribe un mensaje…">
+              <button type="button" class="chat-send-btn" id="chat-send-btn">➤</button>
+            </div>
           </div>
-          <div class="chat-bar"><div class="input flex" style="flex:1">Escribe un mensaje…</div><div class="btn sm">Enviar
         </div>
       </div>
     </div>

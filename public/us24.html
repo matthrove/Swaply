@@ -17,35 +17,14 @@
         <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
       </header>
       <div class="app-viewport">
-        <div class="app-frame" id="appFrame">
+        <div class="app-frame" id="appFrame" role="main">
           <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
-          <div class="scr">
-            <div class="head"><h2>Chats</h2><div class="right">✏️</div></div>
-            <div class="input mt"><span class="ic">🔍</span>Buscar mensajes…</div>
-            <div class="col mt">
-              <div class="card" style="align-items:center;cursor:pointer;" onclick="window.location.href='us21.html'">
-                <div class="av lg">AP</div>
-                <div class="body">
-                  <div class="flex"><div class="name" style="flex:1">Andrea Paredes</div><div class="small">12:30</div></div>
-                  <div class="small" style="margin-top:2px">Confírmame por favor 🙏</div>
-                </div>
-                <span class="pill dark" style="font-size:9px;padding:1px 6px">2</span>
-              </div>
-              <div class="card" style="align-items:center;cursor:pointer;" onclick="window.location.href='us21.html'">
-                <div class="av lg">LM</div>
-                <div class="body">
-                  <div class="flex"><div class="name" style="flex:1">Luis Mendoza</div><div class="small">ayer</div></div>
-                  <div class="small" style="margin-top:2px">Te paso la fórmula que aplicamos…</div>
-                </div>
-              </div>
-              <div class="card" style="align-items:center;cursor:pointer;" onclick="window.location.href='us21.html'">
-                <div class="av lg">KR</div>
-                <div class="body">
-                  <div class="flex"><div class="name" style="flex:1">Karen Ríos</div><div class="small">lun</div></div>
-                  <div class="small" style="margin-top:2px">¡Gracias por la sesión! 😊</div>
-                </div>
-              </div>
+          <div class="scr" style="display:flex; flex-direction:column; height:100%;">
+            <div class="head"><h2>Chats</h2></div>
+            <div class="input mt" style="display:flex; align-items:center; gap:6px; margin-bottom:12px;">
+              <span>🔍</span><span style="color:var(--muted); font-size:13px;">Buscar mensajes…</span>
             </div>
+            <div id="us24-list" style="flex:1; overflow-y:auto;"></div>
           </div>
         </div>
       </div>
