@@ -30,8 +30,8 @@ const MAIN_NAV = {
   Perfil: 'us07',
 };
 
-const EXCLUDE_BOTTOM_NAV = new Set(['us45', 'us01', 'us01b', 'us02', 'us03']);
-const EXCLUDE_BACK = new Set(['us45', 'us15']);
+const EXCLUDE_BOTTOM_NAV = new Set(['us45', 'us01', 'us01b', 'us02', 'us03', 'us41', 'us42', 'us43', 'us44']);
+const EXCLUDE_BACK = new Set(['us45', 'us15', 'us41']);
 
 const FALLBACK_BACK = {
   us02: 'us45',
@@ -2073,6 +2073,26 @@ function setupCustomFlows(frame, screenId) {
   }
 
   else if (screenId === 'us42') {
+    const detail = frame.querySelector('#verif-detail');
+    const cards = frame.querySelectorAll('.verif-card');
+    const total = cards.length;
+
+    const openDetail = (card) => {
+      frame.querySelector('#detail-av').textContent = card.dataset.av;
+      frame.querySelector('#detail-av').style.background = card.querySelector('.verif-av').style.background || 'var(--primary)';
+      frame.querySelector('#detail-name').textContent = card.dataset.name;
+      frame.querySelector('#detail-email').textContent = card.dataset.email;
+      frame.querySelector('#detail-cert').textContent = card.dataset.cert;
+      frame.querySelector('#detail-univ').textContent = card.dataset.univ;
+      frame.querySelector('#detail-career').textContent = card.dataset.career;
+      frame.querySelector('#detail-counter').textContent = `${card.dataset.id} / ${total}`;
+      detail.classList.add('open');
+    };
+
+    cards.forEach(card => card.addEventListener('click', () => openDetail(card)));
+
+    frame.querySelector('#detail-back')?.addEventListener('click', () => detail.classList.remove('open'));
+
     const showToast = (msg, color) => {
       const t = document.createElement('div');
       t.style.cssText = `position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:${color};color:#fff;padding:10px 20px;border-radius:10px;font-weight:700;font-size:13px;z-index:9999;`;
@@ -2080,13 +2100,14 @@ function setupCustomFlows(frame, screenId) {
       document.body.appendChild(t);
       setTimeout(() => t.remove(), 2000);
     };
+
     frame.querySelector('#btn-us42-aprobar')?.addEventListener('click', () => {
-      showToast('✓ Identidad aprobada', '#27ae60');
-      setTimeout(() => navigateTo('us41'), 1200);
+      showToast('✓ Certificado aprobado', '#27ae60');
+      detail.classList.remove('open');
     });
     frame.querySelector('#btn-us42-rechazar')?.addEventListener('click', () => {
-      showToast('✗ Solicitud rechazada', '#d64545');
-      setTimeout(() => navigateTo('us41'), 1200);
+      showToast('✗ Certificado rechazado', '#d64545');
+      detail.classList.remove('open');
     });
   }
 
