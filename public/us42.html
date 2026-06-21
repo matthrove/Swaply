@@ -21,7 +21,7 @@
     .badge-pend { background: #fff3cd; color: #856404; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
 
     /* Detail overlay */
-    #verif-detail { display: none; position: absolute; inset: 0; background: #fff; z-index: 10; flex-direction: column; padding: 0; overflow-y: auto; }
+    #verif-detail { display: none; position: fixed; inset: 0; background: #fff; z-index: 200; flex-direction: column; overflow-y: auto; }
     #verif-detail.open { display: flex; }
   </style>
 </head>
@@ -35,7 +35,7 @@
         <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
       </header>
       <div class="app-viewport">
-        <div class="app-frame" id="appFrame" role="main" style="position:relative;overflow:hidden;">
+        <div class="app-frame" id="appFrame" role="main">
           <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
           <div class="scr" style="display:flex; flex-direction:column; height:100%;">
             <div class="head"><span class="back">‹</span><h2>Verificar identidades</h2><span class="badge-pend" style="margin-left:auto;">5 pendientes</span></div>

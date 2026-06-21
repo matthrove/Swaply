@@ -643,6 +643,8 @@ function setupCustomFlows(frame, screenId) {
       btns[1].onclick = (e) => { e.preventDefault(); navigateTo('us02'); };
     }
     
+    frame.querySelector('#btn-admin-access')?.addEventListener('click', () => navigateTo('us02'));
+
     if (dotsContainer) {
       dotsContainer.innerHTML = '<i class="on"></i><i></i><i></i>';
     }
@@ -1359,15 +1361,9 @@ function setupCustomFlows(frame, screenId) {
       const setTab = (active) => {
         allTabs.forEach(t => {
           if (!t) return;
-          if (t === active) {
-            t.style.background = 'var(--primary)';
-            t.style.color = '#fff';
-            t.style.borderBottom = 'none';
-          } else {
-            t.style.background = 'transparent';
-            t.style.color = 'var(--primary)';
-            t.style.borderBottom = '2px solid transparent';
-          }
+          t.classList.toggle('on', t === active);
+          t.style.background = t === active ? 'var(--primary)' : '';
+          t.style.color = t === active ? '#fff' : '';
         });
       };
 
@@ -2115,12 +2111,40 @@ function setupCustomFlows(frame, screenId) {
     const pendItems = frame.querySelectorAll('#rep-list > div');
     const tabPend = frame.querySelector('#tab-rep-pend');
     const tabRes = frame.querySelector('#tab-rep-res');
+    const repList = frame.querySelector('#rep-list');
+    const resolvedHTML = `
+      <div style="background:#fff;border:1px solid var(--soft);border-radius:10px;padding:12px;margin-bottom:8px;">
+        <div style="display:flex;align-items:flex-start;gap:10px;">
+          <span style="color:#27ae60;font-size:16px;flex-shrink:0;">✓</span>
+          <div><div style="font-weight:700;font-size:13px;">Reseña falsa eliminada</div><div style="font-size:12px;color:var(--muted);margin-top:2px;">Carlos G. → Luis M.</div><div style="font-size:11px;color:var(--muted);">resuelto hace 2 días</div></div>
+        </div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--soft);border-radius:10px;padding:12px;margin-bottom:8px;">
+        <div style="display:flex;align-items:flex-start;gap:10px;">
+          <span style="color:#27ae60;font-size:16px;flex-shrink:0;">✓</span>
+          <div><div style="font-weight:700;font-size:13px;">Cuenta suspendida</div><div style="font-size:12px;color:var(--muted);margin-top:2px;">Usuario "tutor_fake22"</div><div style="font-size:11px;color:var(--muted);">resuelto hace 5 días</div></div>
+        </div>
+      </div>`;
+    const pendingHTML = repList ? repList.innerHTML : '';
     const setTab = (isPend) => {
-      if (tabPend) { tabPend.style.background = isPend ? 'var(--primary)' : 'transparent'; tabPend.style.color = isPend ? '#fff' : 'var(--primary)'; tabPend.style.border = isPend ? 'none' : '1.5px solid var(--primary)'; }
-      if (tabRes) { tabRes.style.background = !isPend ? 'var(--primary)' : 'transparent'; tabRes.style.color = !isPend ? '#fff' : 'var(--primary)'; tabRes.style.border = !isPend ? 'none' : '1.5px solid var(--primary)'; }
+      [tabPend, tabRes].forEach(t => { if (!t) return; t.style.background = ''; t.style.color = ''; t.style.border = ''; });
+      if (isPend) {
+        if (tabPend) { tabPend.style.background = 'var(--primary)'; tabPend.style.color = '#fff'; tabPend.style.border = 'none'; }
+        if (tabRes) { tabRes.style.background = 'transparent'; tabRes.style.color = 'var(--primary)'; tabRes.style.border = '1.5px solid var(--primary)'; }
+        if (repList) repList.innerHTML = pendingHTML;
+      } else {
+        if (tabRes) { tabRes.style.background = 'var(--primary)'; tabRes.style.color = '#fff'; tabRes.style.border = 'none'; }
+        if (tabPend) { tabPend.style.background = 'transparent'; tabPend.style.color = 'var(--primary)'; tabPend.style.border = '1.5px solid var(--primary)'; }
+        if (repList) repList.innerHTML = resolvedHTML;
+      }
     };
     if (tabPend) tabPend.addEventListener('click', () => setTab(true));
     if (tabRes) tabRes.addEventListener('click', () => setTab(false));
+    // Add action button handlers (toast)
+    const actionToast = (msg) => { const t = document.createElement('div'); t.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;padding:10px 20px;border-radius:10px;font-weight:700;font-size:13px;z-index:9999;'; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2000); };
+    frame.querySelector('#btn-rep-eliminar')?.addEventListener('click', () => actionToast('🗑 Contenido eliminado'));
+    frame.querySelector('#btn-rep-suspender')?.addEventListener('click', () => actionToast('🚫 Usuario suspendido'));
+    frame.querySelector('#btn-rep-desestimar')?.addEventListener('click', () => actionToast('✓ Reporte desestimado'));
   }
 
   else if (screenId === 'us44') {
