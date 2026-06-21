@@ -383,14 +383,17 @@ function buildHuSidebar() {
   mainLinks.className = 'sidebar-main-nav';
   mainLinks.setAttribute('aria-label', 'Secciones principales');
   const sidebarUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+  const sidebarIsAdmin = sidebarUser && sidebarUser.role === 'admin';
   const sidebarIsTutor = sidebarUser && sidebarUser.role === 'tutor';
-  const icons = { Inicio: '🏠', Buscar: '🔍', Solicitudes: '📩', Chats: '💬', Perfil: '👤' };
-  const sidebarNav = [
-    ['Inicio', 'us15'],
-    sidebarIsTutor ? ['Solicitudes', 'us19'] : ['Buscar', 'us11'],
-    ['Chats', 'us24'],
-    ['Perfil', 'us07'],
-  ];
+  const icons = { Inicio: '🏠', Buscar: '🔍', Solicitudes: '📩', Chats: '💬', Perfil: '👤', Panel: '📊', Verificar: '✅', Reportes: '⚑', Universidades: '🏫' };
+  const sidebarNav = sidebarIsAdmin
+    ? [['Panel', 'us41'], ['Verificar', 'us42'], ['Reportes', 'us43'], ['Universidades', 'us44']]
+    : [
+        ['Inicio', 'us15'],
+        sidebarIsTutor ? ['Solicitudes', 'us19'] : ['Buscar', 'us11'],
+        ['Chats', 'us24'],
+        ['Perfil', 'us07'],
+      ];
   sidebarNav.forEach(([label, id]) => {
     const btn = document.createElement('button');
     btn.type = 'button';
@@ -526,7 +529,7 @@ function bindInteractions(container, screenId) {
     });
   });
 
-  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy', 'btn-save-photo', 'btn-solicitar-sesion', 'btn-logout-us07', 'btn-delete-si', 'btn-delete-no', 'btn-delete-account', 'btn-send-solicitud', 'btn-cancel-solicitud', 'btn-us17-aceptar', 'btn-us17-rechazar', 'btn-us18-cancelar', 'btn-us18-confirmar', 'btn-mark-complete', 'btn-rate-session', 'btn-save-reminder', 'btn-send-code', 'btn-update-pass', 'btn-save-privacy', 'btn-us20-si', 'btn-us20-no', 'btn-us25-si', 'btn-us25-no', 'chat-send-btn', 'btn-us35-enviar', 'chat-attach-btn', 'btn-us37-aceptar', 'btn-save-notif', 'btn-ver-historial', 'btn-us39-ganar', 'btn-us39-historial', 'btn-go-notif', 'btn-us39-mark-read', 'btn-us36-historial', 'btn-us07-settings']);
+  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy', 'btn-save-photo', 'btn-solicitar-sesion', 'btn-logout-us07', 'btn-delete-si', 'btn-delete-no', 'btn-delete-account', 'btn-send-solicitud', 'btn-cancel-solicitud', 'btn-us17-aceptar', 'btn-us17-rechazar', 'btn-us18-cancelar', 'btn-us18-confirmar', 'btn-mark-complete', 'btn-rate-session', 'btn-save-reminder', 'btn-send-code', 'btn-update-pass', 'btn-save-privacy', 'btn-us20-si', 'btn-us20-no', 'btn-us25-si', 'btn-us25-no', 'chat-send-btn', 'btn-us35-enviar', 'chat-attach-btn', 'btn-us37-aceptar', 'btn-save-notif', 'btn-ver-historial', 'btn-us39-ganar', 'btn-us39-historial', 'btn-go-notif', 'btn-us39-mark-read', 'btn-us36-historial', 'btn-us07-settings', 'btn-us42-aprobar', 'btn-us42-rechazar', 'btn-nueva-univ']);
   container.querySelectorAll('.btn, .btn.ghost, .btn.sm').forEach(btn => {
     if (btn.id && SKIP_IDS.has(btn.id)) return;
     const text = btn.textContent.trim();
@@ -593,6 +596,15 @@ document.getElementById('huToggle')?.addEventListener('click', () => {
 });
 
 let welcomeInterval = null;
+
+// Seed admin user if not exists
+(function seedAdmin() {
+  const users = JSON.parse(localStorage.getItem('users') || '[]');
+  if (!users.find(u => u.role === 'admin')) {
+    users.push({ name: 'Admin Swaply', email: 'admin@swaply.pe', password: 'admin123', role: 'admin' });
+    localStorage.setItem('users', JSON.stringify(users));
+  }
+})();
 
 buildHuSidebar();
 
@@ -931,7 +943,7 @@ function setupCustomFlows(frame, screenId) {
         if (matchedUser) {
           localStorage.setItem('currentUser', JSON.stringify(matchedUser));
           history.length = 0;
-          navigateTo('us15');
+          navigateTo(matchedUser.role === 'admin' ? 'us41' : 'us15');
         } else {
           if (errorDiv) errorDiv.style.display = 'flex';
         }
@@ -2052,6 +2064,53 @@ function setupCustomFlows(frame, screenId) {
         setTimeout(() => { btnSave.textContent = 'Guardar preferencias'; btnSave.style.background = ''; btnSave.disabled = false; }, 2000);
       });
     }
+  }
+
+  else if (screenId === 'us41') {
+    frame.querySelector('#admin-nav-verif')?.addEventListener('click', () => navigateTo('us42'));
+    frame.querySelector('#admin-nav-reports')?.addEventListener('click', () => navigateTo('us43'));
+    frame.querySelector('#admin-nav-univs')?.addEventListener('click', () => navigateTo('us44'));
+  }
+
+  else if (screenId === 'us42') {
+    const showToast = (msg, color) => {
+      const t = document.createElement('div');
+      t.style.cssText = `position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:${color};color:#fff;padding:10px 20px;border-radius:10px;font-weight:700;font-size:13px;z-index:9999;`;
+      t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 2000);
+    };
+    frame.querySelector('#btn-us42-aprobar')?.addEventListener('click', () => {
+      showToast('✓ Identidad aprobada', '#27ae60');
+      setTimeout(() => navigateTo('us41'), 1200);
+    });
+    frame.querySelector('#btn-us42-rechazar')?.addEventListener('click', () => {
+      showToast('✗ Solicitud rechazada', '#d64545');
+      setTimeout(() => navigateTo('us41'), 1200);
+    });
+  }
+
+  else if (screenId === 'us43') {
+    const pendItems = frame.querySelectorAll('#rep-list > div');
+    const tabPend = frame.querySelector('#tab-rep-pend');
+    const tabRes = frame.querySelector('#tab-rep-res');
+    const setTab = (isPend) => {
+      if (tabPend) { tabPend.style.background = isPend ? 'var(--primary)' : 'transparent'; tabPend.style.color = isPend ? '#fff' : 'var(--primary)'; tabPend.style.border = isPend ? 'none' : '1.5px solid var(--primary)'; }
+      if (tabRes) { tabRes.style.background = !isPend ? 'var(--primary)' : 'transparent'; tabRes.style.color = !isPend ? '#fff' : 'var(--primary)'; tabRes.style.border = !isPend ? 'none' : '1.5px solid var(--primary)'; }
+    };
+    if (tabPend) tabPend.addEventListener('click', () => setTab(true));
+    if (tabRes) tabRes.addEventListener('click', () => setTab(false));
+  }
+
+  else if (screenId === 'us44') {
+    const btnNueva = frame.querySelector('#btn-nueva-univ');
+    if (btnNueva) btnNueva.addEventListener('click', () => {
+      const t = document.createElement('div');
+      t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--primary);color:#fff;padding:10px 20px;border-radius:10px;font-weight:700;font-size:13px;z-index:9999;';
+      t.textContent = '🏫 Función próximamente';
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 2000);
+    });
   }
 
   else if (screenId === 'us20') {
