@@ -21,7 +21,11 @@
         <div class="app-frame" id="appFrame" role="main" aria-live="polite">
           <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
         <div class="scr">
-          <div class="head"><span class="back">‹</span><h2>Editar perfil</h2></div>
+          <div class="head" style="display:flex;align-items:center;">
+            <span class="back">‹</span>
+            <h2 style="flex:1;margin:0;">Editar perfil</h2>
+            <button type="button" id="btn-us07-settings" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0;color:var(--primary);" aria-label="Configuración">⚙️</button>
+          </div>
           <div class="flex" style="justify-content:center;flex-direction:column;text-align:center"><div class="av xl">RE</div><div class="small" style="margin-top:6px;text-decoration:underline;color:var(--primary)">Cambiar foto</div></div>
           <div class="form-field mt"><label>Nombre</label><div class="input-wrap"><input id="edit-name" class="field-search" placeholder="Tu nombre completo"></div></div>
           <div class="form-field"><label>Bio</label><div class="input-wrap"><textarea id="edit-bio" class="field-search" placeholder="Cuéntanos sobre ti…" style="height:60px;resize:none;"></textarea></div></div>
