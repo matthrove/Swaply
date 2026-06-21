@@ -526,7 +526,7 @@ function bindInteractions(container, screenId) {
     });
   });
 
-  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy', 'btn-save-photo', 'btn-solicitar-sesion', 'btn-logout-us07', 'btn-delete-si', 'btn-delete-no', 'btn-delete-account', 'btn-send-solicitud', 'btn-cancel-solicitud', 'btn-us17-aceptar', 'btn-us17-rechazar', 'btn-us18-cancelar', 'btn-us18-confirmar', 'btn-mark-complete', 'btn-rate-session', 'btn-save-reminder', 'btn-send-code', 'btn-update-pass', 'btn-save-privacy', 'btn-us20-si', 'btn-us20-no', 'btn-us25-si', 'btn-us25-no', 'chat-send-btn', 'btn-us35-enviar', 'chat-attach-btn']);
+  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy', 'btn-save-photo', 'btn-solicitar-sesion', 'btn-logout-us07', 'btn-delete-si', 'btn-delete-no', 'btn-delete-account', 'btn-send-solicitud', 'btn-cancel-solicitud', 'btn-us17-aceptar', 'btn-us17-rechazar', 'btn-us18-cancelar', 'btn-us18-confirmar', 'btn-mark-complete', 'btn-rate-session', 'btn-save-reminder', 'btn-send-code', 'btn-update-pass', 'btn-save-privacy', 'btn-us20-si', 'btn-us20-no', 'btn-us25-si', 'btn-us25-no', 'chat-send-btn', 'btn-us35-enviar', 'chat-attach-btn', 'btn-us37-aceptar', 'btn-save-notif', 'btn-ver-historial', 'btn-us39-ganar', 'btn-us39-historial']);
   container.querySelectorAll('.btn, .btn.ghost, .btn.sm').forEach(btn => {
     if (btn.id && SKIP_IDS.has(btn.id)) return;
     const text = btn.textContent.trim();
@@ -1086,6 +1086,9 @@ function setupCustomFlows(frame, screenId) {
     });
     const btnDeleteAccount = frame.querySelector('#btn-delete-account');
     if (btnDeleteAccount) btnDeleteAccount.addEventListener('click', () => navigateTo('us49'));
+
+    const navNotif = frame.querySelector('#cfg-nav-notif');
+    if (navNotif) navNotif.addEventListener('click', () => navigateTo('us40'));
 
     const navPrivacy = frame.querySelector('#cfg-nav-privacy');
     if (navPrivacy) navPrivacy.addEventListener('click', () => navigateTo('us48'));
@@ -1919,19 +1922,125 @@ function setupCustomFlows(frame, screenId) {
     const sendBtn = frame.querySelector('#btn-send-solicitud');
     if (sendBtn) {
       sendBtn.addEventListener('click', () => {
-        // Demo: always has enough credits
-        const u = JSON.parse(localStorage.getItem('currentUser') || 'null');
-        const credits = u ? (u.credits ?? 10) : 10;
-        const cost = tutor ? (tutor.credits || 3) : 3;
-        if (credits < cost) {
-          // Show insufficient credits state (us37)
-          navigateTo('us37');
-          return;
-        }
-        if (toast) toast.style.display = 'flex';
-        sendBtn.disabled = true;
-        sendBtn.textContent = 'Enviada ✓';
-        setTimeout(() => navigateTo('us15'), 1800);
+        // Always go to US37 to confirm credit spend
+        localStorage.setItem('pendingSolicitud', JSON.stringify({
+          tutor: tutor ? tutor.name : 'Tutor',
+          subject: frame.querySelector('#sol-subject')?.value || '',
+          cost: tutor ? (tutor.credits || 3) : 3
+        }));
+        navigateTo('us37');
+      });
+    }
+  }
+
+  else if (screenId === 'us37') {
+    const u = JSON.parse(localStorage.getItem('currentUser') || 'null');
+    const pending = JSON.parse(localStorage.getItem('pendingSolicitud') || 'null');
+    const credits = u ? (u.credits ?? 15) : 15;
+    const cost = pending ? (pending.cost || 3) : 3;
+    const after = credits - cost;
+
+    // Populate dynamic values
+    const tutorNameEl = frame.querySelector('#us37-tutor-name');
+    const tutorSubjEl = frame.querySelector('#us37-tutor-subj');
+    const tutorAvEl = frame.querySelector('#us37-tutor-av');
+    const saldoActEl = frame.querySelector('#us37-saldo-actual');
+    const saldoTrasEl = frame.querySelector('#us37-saldo-tras');
+    const costoEl = frame.querySelector('#us37-costo');
+    const habilidadEl = frame.querySelector('#us37-habilidad');
+    const msgEl = frame.querySelector('#us37-msg');
+    const btnAceptar = frame.querySelector('#btn-us37-aceptar');
+
+    if (pending) {
+      if (tutorNameEl) tutorNameEl.textContent = pending.tutor;
+      if (tutorSubjEl) tutorSubjEl.textContent = pending.subject;
+      if (tutorAvEl) tutorAvEl.textContent = pending.tutor.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+      if (habilidadEl) habilidadEl.textContent = pending.subject || 'Cálculo';
+      if (costoEl) costoEl.textContent = cost + ' créditos';
+    }
+    if (saldoActEl) saldoActEl.textContent = credits;
+    if (saldoTrasEl) saldoTrasEl.textContent = after >= 0 ? after : 0;
+
+    if (after < 0) {
+      if (msgEl) {
+        msgEl.style.background = '#f8d7da';
+        msgEl.innerHTML = '✗ Créditos insuficientes. <a href="us36.html" style="color:var(--primary);font-weight:700;">¿Cómo ganar más?</a>';
+      }
+      if (btnAceptar) { btnAceptar.disabled = true; btnAceptar.style.opacity = '0.4'; }
+    }
+
+    if (btnAceptar && after >= 0) {
+      btnAceptar.addEventListener('click', () => {
+        if (u) { u.credits = after; localStorage.setItem('currentUser', JSON.stringify(u)); }
+        localStorage.removeItem('pendingSolicitud');
+        btnAceptar.textContent = '✓ Solicitud enviada';
+        btnAceptar.style.background = '#3aa56b';
+        btnAceptar.disabled = true;
+        setTimeout(() => navigateTo('us15'), 1500);
+      });
+    }
+  }
+
+  else if (screenId === 'us36') {
+    const btnHistorial = frame.querySelector('#btn-ver-historial');
+    if (btnHistorial) btnHistorial.addEventListener('click', () => navigateTo('us38'));
+  }
+
+  else if (screenId === 'us39') {
+    frame.querySelector('#btn-us39-ganar')?.addEventListener('click', () => navigateTo('us36'));
+    frame.querySelector('#btn-us39-historial')?.addEventListener('click', () => navigateTo('us38'));
+  }
+
+  else if (screenId === 'us38') {
+    const tabs = ['tab-mov-todos', 'tab-mov-ganados', 'tab-mov-gastados'];
+    const allMovs = [
+      { type: 'g', title: 'Sesión con Luis M.', sub: '7 nov · enseñé', val: '+3' },
+      { type: 'b', title: 'Solicitud Andrea P.', sub: '5 nov · aprendí', val: '−3' },
+      { type: 'g', title: '5★ de Carlos M.', sub: '2 nov · bonus', val: '+1' },
+      { type: 'g', title: 'Insignia destacada', sub: '1 nov · logro', val: '+5' },
+    ];
+    const listEl = frame.querySelector('#mov-list');
+    const renderMovs = (filter) => {
+      if (!listEl) return;
+      listEl.innerHTML = '';
+      const filtered = filter === 'ganados' ? allMovs.filter(m => m.type === 'g')
+                      : filter === 'gastados' ? allMovs.filter(m => m.type === 'b')
+                      : allMovs;
+      filtered.forEach(m => {
+        const row = document.createElement('div');
+        row.style.cssText = 'display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--soft);';
+        row.innerHTML = `
+          <div style="width:28px;height:28px;border-radius:50%;background:${m.type==='g'?'#d4edda':'#f8d7da'};display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:${m.type==='g'?'#155724':'#721c24'};flex-shrink:0;">${m.type==='g'?'↑':'↓'}</div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--ink);">${m.title}</div><div style="font-size:11px;color:var(--muted);">${m.sub}</div></div>
+          <div style="font-weight:700;font-size:13px;color:${m.type==='g'?'#3aa56b':'#d64545'};">${m.val}</div>
+        `;
+        listEl.appendChild(row);
+      });
+    };
+    tabs.forEach(id => {
+      const el = frame.querySelector('#' + id);
+      if (!el) return;
+      const filter = id.replace('tab-mov-', '');
+      el.addEventListener('click', () => {
+        tabs.forEach(t => {
+          const b = frame.querySelector('#' + t);
+          if (b) { b.style.background = 'transparent'; b.style.color = 'var(--primary)'; b.style.border = '1.5px solid var(--primary)'; }
+        });
+        el.style.background = 'var(--primary)'; el.style.color = '#fff'; el.style.border = 'none';
+        renderMovs(filter === 'todos' ? '' : filter);
+      });
+    });
+    renderMovs('');
+  }
+
+  else if (screenId === 'us40') {
+    const btnSave = frame.querySelector('#btn-save-notif');
+    if (btnSave) {
+      btnSave.addEventListener('click', () => {
+        btnSave.textContent = '✓ Preferencias guardadas';
+        btnSave.style.background = '#3aa56b';
+        btnSave.disabled = true;
+        setTimeout(() => { btnSave.textContent = 'Guardar preferencias'; btnSave.style.background = ''; btnSave.disabled = false; }, 2000);
       });
     }
   }
