@@ -1361,10 +1361,13 @@ function setupCustomFlows(frame, screenId) {
       const setTab = (active) => {
         allTabs.forEach(t => {
           if (!t) return;
-          t.classList.toggle('on', t === active);
-          t.style.background = t === active ? 'var(--primary)' : '';
-          t.style.color = t === active ? '#fff' : '';
+          t.classList.remove('on');
+          t.style.background = '';
+          t.style.color = '';
         });
+        if (active) {
+          active.classList.add('on');
+        }
       };
 
       if (activeTab === 'pendientes') {
