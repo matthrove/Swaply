@@ -596,7 +596,7 @@ let welcomeInterval = null;
 
 buildHuSidebar();
 
-document.getElementById('btnSettings')?.addEventListener('click', () => navigateTo('us04'));
+document.getElementById('btnSettings')?.addEventListener('click', () => navigateTo('configuracion'));
 
 // On static HTML pages, the content is already in the frame — just wire up interactions
 const _initFrame = document.getElementById('appFrame');
