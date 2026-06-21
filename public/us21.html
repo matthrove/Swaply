@@ -115,8 +115,29 @@
 
             <!-- Input bar -->
             <div class="chat-input-bar">
+              <button type="button" id="chat-attach-btn" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--primary);padding:0 2px;flex-shrink:0;">📎</button>
               <input type="text" class="chat-input" id="chat-input" placeholder="Escribe un mensaje…">
               <button type="button" class="chat-send-btn" id="chat-send-btn">➤</button>
+            </div>
+
+            <!-- Attachment sheet -->
+            <div id="attach-sheet" style="display:none;position:absolute;bottom:0;left:0;right:0;background:#fff;border-top:1.5px solid var(--soft);border-radius:16px 16px 0 0;padding:16px 12px 20px;z-index:50;">
+              <div style="font-weight:700;font-size:13px;color:var(--ink);margin-bottom:14px;">Adjuntar</div>
+              <div style="display:flex;gap:20px;">
+                <div class="attach-opt" data-type="imagen" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;">
+                  <div style="width:52px;height:52px;border-radius:14px;background:#fff3cd;display:flex;align-items:center;justify-content:center;font-size:24px;">🖼️</div>
+                  <span style="font-size:11px;font-weight:600;color:var(--ink);">Imagen</span>
+                </div>
+                <div class="attach-opt" data-type="pdf" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;">
+                  <div style="width:52px;height:52px;border-radius:14px;background:#f4e7e9;display:flex;align-items:center;justify-content:center;font-size:24px;">📄</div>
+                  <span style="font-size:11px;font-weight:600;color:var(--ink);">PDF</span>
+                </div>
+                <div class="attach-opt" data-type="camara" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;">
+                  <div style="width:52px;height:52px;border-radius:14px;background:#e8f4e8;display:flex;align-items:center;justify-content:center;font-size:24px;">📷</div>
+                  <span style="font-size:11px;font-weight:600;color:var(--ink);">Cámara</span>
+                </div>
+              </div>
+              <div style="margin-top:14px;font-size:10px;color:var(--muted);background:#f8f4f0;border-radius:8px;padding:8px 10px;">⚠ El archivo no debe superar los <b>10 MB</b></div>
             </div>
           </div>
           </div>

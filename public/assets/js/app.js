@@ -526,7 +526,7 @@ function bindInteractions(container, screenId) {
     });
   });
 
-  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy', 'btn-save-photo', 'btn-solicitar-sesion', 'btn-logout-us07', 'btn-delete-si', 'btn-delete-no', 'btn-delete-account', 'btn-send-solicitud', 'btn-cancel-solicitud', 'btn-us17-aceptar', 'btn-us17-rechazar', 'btn-us18-cancelar', 'btn-us18-confirmar', 'btn-mark-complete', 'btn-rate-session', 'btn-save-reminder', 'btn-send-code', 'btn-update-pass', 'btn-save-privacy', 'btn-us20-si', 'btn-us20-no', 'btn-us25-si', 'btn-us25-no', 'chat-send-btn']);
+  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy', 'btn-save-photo', 'btn-solicitar-sesion', 'btn-logout-us07', 'btn-delete-si', 'btn-delete-no', 'btn-delete-account', 'btn-send-solicitud', 'btn-cancel-solicitud', 'btn-us17-aceptar', 'btn-us17-rechazar', 'btn-us18-cancelar', 'btn-us18-confirmar', 'btn-mark-complete', 'btn-rate-session', 'btn-save-reminder', 'btn-send-code', 'btn-update-pass', 'btn-save-privacy', 'btn-us20-si', 'btn-us20-no', 'btn-us25-si', 'btn-us25-no', 'chat-send-btn', 'btn-us35-enviar', 'chat-attach-btn']);
   container.querySelectorAll('.btn, .btn.ghost, .btn.sm').forEach(btn => {
     if (btn.id && SKIP_IDS.has(btn.id)) return;
     const text = btn.textContent.trim();
@@ -1509,18 +1509,14 @@ function setupCustomFlows(frame, screenId) {
             e.stopPropagation();
             upcoming = upcoming.filter(x => x.id !== s.id);
             localStorage.setItem('upcomingSessions', JSON.stringify(upcoming));
-            
-            completed.unshift({
-              id: Date.now(),
-              tutor: s.tutor,
-              subject: s.subject,
-              date: s.date,
-              duration: s.duration,
-              rating: 5
-            });
+
+            const newCompleted = { id: Date.now(), tutor: s.tutor, subject: s.subject, date: s.date, duration: s.duration, rating: 0 };
+            completed.unshift(newCompleted);
             localStorage.setItem('completedSessions', JSON.stringify(completed));
-            renderList();
-            alert("¡Sesión completada!");
+            localStorage.setItem('completingSession', JSON.stringify(newCompleted));
+
+            const u2 = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            navigateTo(u2 && u2.role === 'tutor' ? 'us32' : 'us31');
           };
           
           sContainer.appendChild(card);
@@ -2103,26 +2099,57 @@ function setupCustomFlows(frame, screenId) {
       { text: '¡Hola! Tengo dudas con derivadas', mine: true, time: '12:01' }
     ];
 
+    const getTime = () => { const n = new Date(); return n.getHours() + ':' + String(n.getMinutes()).padStart(2,'0'); };
+
     const renderMessages = () => {
       if (!messagesEl) return;
       messagesEl.innerHTML = '';
       messages.forEach(msg => {
         const wrap = document.createElement('div');
         wrap.className = 'bubble-wrap' + (msg.mine ? ' mine' : '');
-        wrap.innerHTML = `<div class="bubble ${msg.mine ? 'mine' : 'theirs'}">${msg.text}<div class="bubble-time">${msg.time}</div></div>`;
+        if (msg.file) {
+          wrap.innerHTML = `<div class="bubble ${msg.mine ? 'mine' : 'theirs'}" style="padding:10px 12px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:20px;">${msg.file === 'imagen' ? '🖼️' : msg.file === 'pdf' ? '📄' : '📷'}</span>
+              <div><div style="font-size:12px;font-weight:600;">${msg.text}</div><div style="font-size:10px;opacity:.7;">Toca para ver</div></div>
+            </div>
+            <div class="bubble-time">${msg.time}</div>
+          </div>`;
+        } else {
+          wrap.innerHTML = `<div class="bubble ${msg.mine ? 'mine' : 'theirs'}">${msg.text}<div class="bubble-time">${msg.time}</div></div>`;
+        }
         messagesEl.appendChild(wrap);
       });
       messagesEl.scrollTop = messagesEl.scrollHeight;
     };
     renderMessages();
 
+    const attachBtn = frame.querySelector('#chat-attach-btn');
+    const attachSheet = frame.querySelector('#attach-sheet');
+    if (attachBtn && attachSheet) {
+      attachBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        attachSheet.style.display = attachSheet.style.display === 'none' ? 'block' : 'none';
+      });
+      attachSheet.querySelectorAll('.attach-opt').forEach(opt => {
+        opt.addEventListener('click', () => {
+          const type = opt.dataset.type;
+          const names = { imagen: 'Foto_clase.jpg', pdf: 'Ejercicios_calculo.pdf', camara: 'Foto_20241107.jpg' };
+          messages.push({ text: names[type], mine: true, time: getTime(), file: type });
+          attachSheet.style.display = 'none';
+          renderMessages();
+        });
+      });
+      document.addEventListener('click', (e) => {
+        if (!attachSheet.contains(e.target) && e.target !== attachBtn) attachSheet.style.display = 'none';
+      });
+    }
+
     if (sendBtn && inputEl) {
       const doSend = () => {
         const txt = inputEl.value.trim();
         if (!txt) return;
-        const now = new Date();
-        const time = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0');
-        messages.push({ text: txt, mine: true, time });
+        messages.push({ text: txt, mine: true, time: getTime() });
         inputEl.value = '';
         renderMessages();
       };
@@ -2550,17 +2577,35 @@ function setupCustomFlows(frame, screenId) {
       });
     });
 
-    tags.forEach(tag => {
-      tag.addEventListener('click', () => tag.classList.toggle('on'));
-    });
+    const addTagFn = (container) => {
+      frame.querySelectorAll(container + ' .chip').forEach(tag => {
+        tag.addEventListener('click', () => tag.classList.toggle('on'));
+      });
+      const addBtn = frame.querySelector('#tag-add-btn');
+      if (addBtn) {
+        addBtn.addEventListener('click', () => {
+          const label = prompt('Escribe una etiqueta:');
+          if (!label || !label.trim()) return;
+          const chip = document.createElement('span');
+          chip.className = 'chip on';
+          chip.dataset.tag = label.trim();
+          chip.style.cursor = 'pointer';
+          chip.textContent = label.trim();
+          chip.addEventListener('click', () => chip.classList.toggle('on'));
+          addBtn.parentElement.insertBefore(chip, addBtn);
+        });
+      }
+    };
+    addTagFn('#rate-tags-container');
 
     if (btnSubmit) {
       btnSubmit.addEventListener('click', () => {
         if (selectedRating === 0) { alert('Por favor selecciona una calificación.'); return; }
         const comment = frame.querySelector('#rate-comment')?.value.trim() || '';
         const selectedTags = [...frame.querySelectorAll('#rate-tags-container .chip.on')].map(c => c.dataset.tag).filter(Boolean);
+        const sess = JSON.parse(localStorage.getItem('completingSession') || '{}');
         const reviews = JSON.parse(localStorage.getItem('myReviews') || '[]');
-        reviews.unshift({ id: Date.now(), from: 'Andrea Paredes', rating: selectedRating, comment, tags: selectedTags, date: new Date().toLocaleDateString('es-PE') });
+        reviews.unshift({ id: Date.now(), from: sess.tutor || 'Tutor', rating: selectedRating, comment, tags: selectedTags, date: new Date().toLocaleDateString('es-PE', {day:'numeric', month:'short'}) });
         localStorage.setItem('myReviews', JSON.stringify(reviews));
         navigateTo('us33');
       });
@@ -2568,22 +2613,16 @@ function setupCustomFlows(frame, screenId) {
   }
 
   else if (screenId === 'us32') {
-    // Califica al aprendiz — stars interactivos, tags, submit → us33
     const stars = frame.querySelectorAll('#rate-apprentice-stars-container .star');
     const feedback = frame.querySelector('#rate-apprentice-feedback');
-    const tags = frame.querySelectorAll('#rate-apprentice-tags .chip');
     const btnSubmit = frame.querySelector('#btn-submit-apprentice-rating');
     const feedbackTexts = ['', 'Muy malo 😞', 'Malo 😕', 'Regular 😐', 'Bueno 👍', '¡Excelente! 🌟'];
     let selectedRating = 0;
 
     stars.forEach(star => {
       const val = parseInt(star.dataset.value);
-      star.addEventListener('mouseenter', () => {
-        stars.forEach((s, i) => s.style.color = i < val ? 'var(--cta)' : '#ccc');
-      });
-      star.addEventListener('mouseleave', () => {
-        stars.forEach((s, i) => s.style.color = i < selectedRating ? 'var(--cta)' : '#ccc');
-      });
+      star.addEventListener('mouseenter', () => { stars.forEach((s, i) => s.style.color = i < val ? 'var(--cta)' : '#ccc'); });
+      star.addEventListener('mouseleave', () => { stars.forEach((s, i) => s.style.color = i < selectedRating ? 'var(--cta)' : '#ccc'); });
       star.addEventListener('click', () => {
         selectedRating = val;
         stars.forEach((s, i) => s.style.color = i < selectedRating ? 'var(--cta)' : '#ccc');
@@ -2591,9 +2630,20 @@ function setupCustomFlows(frame, screenId) {
       });
     });
 
-    tags.forEach(tag => {
+    frame.querySelectorAll('#rate-apprentice-tags .chip').forEach(tag => {
       tag.addEventListener('click', () => tag.classList.toggle('on'));
     });
+    const addBtn32 = frame.querySelector('#tag-add-btn-32');
+    if (addBtn32) {
+      addBtn32.addEventListener('click', () => {
+        const label = prompt('Escribe una etiqueta:');
+        if (!label || !label.trim()) return;
+        const chip = document.createElement('span');
+        chip.className = 'chip on'; chip.dataset.tag = label.trim(); chip.style.cursor = 'pointer'; chip.textContent = label.trim();
+        chip.addEventListener('click', () => chip.classList.toggle('on'));
+        addBtn32.parentElement.insertBefore(chip, addBtn32);
+      });
+    }
 
     if (btnSubmit) {
       btnSubmit.addEventListener('click', () => {
@@ -2601,7 +2651,7 @@ function setupCustomFlows(frame, screenId) {
         const comment = frame.querySelector('#rate-apprentice-comment')?.value.trim() || '';
         const selectedTags = [...frame.querySelectorAll('#rate-apprentice-tags .chip.on')].map(c => c.dataset.tag).filter(Boolean);
         const reviews = JSON.parse(localStorage.getItem('myReviews') || '[]');
-        reviews.unshift({ id: Date.now(), from: 'Rogger Escalante', rating: selectedRating, comment, tags: selectedTags, date: new Date().toLocaleDateString('es-PE') });
+        reviews.unshift({ id: Date.now(), from: 'Rogger Escalante', rating: selectedRating, comment, tags: selectedTags, date: new Date().toLocaleDateString('es-PE', {day:'numeric', month:'short'}) });
         localStorage.setItem('myReviews', JSON.stringify(reviews));
         navigateTo('us33');
       });
@@ -2657,7 +2707,7 @@ function setupCustomFlows(frame, screenId) {
     if (reviewsList) {
       displayReviews.forEach(r => {
         const div = document.createElement('div');
-        div.style.cssText = 'border:1px solid var(--soft); border-radius:10px; padding:10px; background:#fff;';
+        div.style.cssText = 'border:1px solid var(--soft); border-radius:10px; padding:10px; background:#fff; cursor:pointer; position:relative;';
         const initials = r.from.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
         div.innerHTML = `
           <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
@@ -2670,8 +2720,51 @@ function setupCustomFlows(frame, screenId) {
           </div>
           ${r.comment ? `<div class="small" style="font-size:12px;line-height:1.4;">"${r.comment}"</div>` : ''}
           ${r.tags?.length ? `<div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;">${r.tags.map(t => `<span style="padding:2px 8px;border:1px solid var(--primary);color:var(--primary);border-radius:999px;font-size:10px;">${t}</span>`).join('')}</div>` : ''}
+          <div style="margin-top:8px;font-size:10px;color:var(--muted);text-align:right;">⚑ Reportar reseña</div>
         `;
+        div.addEventListener('click', () => {
+          localStorage.setItem('reportingReview', JSON.stringify(r));
+          navigateTo('us35');
+        });
         reviewsList.appendChild(div);
+      });
+    }
+  }
+
+  else if (screenId === 'us35') {
+    const review = JSON.parse(localStorage.getItem('reportingReview') || 'null');
+    const avEl = frame.querySelector('#us35-av');
+    const fromEl = frame.querySelector('#us35-from');
+    const starsEl = frame.querySelector('#us35-stars');
+    const commentEl = frame.querySelector('#us35-comment');
+    if (review) {
+      if (avEl) avEl.textContent = review.from.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase();
+      if (fromEl) fromEl.textContent = review.from;
+      if (starsEl) starsEl.textContent = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+      if (commentEl) commentEl.textContent = review.comment ? `"${review.comment}"` : '';
+    }
+
+    let selectedMotivo = null;
+    const opts = frame.querySelectorAll('.report-opt');
+    const otroWrap = frame.querySelector('#us35-otro-wrap');
+    opts.forEach(opt => {
+      opt.addEventListener('click', () => {
+        opts.forEach(o => o.classList.remove('sel'));
+        opt.classList.add('sel');
+        selectedMotivo = opt.dataset.val;
+        if (otroWrap) otroWrap.style.display = selectedMotivo === 'otro' ? 'block' : 'none';
+      });
+    });
+
+    const btnEnviar = frame.querySelector('#btn-us35-enviar');
+    if (btnEnviar) {
+      btnEnviar.addEventListener('click', () => {
+        if (!selectedMotivo) { alert('Por favor selecciona un motivo.'); return; }
+        localStorage.removeItem('reportingReview');
+        btnEnviar.textContent = '✓ Reporte enviado';
+        btnEnviar.style.background = '#3aa56b';
+        btnEnviar.disabled = true;
+        setTimeout(() => navigateTo('us33'), 1500);
       });
     }
   }
