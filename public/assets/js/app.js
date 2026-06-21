@@ -967,7 +967,7 @@ function setupCustomFlows(frame, screenId) {
     if (optSesiones) optSesiones.addEventListener('click', () => navigateTo('us30'));
     if (optBuscar) optBuscar.addEventListener('click', () => navigateTo('us11'));
     if (optCalif) optCalif.addEventListener('click', () => navigateTo('us33'));
-    if (optBilletera) optBilletera.addEventListener('click', () => navigateTo('us39'));
+    if (optBilletera) optBilletera.addEventListener('click', () => navigateTo('us36'));
 
     // ⚙️ Ajustes button in topbar
     document.querySelector('#btnSettings')?.addEventListener('click', () => navigateTo('configuracion'));
@@ -1984,11 +1984,17 @@ function setupCustomFlows(frame, screenId) {
   else if (screenId === 'us36') {
     const btnHistorial = frame.querySelector('#btn-ver-historial');
     if (btnHistorial) btnHistorial.addEventListener('click', () => navigateTo('us38'));
+    const btnMiHist = frame.querySelector('#btn-us36-historial');
+    if (btnMiHist) btnMiHist.addEventListener('click', () => navigateTo('us38'));
   }
 
   else if (screenId === 'us39') {
-    frame.querySelector('#btn-us39-ganar')?.addEventListener('click', () => navigateTo('us36'));
-    frame.querySelector('#btn-us39-historial')?.addEventListener('click', () => navigateTo('us38'));
+    const markBtn = frame.querySelector('#btn-us39-mark-read');
+    if (markBtn) markBtn.addEventListener('click', () => {
+      frame.querySelectorAll('.notif-card.unread').forEach(c => c.classList.remove('unread'));
+      markBtn.style.opacity = '0.4';
+      markBtn.disabled = true;
+    });
   }
 
   else if (screenId === 'us38') {

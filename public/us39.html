@@ -4,8 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#8B1A2B">
-  <title>US39 · Mi billetera — Swaply</title>
+  <title>US39 · Notificaciones — Swaply</title>
   <link rel="stylesheet" href="assets/styles/app.css">
+  <style>
+    .notif-card {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 14px; border-radius: 12px; margin-bottom: 8px;
+      background: #fff; border: 1px solid var(--soft);
+    }
+    .notif-card.unread { background: #fdf0f2; border-color: #f5c6cc; }
+    .notif-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+    .notif-body { flex: 1; }
+    .notif-title { font-size: 13px; font-weight: 700; color: var(--ink); }
+    .notif-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .notif-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); flex-shrink: 0; margin-top: 6px; }
+    .section-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: 12px 0 6px; }
+  </style>
 </head>
 <body class="app-body" data-screen-id="us39">
   <div class="app-shell">
@@ -13,46 +27,76 @@
     <div class="app-main">
       <header class="app-topbar" id="appTopbar">
         <button type="button" id="btnSettings" style="background:none;border:none;font-size:20px;cursor:pointer;padding:0 8px;color:var(--primary);">⚙️</button>
-        <span class="app-topbar-title" id="screenTitle">US39 · Mi billetera</span>
+        <span class="app-topbar-title" id="screenTitle">Notificaciones</span>
         <button type="button" class="hu-toggle" id="huToggle">50 HU</button>
       </header>
       <div class="app-viewport">
         <div class="app-frame" id="appFrame" role="main">
           <div class="bar"><span>12:30</span><span class="icons">▲▼ ⋯⋯⋯</span></div>
-          <div class="scr">
-            <div class="head"><span class="back">‹</span><h2>Mi billetera</h2></div>
-
-            <div style="display:flex; gap:8px; margin-bottom:10px;">
-              <button type="button" id="btn-us39-ganar" style="flex:1; padding:10px; border:1.5px solid var(--primary); background:transparent; color:var(--primary); border-radius:10px; font-size:12px; font-weight:700; cursor:pointer;">💡 ¿Cómo ganar más?</button>
-              <button type="button" id="btn-us39-historial" style="flex:1; padding:10px; border:1.5px solid var(--soft); background:transparent; color:var(--muted); border-radius:10px; font-size:12px; font-weight:700; cursor:pointer;">📋 Ver movimientos</button>
+          <div class="scr" style="display:flex; flex-direction:column; height:100%;">
+            <div class="head" style="display:flex; align-items:center; justify-content:space-between;">
+              <span class="back">‹</span>
+              <h2 style="margin:0; flex:1; padding-left:8px;">Notificaciones</h2>
+              <button type="button" id="btn-us39-mark-read" style="background:none; border:none; font-size:12px; font-weight:700; color:var(--primary); cursor:pointer; padding:0;">Marcar leído</button>
             </div>
 
-            <div style="background:var(--primary); color:#fff; border-radius:16px; padding:20px; text-align:center; margin:8px 0 16px;">
-              <div style="font-size:11px; opacity:0.8; margin-bottom:4px;">Saldo disponible</div>
-              <div style="font-size:32px; font-weight:700;">💎 <span id="wallet-balance">12</span> créditos</div>
-              <div style="font-size:10px; opacity:0.7; margin-top:4px;">1 crédito = 1 hora de tutoría</div>
-            </div>
+            <div style="flex:1; overflow-y:auto; padding-bottom:12px;">
 
-            <div style="display:flex; gap:8px; margin-bottom:16px;">
-              <div style="flex:1; background:#fff; border:1px solid var(--soft); border-radius:12px; padding:12px; text-align:center;">
-                <div style="font-size:20px;">📥</div>
-                <div style="font-size:11px; font-weight:700; color:var(--primary); margin-top:4px;">Recibidos</div>
-                <div style="font-size:18px; font-weight:700; color:var(--ink);" id="wallet-in">7</div>
+              <div class="section-label">Hoy</div>
+
+              <div class="notif-card unread">
+                <div class="notif-icon">📩</div>
+                <div class="notif-body">
+                  <div class="notif-title">Nueva solicitud de tutoría</div>
+                  <div class="notif-sub">Carlos M. quiere una sesión de Cálculo · Hace 10 min</div>
+                </div>
+                <div class="notif-dot"></div>
               </div>
-              <div style="flex:1; background:#fff; border:1px solid var(--soft); border-radius:12px; padding:12px; text-align:center;">
-                <div style="font-size:20px;">📤</div>
-                <div style="font-size:11px; font-weight:700; color:var(--muted); margin-top:4px;">Usados</div>
-                <div style="font-size:18px; font-weight:700; color:var(--ink);" id="wallet-out">5</div>
-              </div>
-            </div>
 
-            <div class="section-label" style="margin-bottom:8px;">Historial de movimientos</div>
-            <div class="col" id="wallet-history">
-              <div class="txn"><div class="ic good">+</div><div class="body"><div style="font-size:12px; font-weight:600;">Sesión completada · Carlos M.</div><div class="small">+1 crédito · Ayer</div></div></div>
-              <div class="txn"><div class="ic bad">−</div><div class="body"><div style="font-size:12px; font-weight:600;">Sesión con Andrea P.</div><div class="small">−1 crédito · Hace 3 días</div></div></div>
-              <div class="txn"><div class="ic good">+</div><div class="body"><div style="font-size:12px; font-weight:600;">Sesión completada · Luis M.</div><div class="small">+1 crédito · Hace 5 días</div></div></div>
-              <div class="txn"><div class="ic bad">−</div><div class="body"><div style="font-size:12px; font-weight:600;">Sesión con Karen R.</div><div class="small">−1 crédito · Hace 1 semana</div></div></div>
-              <div class="txn"><div class="ic good">+</div><div class="body"><div style="font-size:12px; font-weight:600;">Bono de bienvenida</div><div class="small">+5 créditos · Al registrarse</div></div></div>
+              <div class="notif-card unread">
+                <div class="notif-icon">💬</div>
+                <div class="notif-body">
+                  <div class="notif-title">Mensaje de Andrea P.</div>
+                  <div class="notif-sub">"¿Puedes a las 6pm?" · Hace 35 min</div>
+                </div>
+                <div class="notif-dot"></div>
+              </div>
+
+              <div class="notif-card unread">
+                <div class="notif-icon">⏰</div>
+                <div class="notif-body">
+                  <div class="notif-title">Sesión en 1 hora</div>
+                  <div class="notif-sub">Con Luis M. · Cálculo diferencial · 3:00 pm</div>
+                </div>
+                <div class="notif-dot"></div>
+              </div>
+
+              <div class="section-label">Ayer</div>
+
+              <div class="notif-card">
+                <div class="notif-icon">⭐</div>
+                <div class="notif-body">
+                  <div class="notif-title">Te calificaron 5 estrellas</div>
+                  <div class="notif-sub">Karen R. dejó una reseña positiva · Ayer 8:20 pm</div>
+                </div>
+              </div>
+
+              <div class="notif-card">
+                <div class="notif-icon">🎓</div>
+                <div class="notif-body">
+                  <div class="notif-title">Sesión completada</div>
+                  <div class="notif-sub">Ganaste +3 créditos por la sesión con Rogger E. · Ayer 5:00 pm</div>
+                </div>
+              </div>
+
+              <div class="notif-card">
+                <div class="notif-icon">📩</div>
+                <div class="notif-body">
+                  <div class="notif-title">Solicitud aceptada</div>
+                  <div class="notif-sub">Tu solicitud con Andrea P. fue aceptada · Ayer 2:14 pm</div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
