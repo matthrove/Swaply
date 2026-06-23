@@ -1694,11 +1694,39 @@ function setupCustomFlows(frame, screenId) {
     const univFilter = localStorage.getItem('filterUniv') || null;
     const dispFilter = localStorage.getItem('filterDisp') || null;
 
-    if (univFilter && btnUniv) { btnUniv.style.background = 'var(--primary)'; btnUniv.style.color = '#fff'; btnUniv.textContent = '🏛 ' + univFilter; }
-    if (dispFilter && btnDisp) { btnDisp.style.background = 'var(--primary)'; btnDisp.style.color = '#fff'; btnDisp.textContent = '🕐 ' + dispFilter; }
+    let activeUniv = localStorage.getItem('filterUniv') || null;
+    let activeDisp = localStorage.getItem('filterDisp') || null;
 
-    if (btnUniv) btnUniv.addEventListener('click', () => navigateTo('us12'));
-    if (btnDisp) btnDisp.addEventListener('click', () => navigateTo('us13'));
+    const applyFilterStyles = () => {
+      if (btnUniv) {
+        if (activeUniv) {
+          btnUniv.style.background = 'var(--primary)'; btnUniv.style.color = '#fff';
+          btnUniv.textContent = '🏛 ' + activeUniv + ' ✕';
+        } else {
+          btnUniv.style.background = ''; btnUniv.style.color = '';
+          btnUniv.textContent = '🏛 Universidad';
+        }
+      }
+      if (btnDisp) {
+        if (activeDisp) {
+          btnDisp.style.background = 'var(--primary)'; btnDisp.style.color = '#fff';
+          btnDisp.textContent = '🕐 ' + activeDisp + ' ✕';
+        } else {
+          btnDisp.style.background = ''; btnDisp.style.color = '';
+          btnDisp.textContent = '🕐 Disponibilidad';
+        }
+      }
+    };
+    applyFilterStyles();
+
+    if (btnUniv) btnUniv.addEventListener('click', () => {
+      if (activeUniv) { activeUniv = null; localStorage.removeItem('filterUniv'); applyFilterStyles(); renderResults(searchInput?.value || ''); }
+      else navigateTo('us12');
+    });
+    if (btnDisp) btnDisp.addEventListener('click', () => {
+      if (activeDisp) { activeDisp = null; localStorage.removeItem('filterDisp'); applyFilterStyles(); renderResults(searchInput?.value || ''); }
+      else navigateTo('us13');
+    });
 
     const makeTutorCard = (t) => {
       const card = document.createElement('div');
@@ -1726,9 +1754,9 @@ function setupCustomFlows(frame, screenId) {
       if (!resultsEl) return;
       resultsEl.innerHTML = '';
       let filtered = TUTORS_DATA;
-      if (univFilter) filtered = filtered.filter(t => t.univ === univFilter);
-      if (dispFilter) {
-        const kw = dispFilter.replace('Mañanas','mañan').replace('Tardes','tarde').replace('Noches','noche').toLowerCase();
+      if (activeUniv) filtered = filtered.filter(t => t.univ === activeUniv);
+      if (activeDisp) {
+        const kw = activeDisp.replace('Mañanas','mañan').replace('Tardes','tarde').replace('Noches','noche').toLowerCase();
         filtered = filtered.filter(t => t.schedule.toLowerCase().includes(kw));
       }
       if (query) {

@@ -184,13 +184,7 @@ body.app-body {
 }
 
 .app-topbar {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 16px;
-  background: #fff;
-  border-bottom: 1px solid var(--soft);
-  flex-shrink: 0;
+  display: none !important;
 }
 
 .app-topbar-logo {
