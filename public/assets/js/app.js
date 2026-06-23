@@ -16,6 +16,9 @@ if (!screensById['sesiones-tutor']) {
 if (!screensById['buscar-solicitudes']) {
   screensById['buscar-solicitudes'] = { id: 'buscar-solicitudes', us: 'C', title: 'Solicitudes', frameAttrs: '', html: '' };
 }
+if (!screensById['admin-login']) {
+  screensById['admin-login'] = { id: 'admin-login', us: 'Admin', title: 'Acceso administrador', frameAttrs: '', html: '' };
+}
 if (!screensById['us49']) {
   screensById['us49'] = { id: 'us49', us: 'US49', title: 'Borrar cuenta', frameAttrs: '', html: '' };
 }
@@ -606,7 +609,7 @@ let welcomeInterval = null;
   }
 })();
 
-buildHuSidebar();
+// buildHuSidebar(); // HU sidebar removed
 
 document.getElementById('btnSettings')?.addEventListener('click', () => navigateTo('configuracion'));
 
@@ -619,6 +622,10 @@ if (_initFrame) {
   bindInteractions(_initFrame, currentScreen);
   updateBottomNav(_initFrame, currentScreen);
   setupCustomFlows(_initFrame, currentScreen);
+  const screenTitleEl = document.getElementById('screenTitle');
+  if (screenTitleEl) {
+    screenTitleEl.textContent = screenTitleEl.textContent.replace(/^US\d+[a-z]?\s*[·•]\s*/i, '').trim();
+  }
 }
 
 function setupCustomFlows(frame, screenId) {
@@ -634,7 +641,7 @@ function setupCustomFlows(frame, screenId) {
     const passInput = frame.querySelector('#admin-pass');
     const errorDiv = frame.querySelector('#admin-error');
     if (btn) btn.addEventListener('click', () => {
-      if (passInput && passInput.value === 'admin') {
+      if (passInput && passInput.value === '1234') {
         const adminUser = { name: 'Admin Swaply', email: 'admin@swaply.pe', password: 'admin', role: 'admin' };
         localStorage.setItem('currentUser', JSON.stringify(adminUser));
         window.location.href = 'us41.html';

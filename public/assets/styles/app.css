@@ -226,6 +226,8 @@ body.app-body {
 
 .hu-toggle:hover { background: #edd8dc; }
 
+.hu-toggle { display: none !important; }
+
 @media (min-width: 900px) {
   .app-sidebar {
     display: block;
@@ -976,5 +978,23 @@ body.view-pc {
   background: var(--primary) !important;
   color: #fff !important;
   border-color: var(--primary) !important;
+}
+
+@media (max-width: 600px) {
+  .app-viewport {
+    padding: 0;
+    align-items: stretch;
+  }
+  .app-frame {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 100dvh;
+    min-height: 100vh;
+  }
+  .app-topbar {
+    border-radius: 0;
+  }
 }
 
