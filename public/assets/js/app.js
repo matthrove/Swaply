@@ -532,7 +532,7 @@ function bindInteractions(container, screenId) {
     });
   });
 
-  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy', 'btn-save-photo', 'btn-solicitar-sesion', 'btn-logout-us07', 'btn-delete-si', 'btn-delete-no', 'btn-delete-account', 'btn-send-solicitud', 'btn-cancel-solicitud', 'btn-us17-aceptar', 'btn-us17-rechazar', 'btn-us18-cancelar', 'btn-us18-confirmar', 'btn-mark-complete', 'btn-rate-session', 'btn-save-reminder', 'btn-send-code', 'btn-update-pass', 'btn-save-privacy', 'btn-us20-si', 'btn-us20-no', 'btn-us25-si', 'btn-us25-no', 'chat-send-btn', 'btn-us35-enviar', 'chat-attach-btn', 'btn-us37-aceptar', 'btn-save-notif', 'btn-ver-historial', 'btn-us39-ganar', 'btn-us39-historial', 'btn-go-notif', 'btn-us39-mark-read', 'btn-us36-historial', 'btn-us07-settings', 'btn-us42-aprobar', 'btn-us42-rechazar', 'btn-nueva-univ', 'btn-admin-login']);
+  const SKIP_IDS = new Set(['btn-login-submit', 'btn-register-submit', 'btn-logout-submit', 'btn-submit-rating', 'btn-submit-apprentice-rating', 'btn-schedule-confirm', 'btn-reminder-done', 'btn-nueva-sesion', 'btn-save-profile', 'btn-dark', 'btn-privacy', 'btn-save-photo', 'btn-solicitar-sesion', 'btn-logout-us07', 'btn-delete-si', 'btn-delete-no', 'btn-delete-account', 'btn-send-solicitud', 'btn-cancel-solicitud', 'btn-us17-aceptar', 'btn-us17-rechazar', 'btn-us18-cancelar', 'btn-us18-confirmar', 'btn-mark-complete', 'btn-rate-session', 'btn-save-reminder', 'btn-send-code', 'btn-update-pass', 'btn-save-privacy', 'btn-us20-si', 'btn-us20-no', 'btn-us25-si', 'btn-us25-no', 'chat-send-btn', 'btn-us35-enviar', 'chat-attach-btn', 'btn-us37-aceptar', 'btn-save-notif', 'btn-ver-historial', 'btn-us39-ganar', 'btn-us39-historial', 'btn-go-notif', 'btn-us39-mark-read', 'btn-us36-historial', 'btn-us07-settings', 'btn-us42-aprobar', 'btn-us42-rechazar', 'btn-nueva-univ', 'btn-admin-login', 'btn-admin-logout', 'btn-logout-yes', 'btn-logout-no']);
   container.querySelectorAll('.btn, .btn.ghost, .btn.sm').forEach(btn => {
     if (btn.id && SKIP_IDS.has(btn.id)) return;
     const text = btn.textContent.trim();
@@ -2115,6 +2115,17 @@ function setupCustomFlows(frame, screenId) {
     frame.querySelector('#admin-nav-verif')?.addEventListener('click', () => navigateTo('us42'));
     frame.querySelector('#admin-nav-reports')?.addEventListener('click', () => navigateTo('us43'));
     frame.querySelector('#admin-nav-univs')?.addEventListener('click', () => navigateTo('us44'));
+    const logoutOverlay = frame.querySelector('#logout-confirm');
+    frame.querySelector('#btn-admin-logout')?.addEventListener('click', () => {
+      if (logoutOverlay) logoutOverlay.style.display = 'flex';
+    });
+    frame.querySelector('#btn-logout-no')?.addEventListener('click', () => {
+      if (logoutOverlay) logoutOverlay.style.display = 'none';
+    });
+    frame.querySelector('#btn-logout-yes')?.addEventListener('click', () => {
+      localStorage.removeItem('currentUser');
+      window.location.href = 'index.html';
+    });
   }
 
   else if (screenId === 'us42') {
