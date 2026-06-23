@@ -48,7 +48,7 @@ body.app-body {
 }
 
 .app-sidebar {
-  display: none;
+  display: none !important;
   width: var(--sidebar-w);
   flex-shrink: 0;
   background: var(--ink);
